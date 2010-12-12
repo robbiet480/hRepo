@@ -6,19 +6,19 @@ if($slug == "about") {
 						<h2>About</h2>
 						<h3>About the team</h3> 
  
-<h4>Member 1</h4> 
-<p>Bla bla bla</p> 
+<h4>Robbie Trencheny</h4> 
+<p>Owner of MinecraftServers.com & Hostiio. Web devloper by day, sysadmin by night</p> 
  
-<img alt="Member 1" class="bioicon" src="http://placehold.it/57x57" /> 
+<img alt="Robbie Trencheny" class="bioicon" src="http://placehold.it/57x57" /> 
 <dl class="bioinfo"> 
 	<dt>Title</dt> 
-	<dd>Something or other</dd> 
+	<dd>Project Founder</dd> 
 	
 	<dt>IRC Nick</dt> 
-	<dd>blablabla</dd> 
+	<dd>robbiet480</dd> 
 	
 	<dt>Coding languages</dt> 
-	<dd>X Y Z</dd> 
+	<dd>PHP, MySQL, HTML, CSS</dd> 
 </dl> 
  
 <h4>Member 2</h4> 
