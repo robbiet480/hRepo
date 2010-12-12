@@ -67,7 +67,7 @@ if($slug == "about") {
 </dl>
 
 <h4>Organik</h4> 
-<p>I'll design your life TEST</p> 
+<p>I'll design your life TEST2</p> 
  
 <img alt="Member 2" class="bioicon" src="http://placehold.it/57x57" /> 
 <dl class="bioinfo"> 
