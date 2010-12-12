@@ -1,5 +1,5 @@
 <?php
-$pagetitle = "contact":
+$pagetitle = "contact";
 include_once('inc/header.php');
 ?>
 		<div id="wrapper">
