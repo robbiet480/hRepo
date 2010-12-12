@@ -316,8 +316,10 @@ class Database {
 class_alias('Database', 'DB');
 
 try {
-	// create the pdo object
-	DB::setHandle(new PDO(HR_DSN, HR_DBUSR, HR_DBPASS));
+	if(HR_DB_ENABLE) {
+		// create the pdo object
+		DB::setHandle(new PDO(HR_DSN, HR_DBUSR, HR_DBPASS));
+	}
 } catch (PDOException $e) {
 	die('DB ERROR: '.$e);
 }
