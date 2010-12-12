@@ -84,7 +84,7 @@ if($slug == "about") {
 <h4>lukegb</h4>
 <p>Lean, mean, teen machine</p>
 
-<img alt="Member 2" class="bioicon" src="http://placehold.it/57x57" />
+<img alt="Oh hai" class="bioicon" src="http://placehold.it/57x57" />
 <dl class="bioinfo">
         <dt>Title</dt>
         <dd>Programmer</dd>
