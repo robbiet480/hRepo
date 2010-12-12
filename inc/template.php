@@ -44,5 +44,5 @@ function nav () {
 
 function pagetitle () {
 	global $nav, $slug;
-	return $nav[$slug]['title'];
+	return $nav[$slug]['name'];
 }
