@@ -27,6 +27,7 @@ body {
 	font:3em KavalerKursive,sans-serif;
 	float:left;
 	padding:1em 0;
+	text-shadow: 0 0 12px #000;
 }
 
 #top h1 a {
