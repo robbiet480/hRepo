@@ -5,6 +5,8 @@ function url ($slug, $args = array()) {
 }
 
 function template () {
+	header($_SERVER["SERVER_PROTOCOL"]." ".Content::$status);
+
 	foreach(Content::$headers as $k => $v) {
 		header($k.": ".$v);
 	}

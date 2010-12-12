@@ -6,6 +6,7 @@ class Content {
 		'Content-Type' => 'text/html; charset=utf-8'
 	);
 	public static $useTemplate = true;
+	public static $status = "200 OK";
 	
 	public static function set($content) {
 		self::$content = $content;

@@ -1,13 +1,14 @@
 <?php
 
-if (empty(Content::content)) {
-  $http-error = 404;
+if (empty(Content::$content)) {
+	$httpError = 404;
 }
 
-if ($http-error == 404) {
-  Content::setcontent(<<<EOT
-
-
-
-EOT);
+if ($httpError == 404) {
+	Content::$status = "404 Not Found";
+	Content::setcontent(<<<EOT
+	<h2>404 Error</h2>
+	<p>You suck.</p>
+EOT
+	);
 }
