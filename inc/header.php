@@ -10,7 +10,7 @@
 		<div id="top">
 			<div class="gutter clear">
 				<h1><a href="index.php">hRepo</a></h1>
-				<ul id="nav.php">
+				<ul id="nav">
 					<li <?php if($pagetitle == "browse"){echo 'class="active"'; } ?>><a href="browse.php">Browse</a></li>
 					<li <?php if($pagetitle == "about"){echo 'class="active"'; } ?>><a href="about.php">About</a></li>
 					<li <?php if($pagetitle == "faq"){echo 'class="active"'; } ?>><a href="faq.php">FAQ</a></li>
