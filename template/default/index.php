@@ -9,7 +9,7 @@
 	<body>
 		<div id="top">
 			<div class="gutter clear">
-				<h1><a href="<?php url("/") ?>">hRepo</a></h1>
+				<h1><a href="/">hRepo</a></h1>
 				<?php echo nav(); ?>
 			</div>
 		</div>
@@ -34,7 +34,7 @@
 		</div>
 		<div id="footer">
 			<div class="gutter clear">
-				<p>&copy; <?php echo date('Y'); ?> the hRepo Team</p>
+				<p>&copy; <?php echo date('Y'); ?> the hRepo Team. Powered by <a href="http://hostiio.com">Hostiio</a> and <a href="http://aws.amazon.com/s3">Amazon S3</a></p>
 			</div>
 		</div>
 		

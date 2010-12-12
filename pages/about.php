@@ -9,7 +9,7 @@ if($slug == "about") {
 <h4>Robbie Trencheny</h4> 
 <p>Owner of MinecraftServers.com & Hostiio. Web devloper by day, sysadmin by night</p> 
  
-<img alt="Robbie Trencheny" class="bioicon" src="http://placehold.it/57x57" /> 
+<img alt="Robbie Trencheny" class="bioicon" src="http://hrepo.com/static/images/bio/robbie.png" /> 
 <dl class="bioinfo"> 
 	<dt>Title</dt> 
 	<dd>Project Founder</dd> 
