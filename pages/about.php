@@ -48,7 +48,7 @@ if($slug == "about") {
 	<dd>alecgorge</dd> 
 	
 	<dt>Coding languages</dt> 
-	<dd>PHP, MySQL, HTML, CSS, Python, Objective-C, Javascript, Java, C#</dd> 
+	<dd>PHP, MySQL, HTML, CSS, Python, Objective-C, JavaScript/ECMAScript, Java, C#</dd> 
 </dl>
 
 <h4>Sturmeh</h4> 
@@ -79,6 +79,21 @@ if($slug == "about") {
 	
 	<dt>Coding languages</dt> 
 	<dd>Photoshop, CSS, HTML, SQL</dd> 
+</dl>
+
+<h4>lukegb</h4>
+<p>Lean, mean, teen machine</p>
+
+<img alt="Member 2" class="bioicon" src="http://placehold.it/57x57" />
+<dl class="bioinfo">
+        <dt>Title</dt>
+        <dd>Programmer</dd>
+
+        <dt>IRC Nick</dt>
+        <dd>lukegb</dd>
+
+        <dt>Coding languages</dt>
+        <dd>(X)HTML, CSS, SQL, PHP, C#, Python, JavaScript/ECMAScript, Java</dd>
 </dl>
 
 

@@ -38,12 +38,15 @@ define('HR_DB_PREFIX', '');
 
 error_reporting(E_ALL - E_NOTICE);
 
+if (isset($_SERVER['PATH_INFO'])) {
+	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...
+}
+
 $_GET['page'] = rtrim($_GET['page'], '/');
 $parts = explode('/',$_GET['page']);
 if(count($parts) > 1) {
 	$slug = $parts[1];
-}
-else {
+} else {
 	$slug = 'index';
 }
 unset($parts);
