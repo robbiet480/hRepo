@@ -1,7 +1,7 @@
 <?php
 
 if($slug == "git") {
-	Content::$forceTitle = "Git Update";
+	//Content::$forceTitle = "Git Update";
 	chdir(HR_ROOT);
 	Content::setContent("
 	<h1>Updating website from git...</h1>
