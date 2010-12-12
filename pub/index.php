@@ -1,37 +1,59 @@
 <?php
-$pagetitle = "index";
-include_once('../inc/header.php');
-?>
-		<div id="wrapper">
-			<div class="gutter clear">
-				<div id="content">
-					<div class="gutter clear">
-						<h2>Home</h2>
-						<p>intro to hrepo</p>
-						<h3>Recommended Plugins</h3>
-						<p>etc...</p>
-					</div>
-				</div>
-				
-				<div id="sidebar">
-					<div class="gutter clear">
-						<h3>Most Downloaded Plugins</h3>
-						<ol>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-							<li><a href="/plugins/sk89q/WorldEdit/">WorldEdit<span class="count"> (946)</span></a></li>
-						</ol>
-					</div>
-				</div>
-			</div>
-		</div>
-<?php
-include_once('../inc/footer.php');
-?>
+
+/*
+style info:
+
+always tabs.
+braces on the same line.
+camelCase classes, variables and methods
+under_scores in function names and file names
+filesnames are all lowercase
+prefix functions and constants with hr_ (for hRepo) for differntiantion from standard funcs
+always use braces on if, else, for, while, foreach, etc.
+never use the closing ?> unless needed
+
+all urls end in /
+*/
+
+// benchmarks
+define('HR_START', microtime(true));
+
+define('HR_ROOT', realpath(dirname(__FILE__).'/../').'/');
+define('HR_PAGES', HR_ROOT.'pages/');
+define('HR_PUB', HR_ROOT.'pub/');
+define('HR_LIB', HR_ROOT.'lib/');
+define('HR_INC', HR_ROOT.'inc/');
+define('HR_PUB_ROOT', dirname($_SERVER['PHP_SELF']).'/');
+define('HR_TEMPLATE', HR_ROOT.'template/');
+define('HR_TMP', HR_ROOT.'tmp/');
+
+define('HR_TEMPLATE_TO_USE', 'default');
+define('HR_TEMPLATE_PUB_ROOT', HR_PUB_ROOT.'static/'.HR_TEMPLATE_TO_USE.'/');
+
+error_reporting(E_ALL - E_NOTICE);
+
+$_GET['page'] = rtrim($_GET['page'], '/');
+$parts = explode('/',$_GET['page']);
+if(count($parts) > 1) {
+	$slug = $parts[1];
+}
+else {
+	$slug = 'index';
+}
+unset($parts);
+
+// format: $nav['browse'] = array('url' => '/browse', 'slug' => 'browse', 'name' => 'Browse', 'loggedInOnly' => false, 'weight' => 1);
+$nav = array();
+
+require(HR_INC.'logging.php');
+require(HR_INC.'std.php');
+
+inc('content.php');
+inc('user.php');
+inc('template.php');
+
+foreach(glob(HR_PAGES.'*.php') as $page) {
+	require($page);
+}
+
+template();
