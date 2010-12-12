@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>hRepo</title>
-		
-		<link rel="stylesheet" type="text/css" href="static/css/fonts.css" />
-		<link rel="stylesheet" type="text/css" href="static/css/hrepo.css" />
-	</head>
-	<body>
-		<div id="top">
-			<div class="gutter clear">
-				<h1><a href="/">hRepo</a></h1>
-				<ul id="nav">
-					<li><a href="/browse">Browse</a></li>
-					<li><a href="/about">About</a></li>
-					<li><a href="/faq">FAQ</a></li>
-					<li><a href="/login">Login</a></li>
-					<li class="active"><a href="/contact">Contact</a></li>
-				</ul>
-			</div>
-		</div>
+<?php
+$pagetitle = "login";
+include_once('../inc/header.php');
+?>
 		<div id="wrapper">
 			<div class="gutter clear">
 				<div id="content">
@@ -49,12 +32,6 @@
 				</div>
 			</div>
 		</div>
-		<div id="footer">
-			<div class="gutter clear">
-				<p>stuff</p>
-			</div>
-		</div>
-		
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-	</body>
-</html>
+<?php
+include_once('../inc/footer.php');
+?>
