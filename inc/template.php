@@ -1,7 +1,7 @@
 <?php
 
 function url ($slug, $args = array()) {
-	return sprintf("%s/%s", HR_PUB_ROOT, $slug);
+	return "/".rtrim(sprintf("%s/%s", HR_PUB_ROOT, $slug), "/");
 }
 
 function template () {
