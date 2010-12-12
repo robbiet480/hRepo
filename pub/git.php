@@ -1,3 +1,4 @@
-<?php
+<pre><?php
 
-echo exec("cd /var/www/hRepo/ && git pull");
+system("cd /var/www/hRepo/ && git pull", $var);
+var_dump($var);?></pre>
