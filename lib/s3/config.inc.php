@@ -31,19 +31,19 @@ define('AWS_SECRET_KEY', 'Ma050YHi12ZAIb3w/SVBqWJbFppgxA/dfi7nqvjM');
  * Constant: AWS_ACCOUNT_ID
  * 	Amazon Account ID without dashes. Used for identification with Amazon EC2. Found in the AWS Security Credentials.
  */
-define('AWS_ACCOUNT_ID', '');
+define('AWS_ACCOUNT_ID', '660565008207');
 
 /**
  * Constant: AWS_CANONICAL_ID
  * 	Your CanonicalUser ID. Used for setting access control settings in AmazonS3. Found in the AWS Security Credentials.
  */
-define('AWS_CANONICAL_ID', '');
+define('AWS_CANONICAL_ID', 'f934ef5d7ee2924fa5d760e5b7c2a650cf706cf6eec014d94129ada1a71ce2b2');
 
 /**
  * Constant: AWS_CANONICAL_NAME
  * 	Your CanonicalUser DisplayName. Used for setting access control settings in AmazonS3. Found in the AWS Security Credentials (i.e. "Welcome, AWS_CANONICAL_NAME").
  */
-define('AWS_CANONICAL_NAME', '');
+define('AWS_CANONICAL_NAME', 'Robbie Trencheny');
 
 /**
  * Constant: AWS_MFA_SERIAL
