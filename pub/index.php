@@ -49,6 +49,7 @@ require(HR_INC.'logging.php');
 require(HR_INC.'std.php');
 
 inc('content.php');
+inc('sidebar.php');
 inc('user.php');
 inc('template.php');
 
