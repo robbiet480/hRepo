@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "browse";
-include_once('inc/header.php');
+include_once('../inc/header.php');
 ?>
 		<div id="wrapper">
 			<div class="gutter clear">
@@ -33,5 +33,5 @@ include_once('inc/header.php');
 			</div>
 		</div>
 <?php
-include_once('inc/footer.php');
+include_once('../inc/footer.php');
 ?>

@@ -1,6 +1,6 @@
 <?php
 $pagetitle = "index";
-include_once('inc/header.php');
+include_once('../inc/header.php');
 ?>
 		<div id="wrapper">
 			<div class="gutter clear">
