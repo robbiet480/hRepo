@@ -30,6 +30,12 @@ define('HR_TMP', HR_ROOT.'tmp/');
 define('HR_TEMPLATE_TO_USE', 'default');
 define('HR_TEMPLATE_PUB_ROOT', HR_PUB_ROOT.'static/'.HR_TEMPLATE_TO_USE.'/');
 
+define('HR_DB_ENABLE', false);
+define('HR_DSN', 'mysql:host=localhost;dbname=testdb');
+define('HR_DBUSR', 'user');
+define('HR_DBPASS', 'password');
+define('HR_DB_PREFIX', '');
+
 error_reporting(E_ALL - E_NOTICE);
 
 $_GET['page'] = rtrim($_GET['page'], '/');
@@ -48,6 +54,7 @@ $nav = array();
 require(HR_INC.'logging.php');
 require(HR_INC.'std.php');
 
+inc('db.php');
 inc('content.php');
 inc('sidebar.php');
 inc('user.php');
