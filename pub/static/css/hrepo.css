@@ -71,9 +71,55 @@ body {
 	border-radius: 3px;
 }
 
-#top .gutter, #footer .gutter, #wrapper .gutter {
+#top .gutter, #footer .gutter {
 	width: 960px;
 	margin: auto;
+}
+
+#wrapper { 
+	width: 960px;
+	margin: 25px auto;
+	border:1px #666 solid;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	font-size:1.15em;
+	background: #c2c2c2;
+}
+
+#wrapper h2 { 
+	margin-top:0;
+	font-size:1.6em;
+	letter-spacing:-1px;
+}
+
+#wrapper h3 {
+	margin-top:0;
+}
+
+#content {
+	float:left;
+	width:59%;
+}
+
+#sidebar {
+	float:right;
+	width:30%;
+}
+
+#wrapper .gutter {
+	padding:25px;
+}
+
+#footer {
+	background:#b1b1b1;
+	padding:15px;
+	font-size:1.4em;
+}
+
+#footer .gutter {
+	text-align:center;
+	color:#727272;
 }
 
 .clear:after {
