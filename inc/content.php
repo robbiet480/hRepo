@@ -7,6 +7,7 @@ class Content {
 	);
 	public static $useTemplate = true;
 	public static $status = "200 OK";
+	public static $forcedTitle = "";
 	
 	public static function set($content) {
 		self::$content = $content;

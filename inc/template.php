@@ -46,5 +46,8 @@ function nav () {
 
 function pagetitle () {
 	global $nav, $slug;
+	if(!empty(Content::$forcedTitle)) {
+		return Content::$forcedTitle;
+	}
 	return $nav[$slug]['name'];
 }
