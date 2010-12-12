@@ -1,4 +1,3 @@
 <pre><?php
-
-system("cd /var/www/hRepo/ && git pull", $var);
-var_dump($var);?></pre>
+var_dump(exec("cd /var/www/hRepo/ && git pull"));
+?></pre>
