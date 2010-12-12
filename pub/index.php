@@ -23,7 +23,7 @@ define('HR_PAGES', HR_ROOT.'pages/');
 define('HR_PUB', HR_ROOT.'pub/');
 define('HR_LIB', HR_ROOT.'lib/');
 define('HR_INC', HR_ROOT.'inc/');
-define('HR_PUB_ROOT', dirname($_SERVER['PHP_SELF']).'/');
+define('HR_PUB_ROOT', '/'.ltrim(dirname($_SERVER['PHP_SELF']).'/', '/'));
 define('HR_TEMPLATE', HR_ROOT.'template/');
 define('HR_TMP', HR_ROOT.'tmp/');
 
