@@ -1,6 +1,6 @@
 <div id="footer">
 			<div class="gutter clear">
-				<p>stuff</p>
+				<p>&copy; <?php echo date('Y'); ?> the hRepo Team</p>
 			</div>
 		</div>
 		

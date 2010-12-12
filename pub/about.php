@@ -6,10 +6,38 @@ include_once('../inc/header.php');
 			<div class="gutter clear">
 				<div id="content">
 					<div class="gutter clear">
-						<h2>Home</h2>
-						<p>intro to hrepo</p>
-						<h3>Recommended Plugins</h3>
-						<p>etc...</p>
+						<h2>About</h2>
+						<h3>About the team</h3> 
+ 
+<h4>Member 1</h4> 
+<p>Bla bla bla</p> 
+ 
+<img alt="Member 1" class="bioicon" src="http://placehold.it/57x57" /> 
+<dl class="bioinfo"> 
+	<dt>Title</dt> 
+	<dd>Something or other</dd> 
+	
+	<dt>IRC Nick</dt> 
+	<dd>blablabla</dd> 
+	
+	<dt>Coding languages</dt> 
+	<dd>X Y Z</dd> 
+</dl> 
+ 
+<h4>Member 2</h4> 
+<p>Bla bla bla</p> 
+ 
+<img alt="Member 2" class="bioicon" src="http://placehold.it/57x57" /> 
+<dl class="bioinfo"> 
+	<dt>Title</dt> 
+	<dd>Something or other</dd> 
+	
+	<dt>IRC Nick</dt> 
+	<dd>blablabla</dd> 
+	
+	<dt>Coding languages</dt> 
+	<dd>A B C</dd> 
+</dl> 
 					</div>
 				</div>
 				
