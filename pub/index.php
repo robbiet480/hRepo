@@ -49,6 +49,11 @@ if(count($parts) > 1) {
 } else {
 	$slug = 'index';
 }
+if (count($parts) > 2) {
+	$params = array_slice($parts, 2);
+} else {
+	$params = array();
+}
 unset($parts);
 
 // format: $nav['browse'] = array('url' => '/browse', 'slug' => 'browse', 'name' => 'Browse', 'loggedInOnly' => false, 'weight' => 1);

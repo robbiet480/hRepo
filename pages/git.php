@@ -2,7 +2,7 @@
 
 if($slug == "git") {
 	Content::$forcedTitle = "Git Update";
-	if (count($parts) > 2 && $parts[2] == hash('whirlpool', 'http://github.com/robbiet480/hRepo/')) {
+	if (count($params) > 0 && strtolower($params[0]) == hash('whirlpool', 'http://github.com/robbiet480/hRepo/')) {
 		chdir(HR_ROOT);
 		Content::setContent("
 			<h1>Updating website from git...</h1>
