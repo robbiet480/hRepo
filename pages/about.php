@@ -96,7 +96,20 @@ if($slug == "about") {
         <dd>(X)HTML, CSS, SQL, PHP, C#, Python, JavaScript/ECMAScript, Java</dd>
 </dl>
 
+<h4>GoMySQL</h4> 
+<p>NULL</p> 
 
+<img alt="GoMySQL" class="bioicon" src="http://placehold.it/57x57" /> 
+<dl class="bioinfo"> 
+	<dt>Title</dt> 
+	<dd>MySQL DBA</dd> 
+
+	<dt>IRC Nick</dt> 
+	<dd>GoMySQL</dd> 
+
+	<dt>Coding languages</dt> 
+	<dd>SQL, PHP, Perl, Bash</dd>
+</dl>
 
 EOT
 	);
