@@ -111,6 +111,22 @@ if($slug == "about") {
 	<dd>SQL, PHP, Perl, Bash</dd>
 </dl>
 
+
+<h4>Shadow386</h4> 
+<p>Cookies, pie and everything sweet</p> 
+
+<img alt="GoMySQL" class="bioicon" src="http://placehold.it/57x57" /> 
+<dl class="bioinfo"> 
+	<dt>Title</dt> 
+	<dd>Graphic Artist</dd> 
+
+	<dt>IRC Nick</dt> 
+	<dd>Shadow386</dd> 
+
+	<dt>Coding languages</dt> 
+	<dd>"itty bitty bits of java, some c++ knowledge, php and mysql knowledge, and how to draw a decent picture"</dd>
+</dl>
+
 EOT
 	);
 	
