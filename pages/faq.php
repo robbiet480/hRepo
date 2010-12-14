@@ -5,9 +5,9 @@ if($slug == "faq") {
 	Content::setContent(<<<EOT
 	<h1>1. Why is Sturmeh so cool?</h1>
 	<p>Many scientists have tried to derive the answer to the question but even the world's best minds are unsure of what causes the effect.</p>
-	<h1>2. Why is sk89q so lame?</h1>
+	<h3>2. Why is sk89q so lame?</h3>
 	<p>Many scientists have tried to derive the answer to the question but even the world's best minds are unsure of what causes the effect. Also, his plugins suck</p>
-	<h1>3. Why now?</h1>
+	<h3>3. Why now?</h3>
 	<p>Why not?</p>
 
 
