@@ -26,7 +26,7 @@
 					<div class="gutter clear">
 					<?php
 					foreach(Sidebar::$blocks as $v) {
-						echo "<h3>".$v['title']."</h3>".$v['content'];
+						echo "<h3>".$v['title']."</h3><div class='block'>".$v['content']."</div>";
 					}
 					?>
 					</div>
@@ -35,7 +35,9 @@
 		</div>
 		<div id="footer">
 			<div class="gutter clear">
-				<p>&copy; <?php echo date('Y'); ?> the hRepo Team. Powered by <a href="http://hostiio.com">Hostiio</a> and <a href="http://aws.amazon.com/s3">Amazon S3</a>. Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD'); ?>"><?php echo shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD'); ?></a></p>
+				<p>&copy; <?php echo date('Y'); ?> the hRepo Team.</p>
+				<p>Powered by <a href="http://hostiio.com">Hostiio</a> and <a href="http://aws.amazon.com/s3">Amazon S3</a>.</p>
+				<p>Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD'); ?>"><?php echo shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD'); ?></a></p>
 			</div>
 		</div>
 		
