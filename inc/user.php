@@ -32,11 +32,11 @@ class User {
 
 			if(self::checkSession($_POST['username'], $_POST['password'], $_SERVER['REMOTE_ADDR'])) {
 				redirect('/user', true);
-           	}
+			}
 			else {
 				return Message::error("Bad username or password...");
 			}
-       	}
+		}
 	}
 
 	/**
