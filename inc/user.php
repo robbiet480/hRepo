@@ -84,6 +84,7 @@ class User {
 	 * @return boolean True if session is valid user. False otherwise. Also false if ips are different between requests.
 	 */
 	public static function checkSession ($uname, $pword, $last_ip) {
+		echo 'Entering checkSession';
 		$current_ip = $_SERVER['REMOTE_ADDR'];
 		$hash = self::hashWithSalt($pword, $row['userpwsalt']);
 
@@ -119,10 +120,14 @@ class User {
 
 	public static function bootstrap () {
 		session_start();
+		echo 'DEBUG1';
 
 		self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
+		echo 'DEBUG2';
 		if(!self::$isValid) {
+			echo 'DEBUG3';
 			Users::checkCookie();
+			echo 'DEBUG4';
 			self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
 		}
 	}
