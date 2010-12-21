@@ -52,7 +52,7 @@ if($slug == "about") {
 </dl>
 
 <h4>Sturmeh</h4> 
-<p>Bla bla bla</p> 
+<p>Am I doin it right?</p> 
  
 <img alt="Member 2" class="bioicon" src="http://placehold.it/57x57" /> 
 <dl class="bioinfo"> 
