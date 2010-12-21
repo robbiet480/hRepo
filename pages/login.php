@@ -4,7 +4,7 @@ $nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', '
 if($slug == "login") {
 	$message = User::loginHandle();
 	Content::setContent(<<<EOT
-	<h2>Login</h2>
+	<h1>Login</h1>
 	<form action="/login" method="post">$message
 		<div class="form-row">
 			<label for="username">Username</label>
