@@ -88,7 +88,7 @@ body {
 	background: #fff;
 }
 
-#wrapper h2, #wrapper h1 { 
+#wrapper h1 { 
 	margin-top:0;
 	font-size:1.6em;
 	letter-spacing:-1px;
@@ -102,6 +102,20 @@ body {
 	-moz-border-radius:10px 10px 0 0;
 	-webkit-border-radius:10px 10px 0 0;
 	border-radius:10px 10px 0 0;
+}
+
+#wrapper h2 {
+	margin-top: 0;
+	font-size: 1.4em;
+	letter-spacing: -1px;
+	padding: 15px 5px 15px 25px;
+	position: relative;
+	left: -26px;
+	width: 932px;
+	color: grey;
+
+	border: none;
+	border-bottom: 1px #bbb dashed;
 }
 
 #wrapper h3 {
