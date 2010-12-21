@@ -130,6 +130,8 @@ body {
 #sidebar {
 	float:right;
 	width:30%;
+	position: relative;
+	z-index: 60;
 }
 
 #wrapper > .gutter {
