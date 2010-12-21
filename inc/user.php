@@ -84,31 +84,38 @@ class User {
 	 * @return boolean True if session is valid user. False otherwise. Also false if ips are different between requests.
 	 */
 	public static function checkSession ($uname, $pword, $last_ip) {
-		echo 'Entering checkSession';
+echo 'DEBUG1';
 		$current_ip = $_SERVER['REMOTE_ADDR'];
 		$hash = self::hashWithSalt($pword, $row['userpwsalt']);
+echo 'DEBUG2';
 
 		// session not set.
 		if(empty($uname) || empty($pword)) {
 			return false;
 		}
+echo 'DEBUG3';
 
-		// session spoofing!!
+		// session spoofing!!! or... an AOL user. Meh. AOL users are spammy.
 		if($last_ip !== $current_ip) {
 			return false;
 		}
 		$_SESSION['last_ip'] = $current_ip;
+echo 'DEBUG4';
 
 		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ?', $uname));
+echo 'DEBUG5';
 		$row = $smt->fetch(PDO::FETCH_ASSOC);
+echo 'DEBUG6';
 
 		// correct password
 		if($hash === $row['password']) {
+echo 'DEBUG7a';
 			$_SESSION['uname']  = $uname;
 			$_SESSION['pword']  = $hash;
 			$_SESSION['role']  = $row['role'];
 			return true;
 		}
+echo 'DEBUG7b';
 
 		// wrong password
 		return false;
@@ -120,14 +127,10 @@ class User {
 
 	public static function bootstrap () {
 		session_start();
-		echo 'DEBUG1';
 
 		self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
-		echo 'DEBUG2';
 		if(!self::$isValid) {
-			echo 'DEBUG3';
 			Users::checkCookie();
-			echo 'DEBUG4';
 			self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
 		}
 	}
