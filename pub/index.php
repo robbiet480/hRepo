@@ -69,6 +69,7 @@ inc('content.php');
 inc('sidebar.php');
 inc('user.php');
 inc('template.php');
+inc('message.php');
 
 foreach(glob(HR_PAGES.'*.php') as $page) {
 	require($page);
