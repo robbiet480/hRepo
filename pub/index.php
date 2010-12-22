@@ -30,10 +30,10 @@ define('HR_TMP', HR_ROOT.'tmp/');
 define('HR_TEMPLATE_TO_USE', 'default');
 define('HR_TEMPLATE_PUB_ROOT', HR_PUB_ROOT.'static/'.HR_TEMPLATE_TO_USE.'/');
 
-define('HR_DB_ENABLE', false);
-define('HR_DSN', 'mysql:host=localhost;dbname=testdb');
-define('HR_DBUSR', 'user');
-define('HR_DBPASS', 'password');
+define('HR_DB_ENABLE', true);
+define('HR_DSN', 'mysql:host=localhost;dbname=hRepo');
+define('HR_DBUSR', 'hrepo');
+define('HR_DBPASS', '93B7A78FDE35AB12CE89292EB144E20630CAA7E1926D9E4A55F622D0AF49BCBF'); // this can be shared, I guess, since MySQLd only binds to 127.0.0.1
 define('HR_DB_PREFIX', '');
 
 error_reporting(E_ALL - E_NOTICE);
