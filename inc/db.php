@@ -70,7 +70,7 @@ class Database {
 		// $cols is like array('col1', 'col2');
 		if (is_array($cols))
 		{
-			$cols = '`' . implode('`', $cols) . '`';
+			$cols = '`' . implode('`,`', $cols) . '`';
 		}
 
 		// using where statement
