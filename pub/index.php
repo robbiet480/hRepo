@@ -38,6 +38,7 @@ define('HR_DB_PREFIX', '');
 
 error_reporting(E_ALL - E_NOTICE);
 ini_set('display_errors', 'On'); // this is helpful for DEBUGGING but remove it after the fact
+define('HR_DB_DEBUG', true); // this makes magic happen
 
 if (isset($_SERVER['PATH_INFO'])) {
 	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...

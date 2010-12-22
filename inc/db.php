@@ -1,6 +1,7 @@
 <?php
 
 class Database {
+
 	/**
 	 * @var PDOObject The handle to the database.
 	 */
@@ -11,28 +12,28 @@ class Database {
 	 *
 	 * @returns PDOOBject The handle to the database.
 	 */
-	public static function getHandle () {
+	public static function getHandle() {
 		return self::$handle;
 	}
 
 	/**
 	 * FOR INTERNAL USE ONLY.
 	 */
-	public static function setHandle ($handle) {
+	public static function setHandle($handle) {
 		self::$handle = $handle;
 	}
 
 	public static $totalTime = 0;
 
-	public static function beginTransaction () {
+	public static function beginTransaction() {
 		self::$handle->beginTransaction();
 	}
 
-	public static function endTransaction () {
+	public static function endTransaction() {
 		self::$handle->commit();
 	}
 
-	public static function rollbackTransaction () {
+	public static function rollbackTransaction() {
 		self::$handle->rollBack();
 	}
 
@@ -40,7 +41,6 @@ class Database {
 		echo 'So guess what? THE DATABASE ISN\'T ENABLED AND YOU TRIED TO CALL A DATABASE BASED FUNCTION!<br /><br />I mean seriously? Who does that.';
 		die();
 	}
-
 
 	/**
 	 * Perform a select query on the database.
@@ -58,8 +58,9 @@ class Database {
 	 * @param int $limit The limit on the number of results to return. Sanizied for your convience.
 	 * @return PDOStatement A PDOStatement with all of the results.
 	 */
-	public static function select ($table, $cols = '*', $where = null, $order = null, $limit = -1) {
-		if (!HR_DB_ENABLED) self::databaseIsntEnabledYouNoob();
+	public static function select($table, $cols = '*', $where = null, $order = null, $limit = -1) {
+		if (!HR_DB_ENABLED)
+			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 
 		$prepare = array();
@@ -67,41 +68,50 @@ class Database {
 		$sql = "SELECT %s from `%s%s` %s %s %s";
 
 		// $cols is like array('col1', 'col2');
-		if(is_array($cols)) {
-			$cols = '`'.implode('`', $cols).'`';
+		if (is_array($cols))
+		{
+			$cols = '`' . implode('`', $cols) . '`';
 		}
 
 		// using where statement
 		// should be like array('`col1' > ? AND `col2` < ?', '12', '24');
-		if(is_array($where)) {
-			if(count($where) > 1) {
+		if (is_array($where))
+		{
+			if (count($where) > 1)
+			{
 				$prepare = array_slice($where, 1);
 			}
-			$where = 'WHERE '.$where[0];
+			$where = 'WHERE ' . $where[0];
 		}
-		elseif(!is_null($where)) {
-			$where = 'WHERE '.$where;
+		elseif (!is_null($where))
+		{
+			$where = 'WHERE ' . $where;
 		}
 
-		if(is_array($order)) {
+		if (is_array($order))
+		{
 			$orders = "ORDER BY";
-			foreach($order as $k => $v) {
-				if(($k+2)%2 == 0)
+			foreach ($order as $k => $v)
+			{
+				if (($k + 2) % 2 == 0)
 					$orders .= " `$v`";
 				else
 					$orders .= " $v,";
 			}
 			$orders = trim($orders, ',');
 		}
-		else {
+		else
+		{
 			$orders = '';
 		}
 		$order = $orders;
 
-		if($limit > 0 && is_numeric($limit))  {
-			$limit = "LIMIT ".$limit;
+		if ($limit > 0 && is_numeric($limit))
+		{
+			$limit = "LIMIT " . $limit;
 		}
-		else {
+		else
+		{
 			$limit = '';
 		}
 
@@ -110,21 +120,34 @@ class Database {
 		$time = microtime(true) - $start;
 		self::$totalTime += $time;
 
-		Log::add('DB Query: (time: '.$time.') '.$sql);
+		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
 		$smt = self::getHandle()->prepare($sql);
 
-		if(!$smt) {
+		if (!$smt)
+		{
 			print_r(self::getHandle()->errorInfo());
 			return false;
 		}
 
-		if($smt->execute($prepare)) {
+		if ($smt->execute($prepare))
+		{
 			return $smt;
 		}
-		else {
-			echo '<h1>DB Error:</h1>';
-			print_r(self::getHandle()->errorInfo());
-			die();
+		else
+		{
+			if (HR_DB_DEBUG)
+			{
+				echo '<h1>DB Error:</h1>';
+				print_r(self::getHandle()->errorInfo());
+				echo "<h2>SQL Statement</h2><pre>$sql</pre>";
+				die();
+			}
+			else
+			{
+				// OH NOES ¬_¬
+				die('A database error occurred whilst processing this page.
+					Please contact the site administrator!');
+			}
 		}
 	}
 
@@ -145,42 +168,58 @@ class Database {
 	 * @param array $values The respective values for $cols. The data is automatically sanitized. Optional if $cols is associative.
 	 * @return int The number of rows affected.
 	 */
-	public static function insert ($table, $cols, $values = null) {
-		if (!HR_DB_ENABLED) self::databaseIsntEnabledYouNoob();
+	public static function insert($table, $cols, $values = null) {
+		if (!HR_DB_ENABLED)
+			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$prepare = array();
 
 		$sql = "INSERT INTO `%s%s` (%s) VALUES (%s)";
 
-		if($values === null) {
-			$keys = '`'.implode('`,`',array_keys($cols)).'`';
+		if ($values === null)
+		{
+			$keys = '`' . implode('`,`', array_keys($cols)) . '`';
 			$binds = array_values($cols);
 			$values = array_fill(0, count($binds), '?');
 		}
-		else {
-			$keys = '`'.implode('`,`',array_values($cols)).'`';
+		else
+		{
+			$keys = '`' . implode('`,`', array_values($cols)) . '`';
 			$binds = $values;
 			$values = array_fill(0, count($binds), '?');
 		}
 
-		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $keys, implode(',',$values)));
+		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $keys, implode(',', $values)));
 		self::$totalTime += $time;
 
-		Log::add('DB Query: (time: '.$time.') '.$sql);
+		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
 		$smt = self::getHandle()->prepare($sql);
 
-		if(!$smt) {
+		if (!$smt)
+		{
 			print_r(self::getHandle()->errorInfo());
 			return false;
 		}
 
-		if($smt->execute($binds)) {
+		if ($smt->execute($binds))
+		{
 			return $smt->rowCount();
 		}
-		else {
-			echo '<h1>DB Error:</h1>';
-			print_r(self::getHandle()->errorInfo());
-			die();
+		else
+		{
+			if (HR_DB_DEBUG)
+			{
+				echo '<h1>DB Error:</h1>';
+				print_r(self::getHandle()->errorInfo());
+				echo "<h2>SQL Statement</h2><pre>$sql</pre>";
+				die();
+			}
+			else
+			{
+				// OH NOES ¬_¬
+				die('A database error occurred whilst processing this page.
+					Please contact the site administrator!');
+			}
 		}
 	}
 
@@ -201,42 +240,60 @@ class Database {
 	 * @param array $limit (optional) The number of rows to limit the query to.
 	 * @return int The number of rows affected.
 	 */
-	public static function delete ($table, $where, $limit = null) {
-		if (!HR_DB_ENABLED) self::databaseIsntEnabledYouNoob();
+	public static function delete($table, $where, $limit = null) {
+		if (!HR_DB_ENABLED)
+			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$sql = "DELETE FROM `%s%s` %s%s";
 
-		if(is_array($where)) {
-			if(count($where) > 1) {
+		if (is_array($where))
+		{
+			if (count($where) > 1)
+			{
 				$prepare = array_slice($where, 1);
 			}
-			$where = 'WHERE '.$where[0];
+			$where = 'WHERE ' . $where[0];
 		}
-		elseif(!is_null($where)) {
-			$where = 'WHERE '.$where;
+		elseif (!is_null($where))
+		{
+			$where = 'WHERE ' . $where;
 		}
 
-		if(!is_null($limit)) {
-			$limit = " LIMIT ".$limit;
+		if (!is_null($limit))
+		{
+			$limit = " LIMIT " . $limit;
 		}
 		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $where, $limit));
 		self::$totalTime += $time;
 
-		Log::add('DB Query: (time: '.$time.') '.$sql);
+		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
 
 		$smt = self::getHandle()->prepare($sql);
 
-		if(!$smt) {
+		if (!$smt)
+		{
 			print_r(self::getHandle()->errorInfo());
 			return false;
 		}
-		if($smt->execute($prepare)) {
+		if ($smt->execute($prepare))
+		{
 			return $smt->rowCount();
 		}
-		else {
-			echo '<h1>DB Error:</h1>';
-			print_r(self::getHandle()->errorInfo());
-			die();
+		else
+		{
+			if (HR_DB_DEBUG)
+			{
+				echo '<h1>DB Error:</h1>';
+				print_r(self::getHandle()->errorInfo());
+				echo "<h2>SQL Statement</h2><pre>$sql</pre>";
+				die();
+			}
+			else
+			{
+				// OH NOES ¬_¬
+				die('A database error occurred whilst processing this page.
+					Please contact the site administrator!');
+			}
 		}
 	}
 
@@ -258,77 +315,105 @@ class Database {
 	 * @param array $where An array where the first item is one or more comparision statements. Question marks (?) can optionally be used for binding. Then the second item and beyond are the values for the binds. These binds are automatically escaped for security. Example: array('`col1' > ? AND `col2` < ?', '12', '24');
 	 * @return int The number of rows affected.
 	 */
-	public static function update ($table, $cols, $values = null, $where) {
-		if (!HR_DB_ENABLED) self::databaseIsntEnabledYouNoob();
+	public static function update($table, $cols, $values = null, $where) {
+		if (!HR_DB_ENABLED)
+			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$prepare = array();
 
 		$sql = "UPDATE `%s%s` SET%s %s";
 
-		if(!is_array($values)) {
-			foreach($cols as $key => $value) {
+		if (!is_array($values))
+		{
+			foreach ($cols as $key => $value)
+			{
 				$set .= " `$key` = ?,";
 				$binds[] = $value;
 			}
 		}
-		else {
-			foreach($cols as $key => $value) {
+		else
+		{
+			foreach ($cols as $key => $value)
+			{
 				$set .= " `$value` = ?,";
 			}
 			$binds = $values;
 		}
-		$set = ' '.trim($set, ', ');
+		$set = ' ' . trim($set, ', ');
 
 		// using where statement
 		// should be like array('`col1' > ? AND `col2` < ?', '12', '24');
-		if(is_array($where)) {
-			if(count($where) > 1) {
+		if (is_array($where))
+		{
+			if (count($where) > 1)
+			{
 				$prepare = array_slice($where, 1);
 			}
-			$where = 'WHERE '.$where[0];
+			$where = 'WHERE ' . $where[0];
 		}
-		elseif(!is_null($where)) {
-			$where = 'WHERE '.$where;
+		elseif (!is_null($where))
+		{
+			$where = 'WHERE ' . $where;
 		}
 
-		if($limit > 0 && is_numeric($limit))  {
-			$limit = "LIMIT ".$limit;
+		if ($limit > 0 && is_numeric($limit))
+		{
+			$limit = "LIMIT " . $limit;
 		}
-		else {
+		else
+		{
 			$limit = '';
 		}
-		
+
 		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $set, $where));
 
 		self::$totalTime += $time;
 
-		Log::add('DB Query: (time: '.$time.') '.$sql);
+		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
 		$smt = self::getHandle()->prepare($sql);
-		
-		if(!$smt) {
+
+		if (!$smt)
+		{
 			print_r(self::getHandle()->errorInfo());
 			debug_print_backtrace();
 			return false;
 		}
 
 
-		if($smt->execute(array_merge($binds,$prepare))) {
+		if ($smt->execute(array_merge($binds, $prepare)))
+		{
 			return $smt->rowCount();
 		}
-		else {
-			echo '<h1>DB Error:</h1>';
-			print_r(self::getHandle()->errorInfo());
-			die();
+		else
+		{
+			if (HR_DB_DEBUG)
+			{
+				echo '<h1>DB Error:</h1>';
+				print_r(self::getHandle()->errorInfo());
+				echo "<h2>SQL Statement</h2><pre>$sql</pre>";
+				die();
+			}
+			else
+			{
+				// OH NOES ¬_¬
+				die('A database error occurred whilst processing this page.
+					Please contact the site administrator!');
+			}
 		}
 	}
+
 }
+
 class_alias('Database', 'DB');
 
-try {
-	if(HR_DB_ENABLE) {
+try
+{
+	if (HR_DB_ENABLE)
+	{
 		// create the pdo object
 		DB::setHandle(new PDO(HR_DSN, HR_DBUSR, HR_DBPASS));
 	}
-} catch (PDOException $e) {
-	die('DB ERROR: '.$e);
+} catch (PDOException $e)
+{
+	die('DB ERROR: ' . $e);
 }
