@@ -36,9 +36,11 @@ function nav () {
 	$r = "<ul id='nav'>";
 	foreach($nav as $thisSlug => $vals) {
 		if(!($vals['visible'] === false) && (!$vals['loggedInOnly'] || $vals['loggedInOnly'] && User::$isValid || ($vals['loggedInOnly'] == -1) && !User::$isValid)) { 
-			$r .= sprintf('<li%s><a href="%s">%s</a></li>', ($slug == $vals['slug'] ? ' class="active"' : ''),
+			if (!isset($vals['extrapre'])) $vals['extrapre'] = '';
+			if (!isset($vals['extrapost'])) $vals['extrapost'] = '';
+			$r .= sprintf('%s<li%s><a href="%s">%s</a></li>%s', $vals['extrapre'], ($slug == $vals['slug'] ? ' class="active"' : ''),
 															url($vals['url']),
-															$vals['name']);
+															$vals['name'], $vals['extrapost']);
 		}
 	}
 	return $r.'</ul>';
