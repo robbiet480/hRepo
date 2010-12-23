@@ -37,12 +37,13 @@ function nav () {
 	$totalpre = '';
 	$totalpost = '';
 	foreach($nav as $thisSlug => $vals) {
-		if(!($vals['visible'] === false) && (!$vals['loggedInOnly'] || $vals['loggedInOnly'] && User::$isValid || ($vals['loggedInOnly'] == -1) && !User::$isValid)) { 
+		if(($vals['visible'] !== false) && (!$vals['loggedInOnly'] || $vals['loggedInOnly'] && User::$isValid || ($vals['loggedInOnly'] == -1) && !User::$isValid)) { 
 			if (!isset($vals['extrapre'])) $vals['extrapre'] = '';
 			if (!isset($vals['extrapost'])) $vals['extrapost'] = '';
 			$totalpre .= $vals['extrapre'];
 			$totalpost .= $vals['extrapost'];
-			$r .= sprintf('<li%s><a href="%s">%s</a></li>', ($slug == $vals['slug'] ? ' class="active"' : ''),
+			$r .= sprintf('<li%s id="topBarLink%s"><a href="%s">%s</a></li>', ($slug == $vals['slug'] ? ' class="active"' : ''),
+															ucfirst($vals['name']),
 															url($vals['url']),
 															$vals['name']);
 		}

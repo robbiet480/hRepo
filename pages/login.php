@@ -21,7 +21,7 @@ $logindropdown = <<<EOT
 </div>
 EOT;
 
-$nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
+$nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login <span id="loginArrowHead">&#x2303;</span>', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
 if($slug == "login") {
 	$message = User::loginHandle();
 	Content::setContent(<<<EOT
