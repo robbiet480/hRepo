@@ -329,7 +329,7 @@ input[type=checkbox] {
 #loginDropDown {
         position: absolute;
         top: 104px;
-        margin-left: 10em;
+        margin-left: 22em;
         background-color: #361E12;
         z-index: 10000;
         border-bottom-left-radius: 10px;
