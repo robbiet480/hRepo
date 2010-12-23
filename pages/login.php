@@ -15,7 +15,7 @@ $logindropdown = <<<EOT
                 </span>
 
                 <span id="loginBoxLogin">
-                        <input type="submit" value="Login" />
+                        <input type="submit" name="login" value="Login" />
                 </span>
         </form>
 </div>
