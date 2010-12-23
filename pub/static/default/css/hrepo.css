@@ -366,4 +366,8 @@ input[type=checkbox] {
 #loginDropDown #loginBoxLogin {
         float: right;
 }
+
+#loginDropDown br {
+	clear: both;
+}
 /******** LOGIN BOX END *********/

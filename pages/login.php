@@ -4,10 +4,10 @@ $logindropdown = <<<EOT
 <div id="loginDropDown">
         <form action="/login" method="post">
                 <label for="usernameBox">Username:</label>
-                <input type="text" name="username" id="usernameBox" /><br clear="both" />
+                <input type="text" name="username" id="usernameBox" /><br />
 
                 <label for="passwordBox">Password:</label>
-                <input type="password" name="password" id="passwordBox" /><br clear="both" />
+                <input type="password" name="password" id="passwordBox" /><br />
 
                 <span id="loginBoxRMe">
                         <label for="rememberMeBox">Remember Me</label>
@@ -29,6 +29,7 @@ if($slug == "login") {
 	Content::setContent(<<<EOT
 	<h1>Login</h1>
 <div id="loginHalf">
+	<h4>Login to hRepo</h4>
 	<form action="/login" method="post">$message
 		<div class="form-row">
 			<label for="username">Username</label>
@@ -45,7 +46,7 @@ if($slug == "login") {
 </div>
 <div id="registerHalf">
 	<h4>Need to register?</h4>
-        <form action="/register" method="post">$message
+        <form action="/register" method="post">
                 <div class="form-row">
                         <label for="username">Username</label>
                         <span><input type="text" name="username" id="username" /></span>
