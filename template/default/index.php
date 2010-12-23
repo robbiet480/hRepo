@@ -5,8 +5,17 @@
 		
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/hrepo.css" />
+<?php
+foreach (Content::additionalCSS as $addssheet) {
+	echo '		<link rel="stylesheet" type="text/css" href="'.HR_TEMPLATE_PUB_ROOT.'css/'.$addssheet.'" />';
+}
+?>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-		<script type="text/javascript" src="<?php echo HR_TEMPLATE_PUB_ROOT; ?>js/loginbox.js"></script>
+<?php
+foreach (Content::additionalJS as $addjs) {
+        echo '          <script type="text/javascript" src="'.HR_TEMPLATE_PUB_ROOT.'js/'.$addjs.'"></script>';
+} 
+?>
 	</head>
 	<body>
 		<div id="top">

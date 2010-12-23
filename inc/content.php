@@ -8,6 +8,8 @@ class Content {
 	public static $useTemplate = true;
 	public static $status = "200 OK";
 	public static $forcedTitle = "";
+	public static $additionalJS = array();
+	public static $additionalCSS = array();
 	
 	public static function set($content) {
 		self::$content = $content;
@@ -28,4 +30,12 @@ class Content {
 	public static function setHeader($k,$v) {
 		self::$headers[$k] = $v;
 	}
+
+	public static function addAdditionalJS($f) {
+		self::$additionalJS[] = $f;
+	}
+
+        public static function addAdditionalCSS($f) {
+                self::$additionalCSS[] = $f;
+        }
 }
