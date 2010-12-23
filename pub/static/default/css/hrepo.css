@@ -323,3 +323,44 @@ input[type=checkbox] {
 .form-row:nth-of-type(1) {
 	border:0;
 }
+
+
+/******** LOGIN BOX START ********/
+#loginDropDown {
+        position: absolute;
+        top: 104px;
+        margin-left: 10em;
+        background-color: #361E12;
+        z-index: 10000;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 20px;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        width: 18em;
+}
+
+#loginDropDown label {
+        color: white;
+        display: inline;
+        text-align: right;
+        float: left;
+}
+#loginDropDown input[type="text"], #loginDropDown input[type="password"] {
+        width: 10em;
+        font-size: 8pt;
+        float: right;
+}
+#loginDropDown input[type="checkbox"] {
+        vertical-align: bottom;
+        height: 20px;
+}
+
+#loginDropDown #loginBoxRMe {   
+        float: left;
+}
+
+#loginDropDown #loginBoxLogin {
+        float: right;
+}
+/******** LOGIN BOX END *********/

@@ -2,22 +2,22 @@
 
 $logindropdown = <<<EOT
 <div id="loginDropDown">
-	<form action="/login" method="post">
-		<label for="usernameBox">Username:</label>
-		<input type="text" name="username" id="usernameBox" /><br />
+        <form action="/login" method="post">
+                <label for="usernameBox">Username:</label>
+                <input type="text" name="username" id="usernameBox" /><br clear="both" />
 
-		<label for="passwordBox">Password:</label>
-		<input type="password" name="password" id="passwordBox" /><br />
+                <label for="passwordBox">Password:</label>
+                <input type="password" name="password" id="passwordBox" /><br clear="both" />
 
-		<span id="loginBoxRMe">
-			<label for="rememberMeBox">Remember Me</label>
-			<input type="checkbox" name="rememberMe" id="rememberMeBox" />
-		</span>
+                <span id="loginBoxRMe">
+                        <label for="rememberMeBox">Remember Me</label>
+                        <input type="checkbox" name="rememberMe" id="rememberMeBox" />
+                </span>
 
-		<span id="loginBoxLogin">
-			<input type="submit" value="Login" />
-		</span>
-	</form>
+                <span id="loginBoxLogin">
+                        <input type="submit" value="Login" />
+                </span>
+        </form>
 </div>
 EOT;
 
