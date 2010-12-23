@@ -3,10 +3,10 @@ boxIsUp = true;
 function toggleArrowHead() {
 	boxIsUp = !boxIsUp;
 	if (boxIsUp) {
-		setTo = '&#2303;';
+		setTo = '&#x2303;';
 		$('#loginDropDown').slideUp();
 	} else {
-		setTo = '&#2302;';
+		setTo = '&#x2302;';
 		$('#loginDropDown').slideDown();
 	}
 	$('#loginArrowHead').html(setTo);
