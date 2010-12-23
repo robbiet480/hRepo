@@ -1,6 +1,27 @@
 <?php
 
-$nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => '', 'extrapost' => ''); // -1 for only not logged in
+$logindropdown = <<<EOT
+<div id="loginDropDown">
+	<form action="/login" method="post">
+		<label for="usernameBox">Username:</label>
+		<input type="text" name="username" id="usernameBox" /><br />
+
+		<label for="passwordBox">Password:</label>
+		<input type="password" name="password" id="passwordBox" /><br />
+
+		<span id="loginBoxRMe">
+			<label for="rememberMeBox">Remember Me</label>
+			<input type="checkbox" name="rememberMe" id="rememberMeBox" />
+		</span>
+
+		<span id="loginBoxLogin">
+			<input type="submit" value="Login" />
+		</span>
+	</form>
+</div>
+EOT;
+
+$nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
 if($slug == "login") {
 	$message = User::loginHandle();
 	Content::setContent(<<<EOT
