@@ -1,9 +1,22 @@
+boxIsUp = true;
+
+function toggleArrowHead() {
+	boxIsUp = !boxIsUp;
+	if (boxIsUp) {
+		setTo = '&#2303;';
+		$('#loginDropDown').slideUp();
+	} else {
+		setTo = '&#2302;';
+		$('#loginDropDown').slideDown();
+	}
+	$('#loginArrowHead').html(setTo);
+}
 
 $(function(){
-	toModify = '#topBarLinkLogin';
+	toModify = '#topBarLinkLogin a';
 	$(toModify).append(' <span id="loginArrowHead">&#x2303;</span>');
-	$(toModify + ' a').click(function() {
-		$('#loginDropDown').slideToggle();
+	$(toModify).click(function() {
+		toggleArrowHead();
 		return false;
 	});
 });
