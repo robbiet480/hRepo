@@ -6,7 +6,7 @@ function toggleArrowHead() {
 		setTo = '&#x2303;';
 		$('#loginDropDown').slideUp();
 	} else {
-		setTo = '&#x2302;';
+		setTo = '&#x2304;';
 		$('#loginDropDown').slideDown();
 	}
 	$('#loginArrowHead').html(setTo);
