@@ -96,7 +96,7 @@ class User {
 				required: true
 			},
 		 */
-		if (!isset($_POST['confirmPassword']) || empty($_POST['confirmPassword'])) || $_POST['confirmPassword'] !== $_POST['password']) {
+		if (!isset($_POST['confirmPassword']) || empty($_POST['confirmPassword']) || $_POST['confirmPassword'] !== $_POST['password']) {
 			$valerr['confirmPassword'] = 'Confirmation password does not match original password.';
 		}
 		// now email
