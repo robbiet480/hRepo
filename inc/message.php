@@ -10,4 +10,10 @@ class Message {
 	public static function notice ($message) {
 		return "<div class='message message-notice'><p>$message</p></div>";
 	}
+	public static function warning ($message) {
+		return "<div class='message message-warning'><p>$message</p></div>";
+	}
+	public static function validation ($message) {
+		return "<div class='message message-validation'><p>$message</p></div>";
+	}
 }

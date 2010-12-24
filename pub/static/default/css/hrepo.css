@@ -13,12 +13,12 @@ body {
 		left top,
 		color-stop(0, rgb(54,30,18)),
 		color-stop(0.55, rgb(75,44,23))
-	);
+		);
 	background: -moz-linear-gradient(
 		center bottom,
 		rgb(54,30,18) 0%,
 		rgb(75,44,23) 55%
-	);
+		);
 }
 
 #top h1 {
@@ -98,7 +98,7 @@ body {
 	left:-26px;
 	width:932px;
 	color:white;
-	
+
 	-moz-border-radius:10px 10px 0 0;
 	-webkit-border-radius:10px 10px 0 0;
 	border-radius:10px 10px 0 0;
@@ -237,7 +237,7 @@ dl {
 	margin-bottom: 10px;
 }
 dl.bioinfo {
-		margin-left: 75px;
+	margin-left: 75px;
 }
 dl:after {
 	content: ".";
@@ -246,15 +246,15 @@ dl:after {
 	clear: both;
 	visibility: hidden;
 }
-	dl.bioinfo dt {
-		float: left;
-	}
-	dl.bioinfo dd {
-			margin-left: 160px;
-	}
-	dl.bioinfo dt {
-		font-weight: bold;
-	}
+dl.bioinfo dt {
+	float: left;
+}
+dl.bioinfo dd {
+	margin-left: 160px;
+}
+dl.bioinfo dt {
+	font-weight: bold;
+}
 
 img.bioicon {
 	position: relative;
@@ -277,7 +277,7 @@ label {
 	color:#777;
 	font-size:1.2em;
 	color:black;
-	}
+}
 
 input[type=text], select, button, input[type=password] {
 	padding:3px;
@@ -315,11 +315,11 @@ input[type=checkbox] {
 
 .form-row {
 	clear:both;
-	 }
+}
 
-	.form-row span {
-		padding:0 0 10px;
-		display:block;}
+.form-row span {
+	padding:0 0 10px;
+	display:block;}
 .form-row:nth-of-type(1) {
 	border:0;
 }
@@ -327,44 +327,44 @@ input[type=checkbox] {
 
 /******** LOGIN BOX START ********/
 #loginDropDown {
-        position: absolute;
-        top: 104px;
-        margin-left: 22em;
-        background-color: #361E12;
-        z-index: 10000;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+	position: absolute;
+	top: 104px;
+	margin-left: 22em;
+	background-color: #361E12;
+	z-index: 10000;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	-moz-border-bottom-left-radius: 10px;
-        -moz-border-bottom-right-radius: 10px;
-        padding: 20px;
-        padding-top: 10px;
-        padding-bottom: 5px;
-        width: 18em;
+	-moz-border-bottom-right-radius: 10px;
+	padding: 20px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	width: 18em;
 	display: none;
 }
 
 #loginDropDown label {
-        color: white;
-        display: inline;
-        text-align: right;
-        float: left;
+	color: white;
+	display: inline;
+	text-align: right;
+	float: left;
 }
 #loginDropDown input[type="text"], #loginDropDown input[type="password"] {
-        width: 10em;
-        font-size: 8pt;
-        float: right;
+	width: 10em;
+	font-size: 8pt;
+	float: right;
 }
 #loginDropDown input[type="checkbox"] {
-        vertical-align: bottom;
-        height: 20px;
+	vertical-align: bottom;
+	height: 20px;
 }
 
 #loginDropDown #loginBoxRMe {   
-        float: left;
+	float: left;
 }
 
 #loginDropDown #loginBoxLogin {
-        float: right;
+	float: right;
 }
 
 #loginDropDown br {
@@ -379,3 +379,40 @@ input[type=checkbox] {
 	color: #fdfdf0;
 }
 /******** LOGIN BOX END *********/
+
+/******** MESSAGE BOXES BEGIN *********/
+.message-info, .message-success, .message-error, .message-validation, .message-warning {
+	border: 1px solid;
+	margin: 10px 0px;
+	padding:15px 10px 15px 50px;
+	background-repeat: no-repeat;
+	background-position: 10px 50%;
+}
+.message-info {
+	color: #00529B;
+	background-color: #BDE5F8;
+	background-image: url('../../images/messagebox/info.png');
+}
+.message-success {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image:url('../../images/messagebox/success.png');
+}
+.message-warning {
+	color: #9F6000;
+	background-color: #FEEFB3;
+	background-image: url('../../images/messagebox/warning.png');
+}
+.message-error {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('../../images/messagebox/error.png');
+}
+.message-validation {
+	color: #D63301;
+	background-color: #FFCCBA;
+	background-image: url('../../images/messagebox/validation.png');
+}
+/*** Thanks to http://goo.gl/ZTeLE for the CSS
+           and http://goo.gl/LahoY for the icons ***/
+/********** MESSAGE BOXES END ************/
