@@ -5,6 +5,11 @@ function inc ($file) {
 	require(HR_INC.$file);
 }
 
+function inclib($file) {
+	Log::add("including library file: ".$file);
+	require(HR_LIB.$file);
+}
+
 function check_post () {
 	$args = func_get_args();
 	

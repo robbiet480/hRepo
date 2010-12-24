@@ -28,6 +28,7 @@ EOT;
 
 $nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
 if($slug == "login") {
+	inclib('recaptchalib.php');
 	Content::addAdditionalCSS('login.css');
 	$message = $regMessage = '';
 	if (isset($_GET['regMessage']) && $_GET['regMessage']) { // message passed over?

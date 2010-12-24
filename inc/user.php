@@ -25,6 +25,11 @@ class User {
 		return self::$isValid;
 	}
 
+	/**
+	 * Handle the login - pages/login.php
+	 *
+	 * @return string Any message for the form to display. Formatted with the message class.
+	 */
 	public static function loginHandle () {
 		if(check_post('username', 'password', 'login')) {
 			// for security, we don't want session fixation :(
@@ -37,6 +42,17 @@ class User {
 				return Message::error("Bad username or password...");
 			}
 		}
+	}
+	
+	/**
+	 * Handle the registration - pages/register.php
+	 * 
+	 * @return string Any message for the form to display. Formatted with the message class.
+	 */
+	public static function registerHandle() {
+		// TODO: Implement me!
+		inclib('recaptchalib.php');
+		return Message::error('Unimplemented');
 	}
 
 	/**
