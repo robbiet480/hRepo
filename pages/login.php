@@ -29,7 +29,19 @@ EOT;
 $nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
 if($slug == "login") {
 	Content::addAdditionalCSS('login.css');
-	$message = User::loginHandle();
+	$message = $regMessage = '';
+	if (isset($_GET['regMessage']) && $_GET['regMessage']) { // message passed over?
+		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
+		$_SESSION['message'] = '';
+	} else {
+		$message = User::loginHandle();
+	}
+	if (isset($_SESSION['recaperror'])) {
+		$recaperror = $_SESSION['recaperror'];
+	} else {
+		$recaperror = null;
+	}
+	$recaptcha = recaptcha_get_html($recaperror);
 	Content::setContent(<<<EOT
 	<h1>Login</h1>
 <div id="loginHalf">
@@ -50,7 +62,7 @@ if($slug == "login") {
 </div>
 <div id="registerHalf">
 	<h4>Need to register?</h4>
-        <form action="/register" method="post">
+        <form action="/register" method="post">$regMessage
                 <div class="form-row">
                         <label for="username">Username</label>
                         <span><input type="text" name="username" id="username" /></span>
@@ -58,6 +70,18 @@ if($slug == "login") {
                 <div class="form-row">
                         <label for="password">Password</label>
                         <span><input type="password" name="password" id="password" /></span>
+                </div>
+				<div class="form-row">
+                        <label for="password">Confirm Password</label>
+                        <span><input type="password" name="confirmpassword" id="confirmpassword" /></span>
+                </div>
+				<div class="form-row">
+                        <label for="password">E-mail</label>
+                        <span><input type="text" name="email" id="email" /></span>
+                </div>
+				<div class="form-row">
+                        <label for="captcha">CAPTCHA</label>
+                        <span>$recaptcha</span>
                 </div>
                 <div class="form-row form-row-last">
                         <span><input type="submit" name="login" value="Register!" /></span>
