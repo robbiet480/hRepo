@@ -4,6 +4,10 @@
 	padding-left: 1%;
 }
 
+#loginHalf {
+	margin-right: 10px;
+}
+
 #registerHalf {
 	border-left:3px #ddd solid;
 }
