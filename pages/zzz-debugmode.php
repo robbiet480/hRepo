@@ -1,9 +1,10 @@
 <?php
 
 if ($_SESSION['debugmode']) {
+	Content::addAdditionalJS('debugmode.js');
 	Content::append(<<<EOT
-<h4>Debug details</h4>
-	<h4>Logging Output</h4>
+<h4 id="debugInfoHead">Debug details</h4>
+<div id="debugInfo" style="display: none;"><h4>Logging Output</h4>
 		<table>
 			<tr>
 				<th>Time from start</th>
@@ -30,5 +31,5 @@ EOT
 EOT
 			);
 	Content::append(print_r($GLOBALS, true));
-	Content::append('</pre>');
+	Content::append('</pre></div>');
 }
