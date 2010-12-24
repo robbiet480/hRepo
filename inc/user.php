@@ -68,7 +68,7 @@ class User {
 				//$valerr['username'] = 'Username must be between 4 and 32 characters.';
 				$unameLenErr = true;
 			}
-			if (preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username'])) {
+			if (ctype_alnum(str_replace('_', '', $_POST['username']))) {
 				$unameRegexErr = true;
 			}
 			if ($unameLenErr && $unameRegexErr) {
