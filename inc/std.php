@@ -23,7 +23,7 @@ function check_post () {
 
 function redirect ($path, $relative = false) {
 	if($relative) {
-		if ($path[0] == '/' && HR_PUB_ROOT[strlen(HR_PUB_ROOT) - 1] == '/') $path = ltrim($path, '/');
+		if ($path[0] == '/' && substr(HR_PUB_ROOT, -1, 1) == '/') $path = ltrim($path, '/');
 		$path = HR_PUB_ROOT . $path;
 		header("Location: ".$path);
 		exit();
