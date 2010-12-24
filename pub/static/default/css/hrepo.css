@@ -370,4 +370,12 @@ input[type=checkbox] {
 #loginDropDown br {
 	clear: both;
 }
+
+#loginBoxRegister {
+	color: white;
+}
+
+#loginBoxRegister:visited {
+	color: #fdfdf0;
+}
 /******** LOGIN BOX END *********/
