@@ -28,3 +28,5 @@ class Log {
 		return self::$log;
 	}
 }
+
+Log::add('Logging library loaded!');
