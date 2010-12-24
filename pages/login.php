@@ -17,6 +17,10 @@ $logindropdown = <<<EOT
                 <span id="loginBoxLogin">
                         <input type="submit" name="login" value="Login" />
                 </span>
+				
+				<br />
+				
+				<a href="/login" id="loginBoxRegister">Need to register?</a>
         </form>
 </div>
 EOT;
