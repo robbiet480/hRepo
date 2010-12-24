@@ -82,7 +82,7 @@ if($slug == "login") {
                         <span><input type="text" name="email" id="emailReg" /></span>
                 </div>
 				<div class="form-row">
-                        <span id=">$recaptcha</span>
+                        <span>$recaptcha</span>
                 </div>
                 <div class="form-row form-row-last">
                         <span><input type="submit" name="login" value="Register!" /></span>
