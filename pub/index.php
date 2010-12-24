@@ -74,6 +74,9 @@ inc('user.php');
 inc('template.php');
 inc('message.php');
 
+// Now check the user!
+User::bootstrap();
+
 foreach(glob(HR_PAGES.'*.php') as $page) {
 	require($page);
 }
