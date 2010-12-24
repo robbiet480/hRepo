@@ -16,6 +16,12 @@ EOT
 		if ($first === true) {
 			$first = $logent['time'];
 		}
+		$timefromstart = $logent['time'] - $first;
+		Content::append("
+			<tr>
+				<td>$timefromstart</td>
+				<td>{$logent['val']}</td>
+			</tr>");
 	}
 	Content::append(<<<EOT
 		</table>
