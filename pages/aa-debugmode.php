@@ -5,8 +5,8 @@ if (!isset($_SESSION['debugmode']))
 
 if ($slug == "debugmode") {
 	if (!isset($params[0])) {
-		echo "Your current debug mode state is: " . ($_SESSION['debugmode'] ? 'ON' : 'OFF');
-		echo "<form action='/debugmode/".(!$_SESSION['debugmode'] ? 'on' : 'off')."'><input type='submit' value='Click to toggle' /></form>";
+		Content::set("Your current debug mode state is: " . ($_SESSION['debugmode'] ? 'ON' : 'OFF'));
+		Content::append("<form action='/debugmode/".(!$_SESSION['debugmode'] ? 'on' : 'off')."'><input type='submit' value='Click to toggle' /></form>");
 	} else if ($params[0] == 'on') {
 		$_SESSION['debugmode'] = true;
 		redirect('/debugmode', true);
