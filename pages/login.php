@@ -27,20 +27,32 @@ EOT;
 
 
 $nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', 'loggedInOnly' => -1, 'weight' => 4, 'extrapre' => $logindropdown, 'extrapost' => ''); // -1 for only not logged in
-if($slug == "login") {
+if ($slug == "login")
+{
 	inclib('recaptchalib.php');
 	Content::addAdditionalCSS('login.css');
+	Content::addAdditionalJS('registervalidate.js');
+	Content::addAdditionalJS('//dev.jquery.com/view/trunk/plugins/metadata/jquery.metadata.js'); // Yes, // is valid
+	Content::addAdditionalJS('//ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js');
+	Content::addAdditionalJS('//ajax.microsoft.com/ajax/jquery.validate/1.7/additional-methods.js');
+	
 	$message = $regMessage = '';
-	if (isset($params[0]) && $params[0] == 'fromRegister') { // message passed over?
+	if (isset($params[0]) && $params[0] == 'fromRegister')
+	{ // message passed over?
 		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
 		unset($_SESSION['message']);
-	} else {
+	}
+	else
+	{
 		$message = User::loginHandle();
 	}
-	if (isset($_SESSION['recaperror'])) {
+	if (isset($_SESSION['recaperror']))
+	{
 		$recaperror = $_SESSION['recaperror'];
 		unset($_SESSION['recaperror']);
-	} else {
+	}
+	else
+	{
 		$recaperror = null;
 	}
 	$recaptcha = recaptcha_get_html($recaperror);
@@ -64,19 +76,27 @@ if($slug == "login") {
 </div>
 <div id="registerHalf">
 	<h4>Need to register?</h4>
-        <form action="/register" method="post"><div id="notificationArea">$regMessage</div>
+        <form action="/register" method="post" id="registerForm"><div id="notificationArea">$regMessage</div>
+				<div class="form-row" id="usernameValidError" class="validError">
+				</div>
                 <div class="form-row">
                         <label for="usernameReg">Username</label>
                         <span><input type="text" name="username" id="usernameReg" /></span>
                 </div>
+				<div class="form-row" id="passwordValidError" class="validError">
+				</div>
                 <div class="form-row">
                         <label for="passwordReg">Password</label>
                         <span><input type="password" name="password" id="passwordReg" /></span>
                 </div>
+				<div class="form-row" id="confirmPasswordValidError" class="validError">
+				</div>
 				<div class="form-row">
                         <label for="confirmPasswordReg">Confirm Password</label>
-                        <span><input type="password" name="confirmPasswordReg" id="confirmPasswordReg" /></span>
+                        <span><input type="password" name="confirmPassword" id="confirmPasswordReg" /></span>
                 </div>
+				<div class="form-row" id="emailValidError" class="validError">
+				</div>
 				<div class="form-row">
                         <label for="emailReg">E-mail</label>
                         <span><input type="text" name="email" id="emailReg" /></span>
@@ -94,9 +114,9 @@ if($slug == "login") {
 
 EOT
 	);
-	
 }
 
-if (!User::isValid()) {
+if (!User::isValid())
+{
 	Content::addAdditionalJS('loginbox.js');
 }

@@ -2,22 +2,32 @@
 <html>
 	<head>
 		<title><?php echo pagetitle(); ?> &lsaquo; hRepo</title>
-		
+
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/hrepo.css" />
-<?php
-foreach (Content::$additionalCSS as $addssheet) {
-	echo '		<link rel="stylesheet" type="text/css" href="'.HR_TEMPLATE_PUB_ROOT.'css/'.$addssheet.'" />
+		<?php
+		foreach (Content::$additionalCSS as $addssheet)
+		{
+			if (substr($addssheet, 0, 2) != '//')
+			{
+				$addssheet = HR_TEMPLATE_PUB_ROOT . 'css/' . $addssheet;
+			}
+			echo '		<link rel="stylesheet" type="text/css" href="' . $addssheet . '" />
 ';
-}
-?>
+		}
+		?>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
-<?php
-foreach (Content::$additionalJS as $addjs) {
-        echo '          <script type="text/javascript" src="'.HR_TEMPLATE_PUB_ROOT.'js/'.$addjs.'"></script>
+		<?php
+		foreach (Content::$additionalJS as $addjs)
+		{
+			if (substr($addjs, 0, 2) != '//')
+			{
+				$addjs = HR_TEMPLATE_PUB_ROOT . 'js/' . $addjs;
+			}
+			echo '          <script type="text/javascript" src="' . $addjs . '"></script>
 ';
-} 
-?>
+		}
+		?>
 	</head>
 	<body>
 		<div id="top">
@@ -33,14 +43,15 @@ foreach (Content::$additionalJS as $addjs) {
 						<?php echo content(); ?>
 					</div>
 				</div>
-				
+
 				<div id="sidebar">
 					<div class="gutter clear">
-					<?php
-					foreach(Sidebar::$blocks as $v) {
-						echo "<h3>".$v['title']."</h3><div class='block'>".$v['content']."</div>";
-					}
-					?>
+						<?php
+						foreach (Sidebar::$blocks as $v)
+						{
+							echo "<h3>" . $v['title'] . "</h3><div class='block'>" . $v['content'] . "</div>";
+						}
+						?>
 					</div>
 				</div>
 			</div>
@@ -52,6 +63,6 @@ foreach (Content::$additionalJS as $addjs) {
 				<p>Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo trim(shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD')); ?>"><?php echo trim(shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD')); ?></a></p>
 			</div>
 		</div>
-		
+
 	</body>
-		</html>
+</html>
