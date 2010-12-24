@@ -12,7 +12,7 @@ $(document).ready(function(){
 				required: true
 			},
 			confirmPassword: {
-				equalTo: "password",
+				equalTo: "#passwordReg",
 				required: true
 			},
 			email: {
