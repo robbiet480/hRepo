@@ -30,6 +30,7 @@ $nav['login'] = array('url' => '/login', 'slug' => 'login', 'name' => 'Login', '
 if($slug == "login") {
 	inclib('recaptchalib.php');
 	Content::addAdditionalCSS('login.css');
+	print_r($_SESSION);
 	$message = $regMessage = '';
 	if (isset($_GET['regMessage']) && $_GET['regMessage']) { // message passed over?
 		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
