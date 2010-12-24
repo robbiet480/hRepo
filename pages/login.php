@@ -64,7 +64,7 @@ if($slug == "login") {
 </div>
 <div id="registerHalf">
 	<h4>Need to register?</h4>
-        <form action="/register" method="post">$regMessage
+        <form action="/register" method="post"><div id="notificationArea">$regMessage</div>
                 <div class="form-row">
                         <label for="usernameReg">Username</label>
                         <span><input type="text" name="username" id="usernameReg" /></span>

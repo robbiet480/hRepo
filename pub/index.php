@@ -23,7 +23,7 @@ define('HR_PAGES', HR_ROOT.'pages/');
 define('HR_PUB', HR_ROOT.'pub/');
 define('HR_LIB', HR_ROOT.'lib/');
 define('HR_INC', HR_ROOT.'inc/');
-define('HR_PUB_ROOT', 'http://www.hrepo.com/'.ltrim(dirname($_SERVER['PHP_SELF']).'/', '/'));
+define('HR_PUB_ROOT', 'http://'.$_SERVER['HTTP_HOST'].'/'.ltrim(dirname($_SERVER['PHP_SELF']).'/', '/')); // I guess it's bad practice to put a variable into a constant BUT HEY
 define('HR_TEMPLATE', HR_ROOT.'template/');
 define('HR_TMP', HR_ROOT.'tmp/');
 
