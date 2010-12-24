@@ -11,7 +11,7 @@ if($slug == "register") {
 	if ($resp->is_valid && count($valerr) == 0) { // hooray, code correct and no validation errors, carry on!
 			$message .= User::registerHandle();
 	} else if (!$resp->is_valid) {
-		$valerr[] = array('The CAPTCHA code did not match what was displayed.');
+		$valerr[] = 'The CAPTCHA code did not match what was displayed.';
 		$_SESSION['recaperror'] = $resp->error;
 	}
 	if (count($valerr) != 0) { // let's generate the validation error message
