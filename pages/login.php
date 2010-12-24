@@ -33,12 +33,13 @@ if($slug == "login") {
 	$message = $regMessage = '';
 	if (isset($params[0]) && $params[0] == 'fromRegister') { // message passed over?
 		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
-		$_SESSION['message'] = '';
+		unset($_SESSION['message']);
 	} else {
 		$message = User::loginHandle();
 	}
 	if (isset($_SESSION['recaperror'])) {
 		$recaperror = $_SESSION['recaperror'];
+		unset($_SESSION['recaperror']);
 	} else {
 		$recaperror = null;
 	}
@@ -65,24 +66,23 @@ if($slug == "login") {
 	<h4>Need to register?</h4>
         <form action="/register" method="post">$regMessage
                 <div class="form-row">
-                        <label for="username">Username</label>
-                        <span><input type="text" name="username" id="username" /></span>
+                        <label for="usernameReg">Username</label>
+                        <span><input type="text" name="username" id="usernameReg" /></span>
                 </div>
                 <div class="form-row">
-                        <label for="password">Password</label>
-                        <span><input type="password" name="password" id="password" /></span>
+                        <label for="passwordReg">Password</label>
+                        <span><input type="password" name="password" id="passwordReg" /></span>
                 </div>
 				<div class="form-row">
-                        <label for="password">Confirm Password</label>
-                        <span><input type="password" name="confirmpassword" id="confirmpassword" /></span>
+                        <label for="confirmPasswordReg">Confirm Password</label>
+                        <span><input type="password" name="confirmPasswordReg" id="confirmPasswordReg" /></span>
                 </div>
 				<div class="form-row">
-                        <label for="password">E-mail</label>
-                        <span><input type="text" name="email" id="email" /></span>
+                        <label for="emailReg">E-mail</label>
+                        <span><input type="text" name="email" id="emailReg" /></span>
                 </div>
 				<div class="form-row">
-                        <label for="captcha">CAPTCHA</label>
-                        <span>$recaptcha</span>
+                        <span id=">$recaptcha</span>
                 </div>
                 <div class="form-row form-row-last">
                         <span><input type="submit" name="login" value="Register!" /></span>

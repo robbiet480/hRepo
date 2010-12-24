@@ -13,7 +13,11 @@ class Message {
 	public static function warning ($message) {
 		return "<div class='message message-warning'><p>$message</p></div>";
 	}
-	public static function validation ($message) {
-		return "<div class='message message-validation'><p>$message</p></div>";
+	public static function validation ($reasons) {
+		$valcomb = '';
+		foreach ($reasons as $reason) {
+			$valcomb .= '<li>'.$reason.'</li>';
+		}
+		return "<div class='message message-validation'>Validation failed:<ul>$valcomb</ul></div>";
 	}
 }

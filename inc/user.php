@@ -45,6 +45,16 @@ class User {
 	}
 	
 	/**
+	 * Validate the registration form against acceptable usernames, passwords
+	 * 
+	 * @return array[string] An array of validation error messages, to be passed
+	 * to Message::validation
+	 */
+	public static function validateRegisterForm() {
+		return array('Unimplemented');
+	}
+	
+	/**
 	 * Handle the registration - pages/register.php
 	 * 
 	 * @return string Any message for the form to display. Formatted with the message class.
