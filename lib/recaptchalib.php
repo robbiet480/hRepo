@@ -149,7 +149,7 @@ class ReCaptchaResponse {
   */
 function recaptcha_check_answer ($remoteip, $challenge, $response, $extra_params = array())
 {
-	if (HR_RECAPTCHA_PRIVATEKEY == null || HR_RECAPTCHA_PRIVATEKEY == '') {
+	if (HR_RECAPTCHA_PRIVKEY == null || HR_RECAPTCHA_PRIVKEY == '') {
 		die ("To use reCAPTCHA you must get an API key from <a href='https://www.google.com/recaptcha/admin/create'>https://www.google.com/recaptcha/admin/create</a>");
 	}
 
@@ -169,7 +169,7 @@ function recaptcha_check_answer ($remoteip, $challenge, $response, $extra_params
 
         $response = _recaptcha_http_post (RECAPTCHA_VERIFY_SERVER, "/recaptcha/api/verify",
                                           array (
-                                                 'privatekey' => HR_RECAPTCHA_PRIVATEKEY,
+                                                 'privatekey' => HR_RECAPTCHA_PRIVKEY,
                                                  'remoteip' => $remoteip,
                                                  'challenge' => $challenge,
                                                  'response' => $response
