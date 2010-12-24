@@ -5,5 +5,5 @@
 if($slug == "register") {
 	$message = User::registerHandle();
 	$_SESSION['message'] = $message;
-	redirect('/login?regMessage=true', true);
+	redirect('login?regMessage=true', true);
 }
