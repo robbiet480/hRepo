@@ -30,6 +30,9 @@ define('HR_TMP', HR_ROOT.'tmp/');
 define('HR_TEMPLATE_TO_USE', 'default');
 define('HR_TEMPLATE_PUB_ROOT', HR_PUB_ROOT.'static/'.HR_TEMPLATE_TO_USE.'/');
 
+define('HR_RECAPTCHA_PUBKEY', '6Lcy3b8SAAAAADfMXY86VFc8IT7AzeoQPC19G9aL');
+define('HR_RECAPTCHA_PRIVKEY', '6Lcy3b8SAAAAAGHUxvta8txiu7uGniWAffWgTxPj');
+
 define('HR_DB_ENABLE', true);
 define('HR_DSN', 'mysql:host=localhost;dbname=hRepo');
 define('HR_DBUSR', 'hrepo');
