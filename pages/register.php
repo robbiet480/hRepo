@@ -1,6 +1,7 @@
 <?php
 
 if($slug == "register") {
+	inclib('recaptchalib.php');
 	$message = '';
 	$valerr = User::validateRegisterForm(); // this returns an array of validation errors
 	// I don't really think CAPTCHA handling should be part of the user registration system inside the user object, so I'm going to handle it here.
