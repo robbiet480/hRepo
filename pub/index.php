@@ -77,8 +77,6 @@ inc('message.php');
 // Now check the user!
 User::bootstrap();
 
-print_r($_SESSION);
-
 foreach(glob(HR_PAGES.'*.php') as $page) {
 	require($page);
 }
