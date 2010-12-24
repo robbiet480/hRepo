@@ -136,10 +136,10 @@ class User {
 	public static function bootstrap () {
 		session_start();
 
-		self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
+		self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
 		if(!self::$isValid) {
-			Users::checkCookie();
-			self::$isValid = Users::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
+			self::checkCookie();
+			self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
 		}
 	}
 }
