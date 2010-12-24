@@ -35,15 +35,23 @@ if ($slug == "login")
 	Content::addAdditionalJS('//dev.jquery.com/view/trunk/plugins/metadata/jquery.metadata.js'); // Yes, // is valid
 	Content::addAdditionalJS('//ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js');
 	Content::addAdditionalJS('//ajax.microsoft.com/ajax/jquery.validate/1.7/additional-methods.js');
-	
+
 	$message = $regMessage = '';
 	if (isset($params[0]) && $params[0] == 'fromRegister')
 	{ // message passed over?
+		if (isset($_SESSION['validatorPassback'])) {
+			$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = '';
+			$vars = array('username', 'password', 'confirmPassword', 'email', 'usernameClass', 'passwordClass', 'confirmPasswordClass', 'emailClass');
+			foreach ($vars as $var) {
+				$$var = $_SESSION['validatorPassback'][$var];
+			}
+		}
 		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
 		unset($_SESSION['message']);
 	}
 	else
 	{
+		$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = '';
 		$message = User::loginHandle();
 	}
 	if (isset($_SESSION['recaperror']))
@@ -76,34 +84,33 @@ if ($slug == "login")
 </div>
 <div id="registerHalf">
 	<h4>Need to register?</h4>
-        <form action="/register" method="post" id="registerForm"><div id="notificationArea">$regMessage</div>
-				<div class="form-row" id="usernameValidError" class="validError">
-				</div>
+        <form action="/register" method="post" id="registerForm">
+			<div id="notificationArea">$regMessage</div>
+
                 <div class="form-row">
                         <label for="usernameReg">Username</label>
-                        <span><input type="text" name="username" id="usernameReg" /></span>
+                        <span><input type="text" name="username" id="usernameReg" value="$username" class="$usernameClass" /></span>
                 </div>
-				<div class="form-row" id="passwordValidError" class="validError">
-				</div>
+
                 <div class="form-row">
                         <label for="passwordReg">Password</label>
-                        <span><input type="password" name="password" id="passwordReg" /></span>
+                        <span><input type="password" name="password" id="passwordReg" value="$password" class="$passwordClass" /></span>
                 </div>
-				<div class="form-row" id="confirmPasswordValidError" class="validError">
-				</div>
+
 				<div class="form-row">
                         <label for="confirmPasswordReg">Confirm Password</label>
-                        <span><input type="password" name="confirmPassword" id="confirmPasswordReg" /></span>
+                        <span><input type="password" name="confirmPassword" id="confirmPasswordReg" value="$confirmPassword" class="$confirmPasswordClass" /></span>
                 </div>
-				<div class="form-row" id="emailValidError" class="validError">
-				</div>
+
 				<div class="form-row">
                         <label for="emailReg">E-mail</label>
-                        <span><input type="text" name="email" id="emailReg" /></span>
+                        <span><input type="text" name="email" id="emailReg" value="$email" class="$emailClass" /></span>
                 </div>
+			
 				<div class="form-row">
                         <span>$recaptcha</span>
                 </div>
+				
                 <div class="form-row form-row-last">
                         <span><input type="submit" name="login" value="Register!" /></span>
                 </div>
