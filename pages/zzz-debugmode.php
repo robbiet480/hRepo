@@ -12,7 +12,7 @@ if ($_SESSION['debugmode']) {
 EOT
 			);
 	$first = true;
-	foreach (Log::getLog as $logent) {
+	foreach (Log::getLog() as $logent) {
 		if ($first === true) {
 			$first = $logent['time'];
 		}
