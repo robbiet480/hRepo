@@ -60,7 +60,7 @@ class User {
 				rangelength: [4, 32]
 			}
 		*/
-		if (!isset($_POST['username']) || empty(trim($_POST['username']))) {
+		if (!isset($_POST['username']) || empty($_POST['username'])) {
 			$valerr['username'] = 'Please enter a username.';
 		} else {
 			$unameLenErr = $unameRegexErr = false;
@@ -85,7 +85,7 @@ class User {
 				required: true
 			},
 		 */
-		if (!isset($_POST['password']) || empty(trim($_POST['password']))) {
+		if (!isset($_POST['password']) || empty($_POST['password'])) {
 			$valerr['password'] = 'Please enter a password.';
 		} else if (strlen($_POST['password']) < 8) {
 			$valerr['password'] = 'Passwords must be over 8 characters long.';
@@ -96,7 +96,7 @@ class User {
 				required: true
 			},
 		 */
-		if (!isset($_POST['confirmPassword']) || empty(trim($_POST['confirmPassword'])) || $_POST['confirmPassword'] !== $_POST['password']) {
+		if (!isset($_POST['confirmPassword']) || empty($_POST['confirmPassword'])) || $_POST['confirmPassword'] !== $_POST['password']) {
 			$valerr['confirmPassword'] = 'Confirmation password does not match original password.';
 		}
 		// now email
@@ -105,7 +105,7 @@ class User {
 				email: true
 			},
 		 */
-		if (!isset($_POST['email']) || empty(trim($_POST['email']))) {
+		if (!isset($_POST['email']) || empty($_POST['email'])) {
 			$valerr['email'] = 'Please enter a valid email address.';
 		} else if (preg_match("/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i", $_POST['email'])) { // yes, this is the one jQuery uses.
 			$valerr['email'] = 'Please enter a valid email address.';
