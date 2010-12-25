@@ -119,10 +119,25 @@ class User {
 	 * 
 	 * @return string Any message for the form to display. Formatted with the message class.
 	 */
-	public static function registerHandle() {
-		// TODO: Implement me!
-		inclib('recaptchalib.php');
-		return Message::error('Unimplemented');
+	public static function registerHandle($username, $password, $email) {
+		// Things to do:
+		// Generate salt and validation key
+		// Salt + pepper password
+		// RUN QUERY (parameteried, duh)
+		$salt = '';
+		for ($i=0; $i<6; $i++) { 
+			$d = rand(33,126);
+			$salt .= chr($d);
+		}
+		$validatekey = md5($salt . $username . $email . microtime(true) . rand()); // 32 characters...
+		$phash = self::hashWithSalt($password, $salt);
+		
+		$dbret = Database::insert('users', array('username' => $username, 'password' => $phash, 'userpwsalt' => $salt, 'email' => $email, 'validate_key' => $validatekey, 'status' => 0, 'datereg' => date('Y-m-d H:i:s')));
+		if ($dbret) {
+			return Message::success('Your account has been created successfully!<br /><br />An email has been sent to allow you to verify your account. Please click the link inside to activate it.');
+		} else {
+			return Message::error('A database error occurred during account creation. Please contact the server admin.');
+		}
 	}
 
 	/**
