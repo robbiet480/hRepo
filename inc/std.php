@@ -7,7 +7,7 @@ function inc ($file) {
 
 function inclib($file) {
 	Log::add("including library file: ".$file);
-	require(HR_LIB.$file);
+	require_once(HR_LIB.$file);
 }
 
 function check_post () {
