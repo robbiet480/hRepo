@@ -134,9 +134,32 @@ class User {
 		
 		$dbret = Database::insert('users', array('username' => $username, 'password' => $phash, 'userpwsalt' => $salt, 'email' => $email, 'validate_key' => $validatekey, 'status' => 0, 'datereg' => date('Y-m-d H:i:s')));
 		if ($dbret) {
-			return Message::success('Your account has been created successfully!<br /><br />An email has been sent to allow you to verify your account. Please click the link inside to activate it.');
+			// email the user!
+			global $mailer;
+			$mailer->AddAddress($email, $username);
+			$mailer->Subject = 'Registration at hRepo';
+			$mailer->Body = <<<EOM
+Hi $username!
+
+You, or someone using your email address, from the IP address {$_SERVER['REMOTE_IP']} recently registered with hRepo (http://www.hrepo.com).
+
+If this was you, please visit:
+http://www.hrepo.com/activate/{$username}/{$validatekey}/
+	
+If this was not you, please visit:
+http://www.hrepo.com/cancel/{$username}/{$validatekey}/
+	
+Thanks,
+The hRepo Team
+EOM;
+			$mailer->WordWrap = 50;
+			if (!$mailer->Send()) {
+				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2</small>');
+			} else {
+				return Message::success('Your account has been created successfully!<br /><br />An email has been sent to allow you to verify your account. Please click the link inside to activate it.');
+			}
 		} else {
-			return Message::error('A database error occurred during account creation. Please contact the server admin.');
+			return Message::error('A database error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC1</small>');
 		}
 	}
 
@@ -199,7 +222,7 @@ class User {
 		}
 		$_SESSION['last_ip'] = $current_ip;
 
-		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ?', $uname));
+		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ? AND status = 1', $uname));
 		$row = $smt->fetch(PDO::FETCH_ASSOC);
 
 		// correct password

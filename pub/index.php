@@ -74,6 +74,11 @@ inc('user.php');
 inc('template.php');
 inc('message.php');
 
+// Mandatory include-everywhere libraries
+inclib('phpmailer/class.phpmailer.php'); // because then we can set defaults here
+$mailer = new PHPMailer();
+$mailer->SetFrom('donotreply@hrepo.com', 'hRepo System');
+
 // Now check the user!
 User::bootstrap();
 
