@@ -419,3 +419,7 @@ input.error, input.valid {
 /*** Thanks to http://goo.gl/ZTeLE for the CSS
            and http://goo.gl/LahoY for the icons ***/
 /********** MESSAGE BOXES END ************/
+
+a {
+	outline: none;
+}
