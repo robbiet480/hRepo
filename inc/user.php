@@ -229,7 +229,7 @@ EOM;
 		// Set up an IV
 		$iv = self::getIV();
 		// Set cookie data
-		$cookiedat = array('uname' => self::$uname, 'pword' => self::$pword);
+		$cookiedat = array('uname' => self::$uname, 'pword' => self::$phash);
 		// Now set up the actual cookie
 		$cookiedata = base64_encode(mcrypt_encrypt(MCRYPT_BLOWFISH, HR_BLOWFISH_SECRET, json_encode($cookiedat), MCRYPT_MODE_CBC, $iv));
 		self::setLongCookie('ln', $cookiedata);
