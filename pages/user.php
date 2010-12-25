@@ -9,36 +9,43 @@ if ($slug == 'user' && !User::$isValid)
 else if ($slug == 'user')
 {
 	$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
-	if (!isset($params[0]))
+	if (!isset($params[0]) && User::isValid())
 	{
 		redirect('/user/' . User::$uname, true);
 		exit();
 	}
-	// Ugh, database grab
-	$a = Database::select('users', array('username', 'email', 'status', 'datereg', 'role'), array('username = ?', $params[0]));
-	if (!$a->rowCount())
+	else if (!isset($params[0]) && !User::isValid())
 	{
-		Content::setContent('<h2>' . $params[0] . '\'s profile</h2>' . Message::error('No such user exists.'));
+		// user is not logged in
+		Content::setContent('<h2>Profile error</h2>' . Message::error('Please specify a username.'));
 	}
 	else
 	{
-		$b = $a->fetch(PDO::FETCH_ASSOC);
-		$uname = $b['username'];
-		$email = $b['email'];
-		$status = $b['status'];
-		$datereg = strtotime($b['datereg']);
-		$urole = $b['role'];
-
-		if ($params[1] == 'edit' && User::$role > 2)
+		// Ugh, database grab
+		$a = Database::select('users', array('username', 'email', 'status', 'datereg', 'role'), array('username = ?', $params[0]));
+		if (!$a->rowCount())
 		{
-			// have they submitted?
-			if (isset($_POST['submit']))
-			{ // yes
-				// handle form submission
-			}
+			Content::setContent('<h2>' . $params[0] . '\'s profile</h2>' . Message::error('No such user exists.'));
+		}
+		else
+		{
+			$b = $a->fetch(PDO::FETCH_ASSOC);
+			$uname = $b['username'];
+			$email = $b['email'];
+			$status = $b['status'];
+			$datereg = strtotime($b['datereg']);
+			$urole = $b['role'];
 
-			// display the form
-			Content::setContent(<<<EOT
+			if ($params[1] == 'edit' && User::$role > 2)
+			{
+				// have they submitted?
+				if (isset($_POST['submit']))
+				{ // yes
+					// handle form submission
+				}
+
+				// display the form
+				Content::setContent(<<<EOT
 	<h1>Edit your profile</h1>
 	<form action="/user/$uname/edit" method="POST">
 		<div class="form-row">
@@ -58,79 +65,79 @@ else if ($slug == 'user')
 		</div>
 	</form>
 EOT
-			);
-		}
-		else if ($params[1] == 'requestdev' && $params[0] == User::$uname)
-		{
-			if (User::getField('wantsdev'))
+				);
+			}
+			else if ($params[1] == 'requestdev' && $params[0] == User::$uname)
 			{
-				$message = Message::error('Your request has already been sent to the administrators for approval.');
-				Content::setContent(<<<EOT
+				if (User::getField('wantsdev'))
+				{
+					$message = Message::error('Your request has already been sent to the administrators for approval.');
+					Content::setContent(<<<EOT
 					<h1>Request Developer Access</h1>
 					<p>$message</p>
 EOT
-				);
-			}
-			else if ($params[2] != 'yesimsure')
-			{
-				Content::setContent(<<<EOT
+					);
+				}
+				else if ($params[2] != 'yesimsure')
+				{
+					Content::setContent(<<<EOT
 				<h1>Request Developer Access</h1>
 				<p>Are you sure you want to do this? <form action="/user/$uname/requestdev/yesimsure/" method="POST"><input type="submit" value="Yes, I'm sure!" /></form></p>
 EOT
-				);
-			}
-			else
-			{
-				if (Database::update('users', array('wantsdev' => 1), null, array('uid = ?', User::$uid)))
-				{
-					$success = Message::success('The website administrators have been sent an approval request.');
+					);
 				}
 				else
 				{
-					$success = Message::error('A database error occurred whilst attempting to send the approval request.<br />Please try later.');
-				}
-				Content::setContent(<<<EOT
+					if (Database::update('users', array('wantsdev' => 1), null, array('uid = ?', User::$uid)))
+					{
+						$success = Message::success('The website administrators have been sent an approval request.');
+					}
+					else
+					{
+						$success = Message::error('A database error occurred whilst attempting to send the approval request.<br />Please try later.');
+					}
+					Content::setContent(<<<EOT
 				<h1>Request Developer Access</h1>
 				<p>$success</p>
 EOT
-				);
+					);
+				}
 			}
-		}
-		else
-		{
-			switch ($urole)
+			else
 			{
-				case 0:
-					$axx = 'Member';
-					break;
-				case 1:
-					$axx = 'Developer';
-					break;
-				case 2:
-					$axx = 'Administrator :)';
-					break;
-				default:
-					$axx = ':/';
-					break;
-			}
-			switch ($status)
-			{
-				case 0:
-					$statustext = 'Awaiting activation';
-					break;
-				case 1:
-					$statustext = 'Active';
-					break;
-				case 2:
-					$statustext = 'Banned';
-					break;
-				default:
-					$statustext = ':/';
-					break;
-			}
-			$regdatetext = date('jS \o\f F, Y', $datereg);
-			// Welcome!
-			Content::setContent(<<<EOT
+				switch ($urole)
+				{
+					case 0:
+						$axx = 'Member';
+						break;
+					case 1:
+						$axx = 'Developer';
+						break;
+					case 2:
+						$axx = 'Administrator :)';
+						break;
+					default:
+						$axx = ':/';
+						break;
+				}
+				switch ($status)
+				{
+					case 0:
+						$statustext = 'Awaiting activation';
+						break;
+					case 1:
+						$statustext = 'Active';
+						break;
+					case 2:
+						$statustext = 'Banned';
+						break;
+					default:
+						$statustext = ':/';
+						break;
+				}
+				$regdatetext = date('jS \o\f F, Y', $datereg);
+				// Welcome!
+				Content::setContent(<<<EOT
 <h1>$uname's profile</h1>
 <h2>User Details</h2>
 <dl class="userdets">
@@ -151,23 +158,24 @@ EOT
 <dd>$regdatetext</dd>
 </dl>
 EOT
-			);
-		}
-		Sidebar::clear();
-		if (User::$role == 0 && !User::getField('wantsdev'))
-		{
-			$requestpermissions = '<li><a href="/user/requestdev">Request Developer Access</a></li>';
-		}
-		else if (User::getField('wantsdev'))
-		{
-			$requestpermissions = '<li>Developer Access Requested</li>';
-		}
-		Sidebar::add('User CP', <<<EOT
+				);
+			}
+			Sidebar::clear();
+			if (User::$role == 0 && !User::getField('wantsdev'))
+			{
+				$requestpermissions = '<li><a href="/user/requestdev">Request Developer Access</a></li>';
+			}
+			else if (User::getField('wantsdev'))
+			{
+				$requestpermissions = '<li>Developer Access Requested</li>';
+			}
+			Sidebar::add('User CP', <<<EOT
 	<ol>
 		<li><a href="/user/edit">Edit Profile</a></li>
 		$requestpermissions
 	</ol>
 EOT
-		);
+			);
+		}
 	}
 }
