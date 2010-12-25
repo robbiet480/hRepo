@@ -240,9 +240,9 @@ EOM;
 
 		// correct password
 		if($hash === $row['password']) {
-			$_SESSION['uname']  = $uname;
-			$_SESSION['pword']  = $hash;
-			$_SESSION['role']  = $row['role'];
+			$_SESSION['uname']  = self::$uname = $uname;
+			$_SESSION['pword']  = self::$phash = $hash;
+			$_SESSION['role']  = self::$role = $row['role'];
 			return true;
 		}
 		
