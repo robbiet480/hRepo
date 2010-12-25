@@ -325,7 +325,7 @@ EOM;
 		}
 		$_SESSION['last_ip'] = $current_ip;
 
-		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ? AND status = 1', $uname));
+		$smt = Database::select('users', array('password', 'userpwsalt', 'role', 'uid'), array('username = ? AND status = 1', $uname));
 		$row = $smt->fetch(PDO::FETCH_ASSOC);
 
 		if ($fromsess)
