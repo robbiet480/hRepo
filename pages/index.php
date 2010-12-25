@@ -4,7 +4,7 @@ $nav['index'] = array('url' => '/index', 'slug' => 'index', 'name' => 'Home', 'l
 if($slug == "index") {
 	$uname = 'stranger!!';
 	if (User::isValid()) {
-		$uname = User::uname;
+		$uname = User::$uname;
 	}
 	Content::setContent(<<<EOT
 	<h1>Hello {$uname}!</h1>
