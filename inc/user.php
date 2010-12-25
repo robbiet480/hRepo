@@ -40,8 +40,7 @@ class User {
 					Log::add('Woo, I need to remember them...');
 					self::setRememberMe();
 				}
-				//redirect('/user', true); // commented out for debugging
-				return Message::success('You were successfully logged in!');
+				redirect('/user', true); // commented out for debugging
 			}
 			else
 			{
