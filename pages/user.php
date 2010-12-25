@@ -8,21 +8,33 @@ if ($slug == 'user' && !User::$isValid)
 }
 else if ($slug == 'user')
 {
-
-	if ($params[0] == 'edit')
+	$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
+	if (!isset($params[1]))
+	{
+		redirect('/user/' . User::$uname, true);
+		exit();
+	}
+	// Ugh, database grab
+	$a = Database::select('users', array('username', 'email', 'status', 'datereg', 'role'), array('username = ?', $params[1]));
+	$b = $a->fetch(PDO::FETCH_ASSOC);
+	$uname = $b['username'];
+	$email = $b['email'];
+	$status = $b['status'];
+	$datereg = strtotime($b['datereg']);
+	$urole = $b['role'];
+	
+	if ($params[1] == 'edit' && User::$role > 2)
 	{
 		// have they submitted?
 		if (isset($_POST['submit']))
 		{ // yes
 			// handle form submission
 		}
-		$uname = User::$uname;
-		$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
-		$email = User::getField('email');
+
 		// display the form
 		Content::setContent(<<<EOT
 	<h1>Edit your profile</h1>
-	<form action="/user/edit" method="POST">
+	<form action="/user/$uname/edit" method="POST">
 		<div class="form-row">
 			<label for="username">Username</label>
 			<span><input type="text" name="username" id="username" value="$uname" disabled="disabled" /></span>
@@ -42,7 +54,7 @@ else if ($slug == 'user')
 EOT
 		);
 	}
-	else if ($params[0] == 'requestdev')
+	else if ($params[1] == 'requestdev' && $params[0] == User::$uname)
 	{
 		if (User::getField('wantsdev'))
 		{
@@ -53,11 +65,11 @@ EOT
 EOT
 			);
 		}
-		else if ($params[1] != 'yesimsure')
+		else if ($params[2] != 'yesimsure')
 		{
 			Content::setContent(<<<EOT
 				<h1>Request Developer Access</h1>
-				<p>Are you sure you want to do this? <form action="/user/requestdev/yesimsure/" method="POST"><input type="submit" value="Yes, I'm sure!" /></form></p>
+				<p>Are you sure you want to do this? <form action="/user/$uname/requestdev/yesimsure/" method="POST"><input type="submit" value="Yes, I'm sure!" /></form></p>
 EOT
 			);
 		}
@@ -80,9 +92,7 @@ EOT
 	}
 	else
 	{
-		$uname = User::$uname;
-		$email = User::getField('email');
-		switch (User::$role)
+		switch ($urole)
 		{
 			case 0:
 				$axx = 'Member';
@@ -97,9 +107,24 @@ EOT
 				$axx = ':/';
 				break;
 		}
+		switch ($status) {
+			case 0:
+				$statustext = 'Awaiting activation';
+				break;
+			case 1:
+				$statustext = 'Active';
+				break;
+			case 2:
+				$statustext = 'Banned';
+				break;
+			default:
+				$statustext = ':/';
+				break;
+		}
+		$regdatetext = date('jS \o\f F, Y', $datereg);
 		// Welcome!
 		Content::setContent(<<<EOT
-<h1>Welcome to your user page!</h1>
+<h1>$uname's profile</h1>
 <h2>User Details</h2>
 <dl class="userdets">
 
@@ -111,6 +136,12 @@ EOT
 	
 <dt>Access Level</dt>
 <dd>$axx</dd>
+	
+<dt>Status</dt>
+<dd>$statustext</dd>
+	
+<dt>Date Registered</dt>
+<dd>$regdatetext</dd>
 </dl>
 EOT
 		);
