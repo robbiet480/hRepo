@@ -215,7 +215,7 @@ EOM;
 			srand((double) (microtime(true) * 2125000)); // seed PRNG
 			$tr = mcrypt_module_open(MCRYPT_BLOWFISH, '', MCRYPT_MODE_CBC, ''); // Start up mcrypt...
 			$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($tr), MCRYPT_RAND);
-			this::setLongCookie('ln_iv', base64_encode($iv));
+			$this::setLongCookie('ln_iv', base64_encode($iv));
 			return $iv;
 		}
 		else
@@ -232,7 +232,7 @@ EOM;
 		$cookiedat = array('uname' => self::$uname, 'pword' => self::$pword);
 		// Now set up the actual cookie
 		$cookiedata = base64_encode(mcrypt_encrypt(MCRYPT_BLOWFISH, HR_BLOWFISH_SECRET, json_encode($cookiedat), MCRYPT_MODE_CBC, $iv));
-		this::setLongCookie('ln', $cookiedata);
+		$this::setLongCookie('ln', $cookiedata);
 	}
 
 	/**
