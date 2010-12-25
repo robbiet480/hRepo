@@ -9,7 +9,7 @@ if ($slug == 'user' && !User::$isValid)
 else if ($slug == 'user')
 {
 	$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
-	if (!isset($params[1]))
+	if (!isset($params[0]))
 	{
 		redirect('/user/' . User::$uname, true);
 		exit();
