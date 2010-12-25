@@ -2,11 +2,7 @@
 
 $nav['user'] = array('url' => '/user', 'slug' => 'user', 'name' => 'Profile', 'loggedInOnly' => 1, 'weight' => 3, 'extrapre' => '', 'extrapost' => ''); // -1 for only not logged in
 
-if ($slug == 'user' && !User::$isValid)
-{
-	$httpError = 403;
-}
-else if ($slug == 'user')
+if ($slug == 'user')
 {
 	$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
 	if (!isset($params[0]) && User::isValid())
