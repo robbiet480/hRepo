@@ -15,7 +15,6 @@ else if ($slug == 'user')
 		if (isset($_POST['submit']))
 		{ // yes
 			// handle form submission
-			
 		}
 		$uname = User::$uname;
 		$pword = 'oloyoudidntthinkweactuallystorethepassworddidyou';
@@ -41,27 +40,42 @@ else if ($slug == 'user')
 		</div>
 	</form>
 EOT
-);
+		);
 	}
 	else if ($params[0] == 'requestdev')
 	{
-		if ($params[1] != 'yesimsure') {
+		if (User::getField('wantsdev'))
+		{
+			$message = Message::error('Your request has already been sent to the administrators for approval.');
+			Content::setContent(<<<EOT
+					<h1>Request Developer Access</h1>
+					<p>$message</p>
+EOT
+			);
+		}
+		else if ($params[1] != 'yesimsure')
+		{
 			Content::setContent(<<<EOT
 				<h1>Request Developer Access</h1>
 				<p>Are you sure you want to do this? <form action="/user/requestdev/yesimsure/" method="POST"><input type="submit" value="Yes, I'm sure!" /></form></p>
 EOT
-);
-		} else {
-			if (Database::update('users', array('wantsdev' => 1), null, array('uid = ?', User::$uid))) {
+			);
+		}
+		else
+		{
+			if (Database::update('users', array('wantsdev' => 1), null, array('uid = ?', User::$uid)))
+			{
 				$success = Message::success('The website administrators have been sent an approval request.');
-			} else {
+			}
+			else
+			{
 				$success = Message::error('A database error occurred whilst attempting to send the approval request.<br />Please try later.');
 			}
 			Content::setContent(<<<EOT
 				<h1>Request Developer Access</h1>
 				<p>$success</p>
 EOT
-);			
+			);
 		}
 	}
 	else
@@ -84,7 +98,6 @@ EOT
 				break;
 		}
 		// Welcome!
-		Sidebar::clear();
 		Content::setContent(<<<EOT
 <h1>Welcome to your user page!</h1>
 <h2>User Details</h2>
@@ -101,16 +114,21 @@ EOT
 </dl>
 EOT
 		);
-		if (User::$role == 0)
-		{
-			$requestpermissions = '<li><a href="/user/requestdev">Request Developer Access</a></li>';
-		}
-		Sidebar::add('User CP', <<<EOT
+	}
+	Sidebar::clear();
+	if (User::$role == 0 && !User::getField('wantsdev'))
+	{
+		$requestpermissions = '<li><a href="/user/requestdev">Request Developer Access</a></li>';
+	}
+	else if (User::getField('wantsdev'))
+	{
+		$requestpermissions = '<li>Developer Access Requested</li>';
+	}
+	Sidebar::add('User CP', <<<EOT
 	<ol>
 		<li><a href="/user/edit">Edit Profile</a></li>
 		$requestpermissions
 	</ol>
 EOT
-		);
-	}
+	);
 }
