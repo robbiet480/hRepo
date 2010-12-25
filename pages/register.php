@@ -2,6 +2,15 @@
 
 if ($slug == "register")
 {
+	if ($params[0] == 'checkusername') {
+		$pds = Database::select('users', array('uid'), array('username = ?', $_POST['username']));
+		$valerr = array();
+		if ($pds->rowCount() != 0) {
+			$valerr['username'] = 'Username is already taken. :(';
+		}
+		echo json_encode($valerr);
+		exit();
+	}
 	inclib('recaptchalib.php');
 	$message = '';
 	$valerr = User::validateRegisterForm(); // this returns an array of validation errors

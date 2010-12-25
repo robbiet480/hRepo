@@ -6,6 +6,10 @@ class Sidebar {
 	public function add($title, $contents) {
 		self::$blocks[] = array('title' => $title, 'content' => $contents);
 	}
+	
+	public function clear() {
+		self::$blocks[] = array();
+	}
 }
 
 Sidebar::add("Most Downloaded Plugins", <<<EOT

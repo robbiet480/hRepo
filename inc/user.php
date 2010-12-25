@@ -15,9 +15,19 @@ class User {
 	 */
 	public static $phash;
 	/**
-	 * @var int The role number of the user.
+	 * @var integer The uid from the database from the session.
 	 */
-	public static $role;
+	public static $uid;
+	/**
+	 * @var int The role number of the user.
+	 * 
+	 * -1 = Guest
+	 * 0 = Member
+	 * 1 = Developer
+	 * 2 = Administrator
+	 * 
+	 */
+	public static $role = -1;
 
 	public static function isValid() {
 		return self::$isValid;
@@ -47,6 +57,20 @@ class User {
 				return Message::error("Bad username or password...");
 			}
 		}
+	}
+	
+	/**
+	 * Get a database field!
+	 * 
+	 * @return mixed Whatever comes back from the database
+	 */
+	public static function getField($fieldname) {
+		$out = '';
+		$pdd = Database::select('users', array($fieldname), array('uid = ?', self::$uid));
+		if ($pdd->rowCount() == 0)
+				return 'ERROR ERROR ERROR';
+		$out = $pdd->fetchColumn();
+		return $out;
 	}
 
 	/**
@@ -92,6 +116,11 @@ class User {
 			else if ($unameRegexErr)
 			{
 				$valerr['username'] = 'Usernames must contain only letters, numbers and underscores.';
+			}
+			// Is already taken?
+			$pds = Database::select('users', array('uid'), array('username = ?', $_POST['username']));
+			if ($pds->rowCount() != 0) {
+				$valerr['username'] = 'Username is already taken. :(';
 			}
 		}
 		// then password
@@ -314,6 +343,7 @@ EOM;
 			$_SESSION['uname'] = self::$uname = $uname;
 			$_SESSION['pword'] = self::$phash = $hash;
 			$_SESSION['role'] = self::$role = $row['role'];
+			$_SESSION['uid'] = self::$uid = $row['uid'];
 			return true;
 		}
 
