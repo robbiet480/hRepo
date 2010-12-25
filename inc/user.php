@@ -215,7 +215,6 @@ EOM;
 	 */
 	public static function checkSession ($uname, $pword, $last_ip) {
 		$current_ip = $_SERVER['REMOTE_ADDR'];
-		$hash = self::hashWithSalt($pword, $row['userpwsalt']);
 
 		// session not set.
 		if(empty($uname) || empty($pword)) {
@@ -232,6 +231,8 @@ EOM;
 
 		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ? AND status = 1', $uname));
 		$row = $smt->fetch(PDO::FETCH_ASSOC);
+		
+		$hash = self::hashWithSalt($pword, $row['userpwsalt']); // PHP does not stand for PHP: Hypertext Prediction engine. Putting this line BEFORE $row is set fails
 
 		// correct password
 		if($hash === $row['password']) {
