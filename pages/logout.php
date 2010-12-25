@@ -20,7 +20,7 @@ if ($slug == 'logout')
 	setcookie('ln_iv', '', time() - 42000); // and that takes care of remember me
 	
 	User::$uname = '';
-	User::$pword = '';
+	User::$phash = '';
 	User::$role = 0;
 	User::$isValid = false; // and that's all that user stuff taken care of.
 	
