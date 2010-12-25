@@ -25,6 +25,6 @@ if ($slug == 'logout')
 	User::$isValid = false; // and that's all that user stuff taken care of.
 	
 	session_start(); // now restart the session
-	$_SESSION['message'] = 'You have been logged out successfully.';
+	$_SESSION['message'] = Message::success('You have been logged out successfully.');
 }
 ?>
