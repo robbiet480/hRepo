@@ -43,6 +43,27 @@ else if ($slug == 'user')
 EOT
 );
 	}
+	else if ($params[0] == 'requestdev')
+	{
+		if ($params[1] != 'yesimsure') {
+			Content::setContent(<<<EOT
+				<h1>Request Developer Access</h1>
+				<p>Are you sure you want to do this? <form action="/user/requestdev/yesimsure/" method="POST"><input type="submit" value="Yes, I'm sure!" /></form></p>
+EOT
+);
+		} else {
+			if (Database::update('users', array('wantsdev' => 1), null, array('uid = ?', User::$uid))) {
+				$success = Message::success('The website administrators have been sent an approval request.');
+			} else {
+				$success = Message::error('A database error occurred whilst attempting to send the approval request.<br />Please try later.');
+			}
+			Content::setContent(<<<EOT
+				<h1>Request Developer Access</h1>
+				<p>$success</p>
+EOT
+);			
+		}
+	}
 	else
 	{
 		$uname = User::$uname;

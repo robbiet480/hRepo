@@ -8,7 +8,7 @@ class Sidebar {
 	}
 	
 	public function clear() {
-		self::$blocks[] = array();
+		self::$blocks = array();
 	}
 }
 
