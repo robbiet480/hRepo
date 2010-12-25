@@ -120,6 +120,7 @@ class User {
 	 * @return string Any message for the form to display. Formatted with the message class.
 	 */
 	public static function registerHandle($username, $password, $email) {
+		Log::add('User::registerHandle called, beginning.');
 		// Things to do:
 		// Generate salt and validation key
 		// Salt + pepper password
@@ -133,6 +134,7 @@ class User {
 		$phash = self::hashWithSalt($password, $salt);
 		
 		$dbret = Database::insert('users', array('username' => $username, 'password' => $phash, 'userpwsalt' => $salt, 'email' => $email, 'validate_key' => $validatekey, 'status' => 0, 'datereg' => date('Y-m-d H:i:s')));
+		Log::add('User::registerHandle, user added to database: retval = ' . $dbret);
 		if ($dbret) {
 			// email the user!
 			global $mailer;
@@ -153,12 +155,16 @@ Thanks,
 The hRepo Team
 EOM;
 			$mailer->WordWrap = 50;
-			if (!$mailer->Send()) {
+			$mailerret = $mailer->Send();
+			Log::add('User::registerHandle, sending email: retval = ' . $mailerret);
+			if (!$mailerret) {
+				Log::add('User::registerHandle, mailer says: ' . $mailer->ErrorInfo);
 				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2</small>');
 			} else {
 				return Message::success('Your account has been created successfully!<br /><br />An email has been sent to allow you to verify your account. Please click the link inside to activate it.');
 			}
 		} else {
+			Log::add('User::registerHandle, database says: ' . print_r(Database::getHandle()->errorInfo(), true));
 			return Message::error('A database error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC1</small>');
 		}
 	}
@@ -213,11 +219,13 @@ EOM;
 
 		// session not set.
 		if(empty($uname) || empty($pword)) {
+			Log::add('User::checkSession called - returning false, uname/pword blank.');
 			return false;
 		}
 
 		// session spoofing!!! or... an AOL user. Meh. AOL users are spammy.
 		if($last_ip !== $current_ip) {
+			Log::add('User::checkSession called - returning false, IPs do not match. Old IP: ' . $last_ip . ' - New IP: ' . $current_ip);
 			return false;
 		}
 		$_SESSION['last_ip'] = $current_ip;
@@ -232,6 +240,8 @@ EOM;
 			$_SESSION['role']  = $row['role'];
 			return true;
 		}
+		
+		Log::add('User::checkSession called - returning false, incorrect password: $hash was ' . $hash .' and correct hash was ' . $row['password']);
 
 		// wrong password
 		return false;
