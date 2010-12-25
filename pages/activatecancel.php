@@ -28,7 +28,7 @@ if ($slug == "activate" || $slug == "cancel")
 			{
 				// ugh, annoying database class.
 				$dbh = Database::getHandle();
-				$dbr = $dbh->prepare('UPDATE users SET validatekey = NULL, status = :finalstatus WHERE uid = :uid');
+				$dbr = $dbh->prepare('UPDATE users SET validatekey = NULL, status = 1 WHERE uid = :uid');
 				$dbr->bindColumn(':uid', $uid, PDO::PARAM_INT);
 				if ($dbr->execute())
 				{
