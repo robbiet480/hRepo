@@ -262,6 +262,7 @@ EOM;
 			return false;
 		}
 
+		print_r($res);
 		$_SESSION['uname'] = $res['uname'];
 		$_SESSION['pword'] = $res['pword'];
 		$_SESSION['last_ip'] = $_SERVER['REMOTE_ADDR'];
