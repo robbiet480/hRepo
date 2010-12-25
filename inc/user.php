@@ -213,7 +213,7 @@ EOM;
 	 *
 	 * @return boolean True if session is valid user. False otherwise. Also false if ips are different between requests.
 	 */
-	public static function checkSession ($uname, $pword, $last_ip) {
+	public static function checkSession ($uname, $pword, $last_ip, $fromsess = false) {
 		$current_ip = $_SERVER['REMOTE_ADDR'];
 
 		// session not set.
@@ -232,7 +232,11 @@ EOM;
 		$smt = Database::select('users', array('password', 'userpwsalt', 'role'), array('username = ? AND status = 1', $uname));
 		$row = $smt->fetch(PDO::FETCH_ASSOC);
 		
-		$hash = self::hashWithSalt($pword, $row['userpwsalt']); // PHP does not stand for PHP: Hypertext Prediction engine. Putting this line BEFORE $row is set fails
+		if ($fromsess) {
+			$hash = $pword;
+		} else {
+			$hash = self::hashWithSalt($pword, $row['userpwsalt']); // PHP does not stand for PHP: Hypertext Prediction engine. Putting this line BEFORE $row is set fails
+		}
 
 		// correct password
 		if($hash === $row['password']) {
@@ -255,10 +259,10 @@ EOM;
 	public static function bootstrap () {
 		session_start();
 
-		self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
+		self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip'], true);
 		if(!self::$isValid) {
 			self::checkCookie();
-			self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip']);
+			self::$isValid = self::checkSession($_SESSION['uname'], $_SESSION['pword'], $_SESSION['last_ip'], true);
 		}
 	}
 }
