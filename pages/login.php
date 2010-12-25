@@ -11,7 +11,7 @@ $logindropdown = <<<EOT
 
                 <span id="loginBoxRMe">
                         <label for="rememberMeBox">Remember Me</label>
-                        <input type="checkbox" name="rememberMe" id="rememberMeBox" />
+                        <input type="checkbox" name="rememberMe" id="rememberMeBox" value="rememberMeFoSure" />
                 </span>
 
                 <span id="loginBoxLogin">
@@ -39,10 +39,12 @@ if ($slug == "login")
 	$message = $regMessage = '';
 	if (isset($params[0]) && $params[0] == 'fromRegister')
 	{ // message passed over?
-		if (isset($_SESSION['validatorPassback'])) {
-			$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = '';
+		if (isset($_SESSION['validatorPassback']))
+		{
+			$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = $unameLogin = '';
 			$vars = array('username', 'password', 'confirmPassword', 'email', 'usernameClass', 'passwordClass', 'confirmPasswordClass', 'emailClass');
-			foreach ($vars as $var) {
+			foreach ($vars as $var)
+			{
 				$$var = $_SESSION['validatorPassback'][$var];
 			}
 		}
@@ -51,7 +53,10 @@ if ($slug == "login")
 	}
 	else
 	{
-		$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = '';
+		$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = $unameLogin = '';
+		if (isset($_POST['username'])) {
+			$unameLogin = $_POST['username'];
+		}
 		$message = User::loginHandle();
 	}
 	if (isset($_SESSION['recaperror']))
@@ -71,11 +76,15 @@ if ($slug == "login")
 	<form action="/login" method="post">$message
 		<div class="form-row">
 			<label for="username">Username</label>
-			<span><input type="text" name="username" id="username" /></span>
+			<span><input type="text" name="username" id="username" value="$unameLogin" /></span>
 		</div>
 		<div class="form-row">
 			<label for="password">Password</label>
 			<span><input type="password" name="password" id="password" /></span>
+		</div>
+		<div class="form-row">
+			<label for="rememberme">Remember Me</label>
+			<span><input type="checkbox" name="rememberMe" id="rememberMe" value="rememberMeFoSure" /></span>
 		</div>
 		<div class="form-row form-row-last">
 			<span><input type="submit" name="login" value="Login" /></span>
