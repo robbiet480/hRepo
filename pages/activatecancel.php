@@ -28,7 +28,7 @@ if ($slug == "activate" || $slug == "cancel")
 			{
 				// ugh, annoying database class.
 				$dbh = Database::getHandle();
-				$dbr = $dbh->prepare('UPDATE users SET validatekey = NULL, status = 1 WHERE uid = ?');
+				$dbr = $dbh->prepare('UPDATE users SET validate_key = NULL, status = 1 WHERE uid = ?');
 				if ($dbr->execute(array($uid)))
 				{
 					Content::setContent(Message::success('Your account has been activated successfully!'));
