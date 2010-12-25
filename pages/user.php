@@ -1,6 +1,6 @@
 <?php
 
-$nav['user'] = array('url' => '/user', 'slug' => 'user', 'name' => 'user', 'loggedInOnly' => 1, 'weight' => 3, 'extrapre' => '', 'extrapost' => ''); // -1 for only not logged in
+$nav['user'] = array('url' => '/user', 'slug' => 'user', 'name' => 'Profile', 'loggedInOnly' => 1, 'weight' => 3, 'extrapre' => '', 'extrapost' => ''); // -1 for only not logged in
 
 if ($slug == 'user' && !User::$isValid)
 {
@@ -85,10 +85,10 @@ EOT
 			$requestpermissions = '<li><a href="/user/requestdev">Request Developer Access</a></li>';
 		}
 		Sidebar::add('User CP', <<<EOT
-	<ul>
+	<ol>
 		<li><a href="/user/edit">Edit Profile</a></li>
 		$requestpermissions
-	</ul>
+	</ol>
 EOT
 		);
 	}
