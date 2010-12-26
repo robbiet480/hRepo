@@ -32,7 +32,7 @@ if ($slug == 'user')
 			$datereg = strtotime($b['datereg']);
 			$urole = $b['role'];
 
-			if ($params[1] == 'edit' && User::$role > 2)
+			if ($params[1] == 'edit' && User::$role > 1)
 			{
 				// have they submitted?
 				if (isset($_POST['submit']))
