@@ -114,6 +114,7 @@ class User {
 	 * to Message::validation
 	 */
 	public static function validateRegisterForm() {
+		Log::add('User::validateRegisterForm - beginning validation.');
 		$valerr = array();
 		// Validate!
 		// username first
@@ -133,6 +134,7 @@ class User {
 			if ($valerr['username'] == '')
 				unset($valerr['username']);
 		}
+		Log::add('User::validateRegisterForm - username check complete: ' . print_r($valerr, true));
 		// then password
 		/* password: {
 		  minlength: 8,
@@ -147,6 +149,7 @@ class User {
 		{
 			$valerr['password'] = 'Passwords must be over 8 characters long.';
 		}
+		Log::add('User::validateRegisterForm - password check complete: ' . print_r($valerr, true));
 		// then confirmation password
 		/* confirmPassword: {
 		  equalTo: "#passwordReg",
@@ -157,6 +160,7 @@ class User {
 		{
 			$valerr['confirmPassword'] = 'Confirmation password does not match original password.';
 		}
+		Log::add('User::validateRegisterForm - double password check complete: ' . print_r($valerr, true));
 		// now email
 		/* email: {
 		  required: true,
@@ -171,6 +175,7 @@ class User {
 		{ // yes, this is the one jQuery uses.
 			$valerr['email'] = 'Please enter a valid email address.';
 		}
+		Log::add('User::validateRegisterForm - email check complete - validation complete: ' . print_r($valerr, true));
 		// all done!
 		return $valerr;
 	}
