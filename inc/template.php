@@ -44,7 +44,15 @@ function nav() {
 	$totalpost = '';
 	foreach ($nav as $thisSlug => $vals)
 	{
-		if (($vals['visible'] !== false) && (($vals['loggedInOnly'] == 0) || ($vals['loggedInOnly'] == 1 && User::$isValid) || ($vals['loggedInOnly'] == -1 && !User::$isValid)))
+		if (
+				($vals['visible'] !== false) &&
+				(
+					($vals['loggedInOnly'] == 0) || // non-caring page
+					($vals['loggedInOnly'] == 1 && User::$isValid) || // only for logged in
+					($vals['loggedInOnly'] == -1 && !User::$isValid) // only for not logged in
+				)
+				&& (!isset($vals['minRole']) || (User::$role >= $vals['minRole']))
+		)
 		{
 			if (!isset($vals['extrapre']))
 				$vals['extrapre'] = '';
