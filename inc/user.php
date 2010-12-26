@@ -242,7 +242,7 @@ class User {
 				}
 			}
 			if ($isValid && !(checkdnsrr($domain, "MX") ||
-					↪checkdnsrr($domain ,"A")))
+					checkdnsrr($domain ,"A")))
 			{
 				// domain not found in DNS
 				$isValid = false;

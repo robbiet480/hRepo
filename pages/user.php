@@ -103,6 +103,9 @@ if ($slug == 'user')
 							$status = $_POST['status'];
 						}
 					}
+					if (count($valerr) != 0) {
+						$message = Message::validation($valerr);
+					}
 					if (count($changesArray) == 0)
 					{
 						// fail
@@ -156,6 +159,7 @@ EOT;
 				// display the form
 				Content::setContent(<<<EOT
 	<h1>Edit $unamebit profile</h1>
+						$message
 	<form action="/user/$uname/edit" method="POST">
 		<div class="form-row">
 			<label for="username">Username</label>
