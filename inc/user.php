@@ -299,7 +299,7 @@ EOM;
 			if (!$mailerret)
 			{
 				Log::add('User::registerHandle, mailer says: ' . $mailer->ErrorInfo);
-				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2</small>');
+				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2 - '.$mailer->ErrorInfo.'</small>');
 			}
 			else
 			{
