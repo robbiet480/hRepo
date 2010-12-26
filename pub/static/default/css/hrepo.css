@@ -19,14 +19,19 @@ body {
 		rgb(54,30,18) 0%,
 		rgb(75,44,23) 55%
 		);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 #top h1 {
 	margin:0;
+	padding:0;
+	padding-left: 20px;
+	margin-left: 2px;
+	width: 929px;
 	color:white;
 	font:3em KavalerKursive,sans-serif;
 	float:left;
-	padding:1em 0;
 	text-shadow: 0 0 12px #000;
 }
 
@@ -43,7 +48,7 @@ body {
 	margin:0;
 	margin-left:4.5em;
 	list-style:none;
-	padding:2.5em 0;
+	padding: 0;
 	float:left;
 }
 
@@ -58,8 +63,9 @@ body {
 	color:white;
 	font-size:1.4em;
 	text-decoration:none;
-	padding:0.5em 0.7em;
+	padding:0.2em 0.5em;
 	margin:0.6em;
+	margin-left: 2em;
 	border:1px transparent solid;
 	text-align:center;
 }
@@ -80,12 +86,15 @@ body {
 #wrapper { 
 	width: 960px;
 	margin: 25px auto;
-	border:1px #bbb solid;
+	border:2px #646464 solid;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	font-size:1.15em;
-	background: #fff;
+	background: #d5d5d5;
+	-moz-box-shadow: 5px 5px 5px #646464;
+    -webkit-box-shadow: 5px 5px 5px #646464;
+    box-shadow: 5px 5px 5px #646464;
 }
 
 #wrapper h1 { 
@@ -93,11 +102,26 @@ body {
 	font-size:1.6em;
 	letter-spacing:-1px;
 	padding:15px 5px 15px 25px;
-	background:#5b020c;
+	background: none;
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(213,213,213)),
+		color-stop(0.68, rgb(233,233,233)),
+		color-stop(1, rgb(213,213,213))
+		);
+	background-image: -moz-linear-gradient(
+		center bottom,
+		rgb(213,213,213) 0%,
+		rgb(233,233,233) 68%,
+		rgb(213,213,213) 100%
+		);
+
 	position:relative;
 	left:-26px;
 	width:932px;
-	color:white;
+	color: #4b2c18;
 
 	-moz-border-radius:10px 10px 0 0;
 	-webkit-border-radius:10px 10px 0 0;
@@ -211,19 +235,22 @@ p {
 }
 
 #footer {
-	background:#353535;
-	color:#ddd;
+	background:#acacac;
+	color:#717171;
 	padding:15px;
 	font-size:1.4em;	
+	bord
 }
 
 #footer a {
-	color:white;
+	color: #616161;
 }
 
 #footer .gutter {
 	text-align:center;
-	color:#727272;
+	color:#717171;
+	width: 100%;
+	margin-top: -4px;
 }
 
 .clear:after {
@@ -328,8 +355,9 @@ input[type=checkbox] {
 /******** LOGIN BOX START ********/
 #loginDropDown {
 	position: absolute;
-	top: 104px;
-	margin-left: 22em;
+	top: 4.5px;
+	left: 30em;
+	margin: 0;
 	background-color: #361E12;
 	z-index: 10000;
 	border-bottom-left-radius: 10px;
