@@ -95,6 +95,13 @@ if ($slug == 'user')
 							$changesArray['role'] = $_POST['role'];
 							$urole = $_POST['role'];
 						}
+						
+						// user status
+						if ($_POST['status'] != $status && is_numeric($_POST['status']) && $_POST['status'] >= 0 && $_POST['status'] <= 2)
+						{
+							$changesArray['status'] = $_POST['status'];
+							$status = $_POST['status'];
+						}
 					}
 					if (count($changesArray) == 0)
 					{
@@ -123,8 +130,8 @@ if ($slug == 'user')
 				else
 				{
 					$unamebit = $uname . '\'s';
-					$isclass = array('', '', '');
-					$isclass[$urole] = ' selected="selected"';
+					$isclass = $isstat = array('', '', '');
+					$isclass[$urole] = $isstat[$status] = ' selected="selected"';
 					$changeUn = '';
 					$classbit = <<<EOT
 		<div class="form-row">
@@ -133,6 +140,14 @@ if ($slug == 'user')
 				<option value="0"{$isclass[0]}>Member</option>
 				<option value="1"{$isclass[1]}>Developer</option>
 				<option value="2"{$isclass[2]}>Administrator</option>
+			</select></span>
+		</div>
+		<div class="form-row">
+			<label for="role">Status</label>
+			<span><select name="status" id="status">
+				<option value="0"{$isstat[0]}>Awaiting Activation</option>
+				<option value="1"{$isstat[1]}>Active</option>
+				<option value="2"{$isstat[2]}>Banned</option>
 			</select></span>
 		</div>
 EOT;
