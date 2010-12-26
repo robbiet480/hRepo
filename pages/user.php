@@ -13,7 +13,7 @@ if ($slug == 'user')
 	else if (!isset($params[0]) && !User::isValid())
 	{
 		// user is not logged in
-		Content::setContent('<h2>Profile error</h2>' . Message::error('Please specify a username.'));
+		Content::setContent('<h1>Profile error</h1>' . Message::error('Please specify a username.'));
 	}
 	else
 	{
@@ -21,7 +21,7 @@ if ($slug == 'user')
 		$a = Database::select('users', array('username', 'email', 'status', 'datereg', 'role'), array('username = ?', $params[0]));
 		if (!$a->rowCount())
 		{
-			Content::setContent('<h2>' . $params[0] . '\'s profile</h2>' . Message::error('No such user exists.'));
+			Content::setContent('<h1>' . $params[0] . '\'s profile</h1>' . Message::error('No such user exists.'));
 		}
 		else
 		{
@@ -165,13 +165,16 @@ EOT
 			{
 				$requestpermissions = '<li>Developer Access Requested</li>';
 			}
-			Sidebar::add('User CP', <<<EOT
+			if (User::$uname == $uname || User::$role > 1)
+			{
+				Sidebar::add('User CP', <<<EOT
 	<ol>
 		<li><a href="/user/$uname/edit">Edit Profile</a></li>
 		$requestpermissions
 	</ol>
 EOT
-			);
+				);
+			}
 		}
 	}
 }
