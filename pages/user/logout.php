@@ -26,5 +26,6 @@ if ($slug == 'logout')
 	
 	session_start(); // now restart the session
 	$_SESSION['message'] = Message::success('You have been logged out successfully.');
+	redirect('/index', true);
 }
 ?>
