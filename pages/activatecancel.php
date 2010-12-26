@@ -47,7 +47,7 @@ if ($slug == "activate" || $slug == "cancel")
 			else
 			{
 				// now I've got to delete their account...
-				if (Database::delete('user', array('uid = ?', $uid), 1))
+				if (Database::delete('users', array('uid = ?', $uid), 1))
 				{
 					Log::add('Account deletion successful.');
 					Content::setContent(Message::success('The account has been deleted successfully.'));
