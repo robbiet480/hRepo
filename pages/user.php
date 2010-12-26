@@ -32,6 +32,7 @@ if ($slug == 'user')
 			$datereg = strtotime($b['datereg']);
 			$urole = $b['role'];
 			$usalt = $b['userpwsalt'];
+			$uuid = $b['uid'];
 
 			if ($params[1] == 'edit' && User::$role > 1)
 			{
@@ -102,7 +103,7 @@ if ($slug == 'user')
 					}
 					else
 					{
-						if (Database::update('users', $changesArray))
+						if (Database::update('users', $changesArray, null, array('uid = ?', $uuid)))
 						{
 							$message .= Message::success('Profile updated!');
 						}
@@ -117,7 +118,7 @@ if ($slug == 'user')
 				{
 					$unamebit = 'your';
 					$classbit = '';
-					$changeUn = 'disabled="disabled"';
+					$changeUn = (User::$role != 2) ? 'disabled="disabled"' : '';
 				}
 				else
 				{
@@ -267,6 +268,7 @@ EOT
 			{
 				Sidebar::add('User CP', <<<EOT
 	<ol>
+		<li><a href="/user/$uname/">Main Profile</a></li>
 		<li><a href="/user/$uname/edit">Edit Profile</a></li>
 		$requestpermissions
 	</ol>
