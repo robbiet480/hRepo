@@ -47,7 +47,7 @@ if (isset($_SERVER['PATH_INFO'])) {
 	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...
 }
 
-if (substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
+if (strlen($_GET['page']) != 0 && substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
 	header('Location: '. HR_PUB_ROOT . ltrim($_GET['page'], '/') . '/');
 	exit();
 }
