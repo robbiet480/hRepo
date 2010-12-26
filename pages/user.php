@@ -78,7 +78,7 @@ if ($slug == 'user')
 						if ($_POST['username'] != $uname && $_POST['username'] != '')
 						{
 							$valerra = User::validateUsername($uname);
-							if ($valerra == '')
+							if ($valerra == true)
 							{
 								$changesArray['username'] = $_POST['username'];
 								$uname = $_POST['username'];
