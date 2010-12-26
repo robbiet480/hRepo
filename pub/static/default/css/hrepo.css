@@ -91,9 +91,9 @@ body {
 	border-radius: 10px;
 	font-size:1.15em;
 	background: #d5d5d5;
-	-moz-box-shadow: 5px 5px 5px #646464;
-    -webkit-box-shadow: 5px 5px 5px #646464;
-    box-shadow: 5px 5px 5px #646464;
+	-moz-box-shadow: 2px 2px 2px #646464;
+    -webkit-box-shadow: 2px 2px 2px #646464;
+    box-shadow: 2px 2px 2px #646464;
 }
 
 #wrapper h1 { 
