@@ -45,7 +45,8 @@ $(document).ready(function(){
 			username: {
 				required: "Please enter a username.",
 				username: "Usernames may only contain letters, numbers, and underscores.",
-				rangelength: "Usernames should be between 4 and 32 characters."
+				rangelength: "Usernames should be between 4 and 32 characters.",
+				remote: "That username's already taken. :("
 			}
 		}
 	});

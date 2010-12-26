@@ -7,7 +7,7 @@ if ($slug == "register")
 		$valerr = array();
 		$valerr['username'] = 'true';
 		if ($pds->rowCount() != 0) {
-			$valerr['username'] = 'Username is already taken. :(';
+			$valerr['username'] = 'false';
 		}
 		echo $valerr['username'];
 		exit();
