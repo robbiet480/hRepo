@@ -18,7 +18,7 @@ if ($slug == 'user')
 	else
 	{
 		// Ugh, database grab
-		$a = Database::select('users', array('*'), array('username = ?', $params[0]));
+		$a = Database::select('users', '*', array('username = ?', $params[0]));
 		if (!$a->rowCount())
 		{
 			Content::setContent('<h1>' . $params[0] . '\'s profile</h1>' . Message::error('No such user exists.'));
