@@ -9,7 +9,7 @@ if ($slug == "register")
 		if ($pds->rowCount() != 0) {
 			$valerr['username'] = 'Username is already taken. :(';
 		}
-		echo json_encode($valerr);
+		echo $valerr['username'];
 		exit();
 	}
 	inclib('recaptchalib.php');
