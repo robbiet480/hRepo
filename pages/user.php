@@ -167,7 +167,7 @@ EOT
 			}
 			Sidebar::add('User CP', <<<EOT
 	<ol>
-		<li><a href="/user/edit">Edit Profile</a></li>
+		<li><a href="/user/$uname/edit">Edit Profile</a></li>
 		$requestpermissions
 	</ol>
 EOT
