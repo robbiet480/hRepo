@@ -5,7 +5,7 @@ if ($slug == "register")
 	if ($params[0] == 'checkusername') {
 		$pds = Database::select('users', array('uid'), array('username = ?', $_POST['username']));
 		$valerr = array();
-		$valerr['username'] = true;
+		$valerr['username'] = 'true';
 		if ($pds->rowCount() != 0) {
 			$valerr['username'] = 'Username is already taken. :(';
 		}
