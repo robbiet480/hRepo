@@ -82,7 +82,7 @@ inc('message.php');
 inclib('phpmailer/class.phpmailer.php'); // because then we can set defaults here
 $mailer = new PHPMailer();
 $mailer->SetFrom('donotreply@hrepo.com', 'hRepo System');
-$mail->IsSendmail();
+$mailer->IsSendmail();
 
 // Now check the user!
 User::bootstrap();
