@@ -39,10 +39,16 @@ if ($slug == 'user')
 				{ // yes
 					// handle form submission
 				}
+				
+				if ($uname == User::$uname) {
+					$unamebit = 'your';
+				} else {
+					$unamebit = $uname . '\'s';
+				}
 
 				// display the form
 				Content::setContent(<<<EOT
-	<h1>Edit your profile</h1>
+	<h1>Edit $unamebit profile</h1>
 	<form action="/user/$uname/edit" method="POST">
 		<div class="form-row">
 			<label for="username">Username</label>
