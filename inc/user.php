@@ -131,7 +131,7 @@ class User {
 		else
 		{
 			$valerr['username'] = self::validateUsername($_POST['username']);
-			if ($valerr['username'] == '')
+			if ($valerr['username'] == true)
 				unset($valerr['username']);
 		}
 		Log::add('User::validateRegisterForm - username check complete: ' . print_r($valerr, true));
