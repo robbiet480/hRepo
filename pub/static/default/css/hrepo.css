@@ -26,7 +26,7 @@ body {
 #top h1 {
 	margin:0;
 	padding:0;
-	padding-left: 20px;
+	margin-left: -80px;
 
 	color:white;
 	font:3em KavalerKursive,sans-serif;
