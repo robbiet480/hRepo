@@ -43,5 +43,5 @@ if ($slug == "register")
 		$message .= Message::validation($valerr);
 	}
 	$_SESSION['message'] = $message;
-	redirect('/login/fromRegister', true);
+	//redirect('/login/fromRegister', true);
 }
