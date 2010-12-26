@@ -48,7 +48,7 @@ if (isset($_SERVER['PATH_INFO'])) {
 }
 
 if (substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
-	header('Location: '. HR_PUB_ROOT . $_GET['page']);
+	header('Location: '. HR_PUB_ROOT . ltrim($_GET['page'], '/') . '/');
 	exit();
 }
 $_GET['page'] = rtrim($_GET['page'], '/');
