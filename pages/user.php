@@ -18,7 +18,7 @@ if ($slug == 'user')
 	else
 	{
 		// Ugh, database grab
-		$a = Database::select('users', array('username', 'email', 'status', 'datereg', 'role'), array('username = ?', $params[0]));
+		$a = Database::select('users', array('*'), array('username = ?', $params[0]));
 		if (!$a->rowCount())
 		{
 			Content::setContent('<h1>' . $params[0] . '\'s profile</h1>' . Message::error('No such user exists.'));
@@ -31,6 +31,7 @@ if ($slug == 'user')
 			$status = $b['status'];
 			$datereg = strtotime($b['datereg']);
 			$urole = $b['role'];
+			$usalt = $b['userpwsalt'];
 
 			if ($params[1] == 'edit' && User::$role > 1)
 			{
@@ -38,12 +39,102 @@ if ($slug == 'user')
 				if (isset($_POST['submit']))
 				{ // yes
 					// handle form submission
+					$changesArray = array();
+					$valerr = array();
+
+					// password
+					if ($_POST['password'] != $pword)
+					{
+						if (strlen($_POST['password']) < 8)
+						{
+							$valerr['password'] = 'Passwords must be longer than 8 characters.';
+						}
+						else
+						{
+							// has changed
+							$changesArray['password'] = User::hashWithSalt($_POST['password'], $usalt);
+						}
+					}
+
+					// email
+					if ($_POST['email'] != $email)
+					{
+						if (!User::validEmail($_POST['email']))
+						{
+							$valerr['email'] = 'Please enter a valid email address.';
+						}
+						else
+						{
+							$changesArray['email'] = $_POST['email'];
+							$email = $_POST['email'];
+						}
+					}
+
+					if (User::$role == 2)
+					{ // if is an administrator...
+						// can edit more stuff!
+						// username
+						if ($_POST['username'] != $uname && $_POST['username'] != '')
+						{
+							$valerra = User::validateUsername($uname);
+							if ($valerra == '')
+							{
+								$changesArray['username'] = $_POST['username'];
+								$uname = $_POST['username'];
+							}
+							else
+							{
+								$valerr['username'] = $valerra;
+							}
+						}
+
+						// user role
+						if ($_POST['role'] != $urole && is_numeric($_POST['role']) && $_POST['role'] >= 0 && $_POST['role'] <= 2)
+						{
+							$changesArray['role'] = $_POST['role'];
+							$urole = $_POST['role'];
+						}
+					}
+					if (count($changesArray) == 0)
+					{
+						// fail
+						$message .= Message::error('You didn\'t specify any valid changes!');
+					}
+					else
+					{
+						if (Database::update('users', $changesArray))
+						{
+							$message .= Message::success('Profile updated!');
+						}
+						else
+						{
+							$message .= Message::error('A database error occurred during the profile update.');
+						}
+					}
 				}
-				
-				if ($uname == User::$uname) {
+
+				if ($uname == User::$uname)
+				{
 					$unamebit = 'your';
-				} else {
+					$classbit = '';
+					$changeUn = 'disabled="disabled"';
+				}
+				else
+				{
 					$unamebit = $uname . '\'s';
+					$isclass = array('', '', '');
+					$isclass[$urole] = ' selected="selected"';
+					$changeUn = '';
+					$classbit = <<<EOT
+		<div class="form-row">
+			<label for="role">Role</label>
+			<span><select name="role" id="role">
+				<option value="0"{$isclass[0]}>Member</option>
+				<option value="1"{$isclass[1]}>Developer</option>
+				<option value="2"{$isclass[2]}>Administrator</option>
+			</select></span>
+		</div>
+EOT;
 				}
 
 				// display the form
@@ -52,7 +143,7 @@ if ($slug == 'user')
 	<form action="/user/$uname/edit" method="POST">
 		<div class="form-row">
 			<label for="username">Username</label>
-			<span><input type="text" name="username" id="username" value="$uname" disabled="disabled" /></span>
+			<span><input type="text" name="username" id="username" value="$uname" $changeUn /></span>
 		</div>
 		<div class="form-row">
 			<label for="password">Password</label>
@@ -62,6 +153,7 @@ if ($slug == 'user')
 			<label for="email">Email</label>
 			<span><input type="text" name="email" id="email" value="$email" /></span>
 		</div>
+		$classbit
 		<div class="form-row form-row-last">
 			<span><input type="submit" name="submit" value="Edit Profile" /></span>
 		</div>

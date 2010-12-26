@@ -46,7 +46,8 @@ class User {
 
 			if (self::checkSession($_POST['username'], $_POST['password'], $_SERVER['REMOTE_ADDR']))
 			{
-				if ($_POST['rememberMe'] == 'rememberMeFoSure') {
+				if ($_POST['rememberMe'] == 'rememberMeFoSure')
+				{
 					Log::add('Woo, I need to remember them...');
 					self::setRememberMe();
 				}
@@ -58,7 +59,7 @@ class User {
 			}
 		}
 	}
-	
+
 	/**
 	 * Get a database field!
 	 * 
@@ -68,9 +69,42 @@ class User {
 		$out = '';
 		$pdd = Database::select('users', array($fieldname), array('uid = ?', self::$uid));
 		if ($pdd->rowCount() == 0)
-				return 'ERROR ERROR ERROR';
+			return 'ERROR ERROR ERROR';
 		$out = $pdd->fetchColumn();
 		return $out;
+	}
+
+	public static function validateUsername($uname) {
+		$unameLenErr = $unameRegexErr = false;
+		$valerr = true;
+		if (strlen($_POST['username']) < 4 || strlen($_POST['username']) > 32)
+		{
+			//$valerr['username'] = 'Username must be between 4 and 32 characters.';
+			$unameLenErr = true;
+		}
+		if (!ctype_alnum(str_replace('_', '', $_POST['username'])))
+		{
+			$unameRegexErr = true;
+		}
+		if ($unameLenErr && $unameRegexErr)
+		{
+			$valerr = 'Username must be between 4 and 32 characters and contain only letters, numbers and underscores.';
+		}
+		else if ($unameLenErr)
+		{
+			$valerr = 'Username must be between 4 and 32 characters.';
+		}
+		else if ($unameRegexErr)
+		{
+			$valerr = 'Usernames must contain only letters, numbers and underscores.';
+		}
+		// Is already taken?
+		$pds = Database::select('users', array('uid'), array('username = ?', $_POST['username']));
+		if ($pds->rowCount() != 0)
+		{
+			$valerr = 'Username is already taken. :(';
+		}
+		return $valerr;
 	}
 
 	/**
@@ -95,33 +129,9 @@ class User {
 		}
 		else
 		{
-			$unameLenErr = $unameRegexErr = false;
-			if (strlen($_POST['username']) < 4 || strlen($_POST['username']) > 32)
-			{
-				//$valerr['username'] = 'Username must be between 4 and 32 characters.';
-				$unameLenErr = true;
-			}
-			if (!ctype_alnum(str_replace('_', '', $_POST['username'])))
-			{
-				$unameRegexErr = true;
-			}
-			if ($unameLenErr && $unameRegexErr)
-			{
-				$valerr['username'] = 'Username must be between 4 and 32 characters and contain only letters, numbers and underscores.';
-			}
-			else if ($unameLenErr)
-			{
-				$valerr['username'] = 'Username must be between 4 and 32 characters.';
-			}
-			else if ($unameRegexErr)
-			{
-				$valerr['username'] = 'Usernames must contain only letters, numbers and underscores.';
-			}
-			// Is already taken?
-			$pds = Database::select('users', array('uid'), array('username = ?', $_POST['username']));
-			if ($pds->rowCount() != 0) {
-				$valerr['username'] = 'Username is already taken. :(';
-			}
+			$valerr['username'] = self::validateUsername($_POST['username']);
+			if ($valerr['username'] == '')
+				unset($valerr['username']);
 		}
 		// then password
 		/* password: {
@@ -157,12 +167,83 @@ class User {
 		{
 			$valerr['email'] = 'Please enter a valid email address.';
 		}
-		else if (preg_match("/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i", $_POST['email']))
+		else if (!self::validEmail($_POST['email']))
 		{ // yes, this is the one jQuery uses.
 			$valerr['email'] = 'Please enter a valid email address.';
 		}
 		// all done!
 		return $valerr;
+	}
+
+	/**
+	  Validate an email address.
+	  Provide email address (raw input)
+	  Returns true if the email address has the email
+	  address format and the domain exists.
+	 * 
+	 * http://www.linuxjournal.com/article/9585?page=0,3
+	 */
+	public static function validEmail($email) {
+		$isValid = true;
+		$atIndex = strrpos($email, "@");
+		if (is_bool($atIndex) && !$atIndex)
+		{
+			$isValid = false;
+		}
+		else
+		{
+			$domain = substr($email, $atIndex + 1);
+			$local = substr($email, 0, $atIndex);
+			$localLen = strlen($local);
+			$domainLen = strlen($domain);
+			if ($localLen < 1 || $localLen > 64)
+			{
+				// local part length exceeded
+				$isValid = false;
+			}
+			else if ($domainLen < 1 || $domainLen > 255)
+			{
+				// domain part length exceeded
+				$isValid = false;
+			}
+			else if ($local[0] == '.' || $local[$localLen - 1] == '.')
+			{
+				// local part starts or ends with '.'
+				$isValid = false;
+			}
+			else if (preg_match('/\\.\\./', $local))
+			{
+				// local part has two consecutive dots
+				$isValid = false;
+			}
+			else if (!preg_match('/^[A-Za-z0-9\\-\\.]+$/', $domain))
+			{
+				// character not valid in domain part
+				$isValid = false;
+			}
+			else if (preg_match('/\\.\\./', $domain))
+			{
+				// domain part has two consecutive dots
+				$isValid = false;
+			}
+			else if
+			(!preg_match('/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/', str_replace("\\\\", "", $local)))
+			{
+				// character not valid in local part unless 
+				// local part is quoted
+				if (!preg_match('/^"(\\\\"|[^"])+"$/', str_replace("\\\\", "", $local)))
+				{
+					$isValid = false;
+				}
+			}
+			if ($isValid && !(checkdnsrr($domain, "MX") ||
+					↪checkdnsrr($domain ,"A")))
+			{
+				// domain not found in DNS
+				$isValid = false;
+			}
+		}
+		return $isValid;
 	}
 
 	/**
