@@ -7,7 +7,7 @@ if ($slug == 'create')
 	
 	if (User::$role < 1) {
 		$message .= Message::notice('As you are not registered as a developer, you won\'t be able to control any plugins you upload here, and they will not be marked as yours.<br />Once you have been moved to the Developers group, you will gain access to edit your plugin.'); // default message
-		$ismyplugin = '" disabled="disabled';
+		$ismyplugin = 'disabled="disabled';
 	}
 	
 	if (isset($_POST['submit']) && $_POST['submit'] == 'Create!') {
@@ -33,11 +33,11 @@ if ($slug == 'create')
 			</div>
 			<div class="form-row">
 				<label for="pmysql">Requires MySQL?</label>
-				<span><input type="checkbox" name="pmysql" id="pmysql" value="yes" checked="$pmysql" /></span>
+				<span><input type="checkbox" name="pmysql" id="pmysql" value="yes" $pmysql /></span>
 			</div>
 			<div class="form-row">
 				<label for="ismyplugin">Is My Own Plugin?</label>
-				<span><input type="checkbox" name="ismyplugin" id="ismyplugin" value="yes" checked="$ismyplugin" /></span>
+				<span><input type="checkbox" name="ismyplugin" id="ismyplugin" value="yes" $ismyplugin /></span>
 			</div>
 			<div class="form-row form-row-last">
 				<span><input type="submit" name="submit" id="submitBtn" value="Create!" /></span>
