@@ -3,7 +3,7 @@
 $nav['create'] = array('url' => '/create', 'slug' => 'create', 'name' => 'Create New Plugin', 'loggedInOnly' => 1, 'minRole' => 0, 'weight' => 4, 'extrapre' => '', 'extrapost' => ''); // 1 for only logged in
 if ($slug == 'create')
 {
-	if (User::$role == 0)
+	if (User::$role == -1)
 	{
 		$httpError = 403;
 	}
