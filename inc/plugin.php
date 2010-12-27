@@ -67,16 +67,16 @@ class Plugin {
 		}
 		if ($this->inited == 1)
 		{
-			Database::update('plugins', $dbarray, null, array('pid = ?', $this->id));
+			$a = Database::update('plugins', $dbarray, null, array('pid = ?', $this->id));
 		}
 		else
 		{
 			unset($dbarray['pid']); // auto increment
 			$dbarray['padded_date'] = date('Y-m-d H:i:s');
-			Database::insert('plugins', $dbarray);
+			$a = Database::insert('plugins', $dbarray);
+			if ($a == 1)
+				$this->id = Database::getHandle()->lastInsertId();
 		}
+		return ($a == 1) ? true : false;
 	}
-
 }
-
-?>
