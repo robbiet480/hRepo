@@ -242,7 +242,7 @@ class User {
 				}
 			}
 			if ($isValid && !(checkdnsrr($domain, "MX") ||
-					checkdnsrr($domain ,"A")))
+					checkdnsrr($domain, "A")))
 			{
 				// domain not found in DNS
 				$isValid = false;
@@ -299,7 +299,7 @@ EOM;
 			if (!$mailerret)
 			{
 				Log::add('User::registerHandle, mailer says: ' . $mailer->ErrorInfo);
-				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2 - '.$mailer->ErrorInfo.'</small>');
+				return Message::error('An error occurred during account creation. Please contact the server admin.<br /><br /><small>ACC2 - ' . $mailer->ErrorInfo . '</small>');
 			}
 			else
 			{
@@ -382,10 +382,17 @@ EOM;
 	}
 
 	public static function logout() {
-		unset($_SESSION['uname']);
-		unset($_SESSION['pword']);
-		unset($_SESSION['last_ip']);
-		session_destroy();
+		$_SESSION = array(); // this clears all session variables
+
+		setcookie('ln', '', time() - 42000);
+		setcookie('ln_iv', '', time() - 42000); // and that takes care of remember me
+
+		User::$uname = '';
+		User::$phash = '';
+		User::$role = 0;
+		User::$isValid = false; // and that's all that user stuff taken care of.
+
+		session_regenerate_id(true); // delete old session
 	}
 
 	/**

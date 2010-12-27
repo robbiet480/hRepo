@@ -87,6 +87,7 @@ inc('sidebar.php');
 inc('user.php');
 inc('template.php');
 inc('message.php');
+inc('plugin.php');
 
 // Mandatory include-everywhere libraries
 inclib('phpmailer/class.phpmailer.php'); // because then we can set defaults here
