@@ -4,19 +4,22 @@ $nav['create'] = array('url' => '/create', 'slug' => 'create', 'name' => 'Create
 if ($slug == 'create')
 {
 	$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = '';
-	
-	if (User::$role < 1) {
+
+	if (User::$role < 1)
+	{
 		$message .= Message::notice('As you are not registered as a developer, you won\'t be able to control any plugins you upload here, and they will not be marked as yours.<br />Once you have been moved to the Developers group, you will gain access to edit your plugin.'); // default message
 		$ismyplugin = 'disabled="disabled';
 	}
-	
-	if (isset($_POST['submit']) && $_POST['submit'] == 'Create!') {
+
+	if (isset($_POST['submit']) && $_POST['submit'] == 'Create!')
+	{
 		// stuff happens here.
 		$message .= Message::error('Unimplemented.');
 	}
-	
+
 	Content::setContent(<<<EOT
 	<h1>Create a New Plugin</h1>	
+	<h2>Step 1 of 2</h2>
 			$message
 		<form action="/create/" method="POST">
 			<div class="form-row">
