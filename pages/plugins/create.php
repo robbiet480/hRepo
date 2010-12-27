@@ -19,7 +19,7 @@ if ($slug == 'create')
 
 	Content::setContent(<<<EOT
 	<h1>Create a New Plugin</h1>	
-	<h2>Step 1 of 2</h2>
+	<h3>Step 1 of 2</h3>
 			$message
 		<form action="/create/" method="POST">
 			<div class="form-row">
