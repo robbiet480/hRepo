@@ -9,7 +9,8 @@ if ($slug == 'create')
 	}
 	else
 	{
-		$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = '';
+		Content::addAdditionalJS('plugincreateform.js');
+		$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = $pauthorname = '';
 
 		if (User::$role < 1)
 		{
@@ -23,16 +24,22 @@ if ($slug == 'create')
 			{
 				$_POST['ismyplugin'] = ''; // force no :D
 			}
-			
+
 			// stuff happens here.
 			$newPlugin = new Plugin();
-			$newPlugin->desc = htmlentities($_POST['pdesc']);
-			$newPlugin->name = htmlentities($_POST['pname']);
-			$newPlugin->reqs = htmlentities($_POST['preqs']);
+			$pname = $newPlugin->name = htmlentities($_POST['pname']);
+			$pdesc = $newPlugin->desc = htmlentities($_POST['pdesc']);
+			$preqs = $newPlugin->reqs = htmlentities($_POST['preqs']);
+			$pmysql .= ($_POST['pmysql'] == 'yes') ? ' checked="checked"' : '';
+			$ismyplugin .= ($_POST['ismyplugin'] == 'yes') ? ' checked="checked"' : '';
 			$newPlugin->requires_mysql = ($_POST['pmysql'] == 'yes');
-			$newPlugin->author_id = ($_POST['ismyplugin'] == 'yes') ? User::$uid : -1;
-			if ($newPlugin->saveData()) {
-				redirect('/upload/' . $newPlugin->getID());
+			$newPlugin->author_id = User::$uid;
+			$pauthorname = $newPlugin->real_author_name = ($_POST['ismyplugin'] == 'yes') ? '' : htmlentities($_POST['pauthorname']);
+			$pauthornameVis = ($_POST['ismyplugin'] == 'yes') ? ' style="display:none;"' : '';
+			$newPlugin->status = ($_POST['ismyplugin'] == 'yes') ? 1 : 0;
+			if ($newPlugin->saveData())
+			{
+				redirect('/upload/' . User::$uname . '/' . $newPlugin->name . '/');
 			}
 		}
 		Content::setContent(<<<EOT
@@ -59,6 +66,10 @@ if ($slug == 'create')
 			<div class="form-row">
 				<label for="ismyplugin">Is My Own Plugin?</label>
 				<span><input type="checkbox" name="ismyplugin" id="ismyplugin" value="yes" $ismyplugin /></span>
+			</div>
+			<div class="form-row" id="pauthornameRow" $pauthornameVis>
+				<label for="pauthorname">Real Author Name</label>
+				<span><input type="text" name="pauthorname" id="pauthorname" value="$pauthorname" /></span>
 			</div>
 			<div class="form-row form-row-last">
 				<span><input type="submit" name="submit" id="submitBtn" value="Create!" /></span>
