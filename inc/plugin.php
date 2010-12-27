@@ -7,8 +7,7 @@
  */
 class Plugin {
 
-	private static final
-	$mappings = array(
+	private static $mappings = array(
 		'pid' => 'id',
 		'pauthor_id' => 'author_id',
 		'pname' => 'name',
