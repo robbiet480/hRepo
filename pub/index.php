@@ -47,10 +47,20 @@ if (isset($_SERVER['PATH_INFO'])) {
 	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...
 }
 
+// URI fixing, to avoid google :( ing
+$correctURI = $_GET['page'];
 if (strlen($_GET['page']) != 0 && substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
-	header('Location: '. HR_PUB_ROOT . ltrim($_GET['page'], '/') . '/');
+	$correctURI = $correctURI . '/';
+}
+while (strpos($correctURI, '//')) {
+	$correctURI = str_replace('//', '/', $correctURI);
+}
+if ($correctURI != $_GET['page']) {
+	header('Location: '. HR_PUB_ROOT . ltrim($correctURI, '/') . '/');
 	exit();
 }
+// end URI fix
+
 $_GET['page'] = rtrim($_GET['page'], '/');
 $parts = explode('/',$_GET['page']);
 if(count($parts) > 1) {
