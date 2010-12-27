@@ -48,15 +48,15 @@ if (isset($_SERVER['PATH_INFO'])) {
 }
 
 // URI fixing, to avoid google :( ing
-$correctURI = $_GET['page'];
-if (strlen($correctURI) != 0 && substr($correctURI, -1, 1) != '/' && count($_POST) == 0) {
+$correctURI = ltrim($_GET['page'], '/');
+if (strlen($correctURI) != 0 && substr($correctURI, -1, 1) != '/') {
 	$correctURI = $correctURI . '/';
 }
 while (strpos($correctURI, '//') !== FALSE) {
 	$correctURI = str_replace('//', '/', $correctURI);
 }
-if ($correctURI != $_GET['page']) {
-	header('Location: '. HR_PUB_ROOT . ltrim($correctURI, '/') . '/');
+if ($correctURI != $_GET['page'] && count($_POST) == 0) {
+	header('Location: '. HR_PUB_ROOT . ltrim($correctURI, '/'));
 	exit();
 }
 // end URI fix
