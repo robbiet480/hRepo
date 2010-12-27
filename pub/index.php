@@ -55,8 +55,8 @@ if (strlen($correctURI) != 0 && substr($correctURI, -1, 1) != '/') {
 while (strpos($correctURI, '//') !== FALSE) {
 	$correctURI = str_replace('//', '/', $correctURI);
 }
-if ($correctURI != $_GET['page'] && count($_POST) == 0) {
-	header('Location: '. HR_PUB_ROOT . ltrim($correctURI, '/'));
+if ('/' . $correctURI != $_GET['page'] && count($_POST) == 0) {
+	header('Location: '. HR_PUB_ROOT . $correctURI);
 	exit();
 }
 // end URI fix
