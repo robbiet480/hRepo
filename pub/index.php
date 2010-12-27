@@ -49,10 +49,10 @@ if (isset($_SERVER['PATH_INFO'])) {
 
 // URI fixing, to avoid google :( ing
 $correctURI = $_GET['page'];
-if (strlen($_GET['page']) != 0 && substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
+if (strlen($correctURI) != 0 && substr($correctURI, -1, 1) != '/' && count($_POST) == 0) {
 	$correctURI = $correctURI . '/';
 }
-while (strpos($correctURI, '//')) {
+while (strpos($correctURI, '//') !== FALSE) {
 	$correctURI = str_replace('//', '/', $correctURI);
 }
 if ($correctURI != $_GET['page']) {
