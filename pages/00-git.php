@@ -22,14 +22,9 @@ if($slug == "git") {
 		file_put_contents(HR_ROOT . '/gitcommit.txt', serialize($gitCommit));
 		Content::append('<p>Last git commit: ' . $gitCommit['long'] . ' by ' . $gitCommit['userid']. '</p>');
 	} else {
-		ob_start();
-		print_r($parts);
-		$dnote = ob_get_contents();
-		ob_end_clean();
 		Content::setContent("
 			<h1>Authorisation code incorrect or missing</h2>
 			<p>Git update did not go through.</p>
-			<!-- Debug note: $dnote -->
 		");
 	}
 }
