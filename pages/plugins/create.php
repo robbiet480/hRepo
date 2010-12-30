@@ -30,20 +30,24 @@ if ($slug == 'create')
 			$pname = $newPlugin->name = htmlentities($_POST['pname']);
 			$pdesc = $newPlugin->desc = htmlentities($_POST['pdesc']);
 			$preqs = $newPlugin->reqs = htmlentities($_POST['preqs']);
-			$pmysql .= ($_POST['pmysql'] == 'yes') ? ' checked="checked"' : '';
-			$ismyplugin .= ($_POST['ismyplugin'] == 'yes') ? ' checked="checked"' : '';
+			$pmysql .= ( $_POST['pmysql'] == 'yes') ? ' checked="checked"' : '';
+			$ismyplugin .= ( $_POST['ismyplugin'] == 'yes') ? ' checked="checked"' : '';
 			$newPlugin->requires_mysql = ($_POST['pmysql'] == 'yes');
 			$newPlugin->author_id = User::$uid;
 			$pauthorname = $newPlugin->real_author_name = ($_POST['ismyplugin'] == 'yes') ? '' : htmlentities($_POST['pauthorname']);
 			$pauthornameVis = ($_POST['ismyplugin'] == 'yes') ? ' style="display:none;"' : '';
-			$newPlugin->status = ($_POST['ismyplugin'] == 'yes') ? 1 : 0;
+			$newPlugin->status = ($_POST['ismyplugin'] == 'yes') ? -1 : -2;
 			if ($newPlugin->saveData())
 			{
 				redirect('/upload/' . User::$uname . '/' . $newPlugin->name . '/');
 			}
+			else
+			{
+				$message .= Message::error('An error occurred whilst adding the plugin to the database. Please contact an hRepo administrator.');
+			}
 		}
 		Content::setContent(<<<EOT
-	<h1>Create a New Plugin</h1>	
+	<h1>Create a New Plugin</h1>
 	<h3>Step 1 of 2</h3>
 			$message
 		<form action="/create/" method="POST">

@@ -34,9 +34,9 @@ define('HR_RECAPTCHA_PUBKEY', '6Lcy3b8SAAAAADfMXY86VFc8IT7AzeoQPC19G9aL');
 define('HR_RECAPTCHA_PRIVKEY', '6Lcy3b8SAAAAAGHUxvta8txiu7uGniWAffWgTxPj');
 
 define('HR_DB_ENABLE', true);
-define('HR_DSN', 'mysql:host=localhost;dbname=hRepo');
-define('HR_DBUSR', 'hrepo');
-define('HR_DBPASS', '93B7A78FDE35AB12CE89292EB144E20630CAA7E1926D9E4A55F622D0AF49BCBF'); // this can be shared, I guess, since MySQLd only binds to 127.0.0.1
+define('HR_DSN', 'mysql:host=localhost;port=3306;dbname=bukkit_fill2');
+define('HR_DBUSR', 'bukkit_fill');
+define('HR_DBPASS', 'eKd?X3}U_vzB'); // this can be shared, I guess, since MySQLd only binds to 127.0.0.1
 define('HR_DB_PREFIX', '');
 
 error_reporting(E_ALL - E_NOTICE);
@@ -80,6 +80,10 @@ $nav = array();
 
 require(HR_INC.'logging.php');
 require(HR_INC.'std.php');
+
+// Load up the XenForo system
+// XenForo loading here
+// End XenForo
 
 inc('db.php');
 inc('content.php');

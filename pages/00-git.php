@@ -2,7 +2,7 @@
 
 if($slug == "git") {
 	Content::$forcedTitle = "Git Update";
-	if (count($params) > 0 && strtolower($params[0]) == 'pullfromgit') {
+	if (count($params) > 0) {
 		chdir(HR_ROOT);
 		Content::setContent("
 			<h1>Updating website from git...</h1>

@@ -29,7 +29,8 @@ class Plugin {
 	public $downloads = 0; // download counter
 	public $added_date = ''; // date added to db
 	public $rating = -1; // rating 1-5
-	public $status = -1; // -1 = non-visible, 0 = unclaimed, 1 = visible, 2 = deprecated/out of date
+	public $status = -2; // -2 = non-visible, unclaimed; -1 = non-visible, claimed; 0 = unclaimed, visible; 1 = claimed, visible; 2 = deprecated/out of date
+	public $real_author_name = ''; // should only exist if $status = 0 or -2
 
 	function Plugin($pluginid = -1) {
 		if ($pluginid != -1)
