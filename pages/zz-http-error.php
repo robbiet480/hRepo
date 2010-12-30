@@ -3,6 +3,9 @@
 if (empty(Content::$content) && !isset($httpError)) {
 	$httpError = 404;
 }
+if (!isset($httpError)) {
+	$httpError = 200;
+}
 
  if ($httpError == 403) {
 	Content::$forcedTitle = "403 Unauthorised";
