@@ -90,7 +90,7 @@ require(HR_INC.'std.php');
 	require_once($xenforoRoot . '/library/XenForo/Autoloader.php');
 	XenForo_Autoloader::getInstance()->setupAutoloader($xenforoRoot . '/library');
 	
-	XenForo_Application::initialize($fileDir . '/library', $fileDir);
+	XenForo_Application::initialize($xenforoRoot . '/library', $xenforoRoot);
 	XenForo_Application::set('page_start_time', $startTime);
 
 	// Not required if you are not using any of the preloaded data
