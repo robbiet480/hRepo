@@ -10,7 +10,7 @@ if ($slug == 'create')
 	else
 	{
 		Content::addAdditionalJS('plugincreateform.js');
-		$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = $pauthorname = '';
+		$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = $pauthorname = $pauthornameVis = '';
 
 		if (User::$role < 1)
 		{
