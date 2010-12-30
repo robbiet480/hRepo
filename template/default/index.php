@@ -3,7 +3,7 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 ?><!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo pagetitle(); ?> &lsaquo; hRepo</title>
+		<title><?php echo pagetitle(); ?> &lsaquo; Fill the Bukkit</title>
 
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/hrepo.css" />
@@ -34,7 +34,7 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 	<body>
 		<div id="top">
 			<div class="gutter clear">
-				<h1><a href="/">hRepo</a></h1>
+				<h1><a href="/">Fill the Bukkit</a></h1>
 				<?php echo nav(); ?>
 			</div>
 		</div>
