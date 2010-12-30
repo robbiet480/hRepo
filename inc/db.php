@@ -190,6 +190,7 @@ class Database {
 		}
 
 		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $keys, implode(',', $values)));
+		$time = microtime(true) - $start;
 		self::$totalTime += $time;
 
 		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
@@ -264,6 +265,7 @@ class Database {
 			$limit = " LIMIT " . $limit;
 		}
 		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $where, $limit));
+		$time = microtime(true) - $start;
 		self::$totalTime += $time;
 
 		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
@@ -366,7 +368,7 @@ class Database {
 		}
 
 		$sql = trim(sprintf($sql, HR_DB_PREFIX, $table, $set, $where));
-
+		$time = microtime(true) - $start;
 		self::$totalTime += $time;
 
 		Log::add('DB Query: (time: ' . $time . ') ' . $sql);
