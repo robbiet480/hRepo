@@ -45,8 +45,9 @@ function nav() {
 	foreach ($nav as $thisSlug => $vals)
 	{
 		if (
-				($vals['visible'] !== false) &&
+				(!isset($vals['visible']) || $vals['visible'] !== false) &&
 				(
+					(!isset($vals['loggedInOnly'])) ||
 					($vals['loggedInOnly'] == 0) || // non-caring page
 					($vals['loggedInOnly'] == 1 && User::$isValid) || // only for logged in
 					($vals['loggedInOnly'] == -1 && !User::$isValid) // only for not logged in
