@@ -59,7 +59,7 @@ class Database {
 	 * @return PDOStatement A PDOStatement with all of the results.
 	 */
 	public static function select($table, $cols = '*', $where = null, $order = null, $limit = -1) {
-		if (!HR_DB_ENABLED)
+		if (!HR_DB_ENABLE)
 			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 
@@ -169,7 +169,7 @@ class Database {
 	 * @return int The number of rows affected.
 	 */
 	public static function insert($table, $cols, $values = null) {
-		if (!HR_DB_ENABLED)
+		if (!HR_DB_ENABLE)
 			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$prepare = array();
@@ -241,7 +241,7 @@ class Database {
 	 * @return int The number of rows affected.
 	 */
 	public static function delete($table, $where, $limit = null) {
-		if (!HR_DB_ENABLED)
+		if (!HR_DB_ENABLE)
 			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$sql = "DELETE FROM `%s%s` %s%s";
@@ -316,7 +316,7 @@ class Database {
 	 * @return int The number of rows affected.
 	 */
 	public static function update($table, $cols, $values = null, $where) {
-		if (!HR_DB_ENABLED)
+		if (!HR_DB_ENABLE)
 			self::databaseIsntEnabledYouNoob();
 		$start = microtime(true);
 		$prepare = array();
