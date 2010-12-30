@@ -4,11 +4,13 @@ $nav['upload'] = array('url' => '/upload', 'slug' => 'upload', 'name' => 'Upload
 if ($slug == "upload")
 {
 	$pluginUsername = $params[0];
+	$u = new XenForo_Model_User();
+	$pluginUserID = $u->getUserIdFromUser($u->getUserByName($pluginUsername));
 	$pluginName = $params[1];
 	$dbHandle = Database::getHandle();
-	$dbQuery = $dbHandle->prepare('SELECT pl.pname, us.username FROM plugins AS pl LEFT JOIN users ON pl.pauthor_id = us.uid WHERE pl.pname = ? AND us.username = ?');
-	$dbRow = $dbQuery->execute(array($pluginName, $pluginUsername));
-	if (User::$role == -1 || User::$uname != $pluginUsername)
+	$dbQuery = $dbHandle->prepare('SELECT pl.pname, pl.pauthor_id FROM plugins AS pl WHERE pl.pname = ? AND pl.pauthor_id = ?');
+	$dbRow = $dbQuery->execute(array($pluginName, $pluginUserID));
+	if (User::$role == -1 || User::$uname != $pluginUserID)
 	{
 		$httpError = 403;
 	}
