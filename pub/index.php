@@ -84,19 +84,18 @@ require(HR_INC.'std.php');
 // Load up the XenForo system
 	Log::add('Begin initialising XenForo...');
 	$startTime = microtime(true);
-	$xenforoRoot = '/home2/bukkit/public_html/forums';
-	
-	// Setup XenForo's autoloader
-	require_once($xenforoRoot . '/library/XenForo/Autoloader.php');
-	XenForo_Autoloader::getInstance()->setupAutoloader($xenforoRoot . '/library');
-	
-	XenForo_Application::initialize($xenforoRoot . '/library', $xenforoRoot);
+	$fileDir = realpath('./../forums/');
+
+	require($fileDir . '/library/XenForo/Autoloader.php');
+	XenForo_Autoloader::getInstance()->setupAutoloader($fileDir . '/library');
+
+	XenForo_Application::initialize($fileDir . '/library', $fileDir);
 	XenForo_Application::set('page_start_time', $startTime);
 
 	// Not required if you are not using any of the preloaded data
 	$dependencies = new XenForo_Dependencies_Public();
 	$dependencies->preLoadData();
-	
+
 	XenForo_Session::startPublicSession();
 	Log:add('XF initialisation complete!');
 // End XenForo
