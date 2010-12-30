@@ -46,6 +46,12 @@ define('HR_DB_DEBUG', true); // this makes magic happen
 if (isset($_SERVER['PATH_INFO'])) {
 	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...
 }
+if (!isset($_GET['page'])) {
+	if (isset($_SERVER['QUERY_STRING'])) {
+		$andPos = strpos($_SERVER['QUERY_STRING'], '&');
+		$_GET['page'] = substr($_SERVER['QUERY_STRING'], 0, $andPos);
+	}
+}
 
 // URI fixing, to avoid google :( ing
 $correctURI = ltrim($_GET['page'], '/');
