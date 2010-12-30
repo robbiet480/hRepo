@@ -28,6 +28,10 @@ class User {
 	 * 
 	 */
 	public static $role = -1;
+	/**
+	 * @var XenForo_Visitor The visitor object!
+	 */
+	public static $visitor;
 
 	public static function isValid() {
 		return self::$isValid;
