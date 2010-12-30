@@ -84,7 +84,8 @@ require(HR_INC.'std.php');
 // Load up the XenForo system
 	Log::add('Begin initialising XenForo...');
 	$startTime = microtime(true);
-	$fileDir = realpath('./../forums/');
+	//$fileDir = realpath('./../forums/');
+	$fileDir = '/home2/bukkit/public_html/forums/';
 
 	require($fileDir . '/library/XenForo/Autoloader.php');
 	XenForo_Autoloader::getInstance()->setupAutoloader($fileDir . '/library');
