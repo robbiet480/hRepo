@@ -6,7 +6,7 @@ if($slug == "git") {
 		chdir(HR_ROOT);
 		Content::setContent("
 			<h1>Updating website from git...</h1>
-			<pre>".`echo Running git pull && git pull 2>&1`."</pre>
+			<pre>".`echo Running svn revert && svn revert -R . 2>&1 && echo Running svn update && svn update`."</pre>
 		");
 	} else {
 		ob_start();

@@ -98,7 +98,7 @@ require(HR_INC.'std.php');
 	$dependencies->preLoadData();
 
 	XenForo_Session::startPublicSession();
-	Log:add('XF initialisation complete!');
+	Log::add('XF initialisation complete!');
 // End XenForo
 
 inc('db.php');
