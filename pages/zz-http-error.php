@@ -11,7 +11,7 @@ if (!isset($httpError)) {
 	Content::$forcedTitle = "403 Unauthorised";
 	Content::$status = "403 Unauthorised";
 	$maybeLogin = '';
-	if (User::$role == -1) {
+	if (User::$role == User::ROLE_GUEST) {
 		$maybeLogin = '<p>You might need to <a href="/login/">log in</a> to access this area.</p>';
 	}
 	Content::setContent(<<<EOT

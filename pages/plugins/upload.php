@@ -10,7 +10,7 @@ if ($slug == "upload")
 	$dbHandle = Database::getHandle();
 	$dbQuery = $dbHandle->prepare('SELECT pl.pname, pl.pauthor_id FROM plugins AS pl WHERE pl.pname = ? AND pl.pauthor_id = ?');
 	$dbRow = $dbQuery->execute(array($pluginName, $pluginUserID));
-	if (User::$role == -1 || User::$uname != $pluginUserID)
+	if ((User::$role == -1 || User::$uid != $pluginUserID) && (User::$role != User::ROLE_ADMIN))
 	{
 		$httpError = 403;
 	}

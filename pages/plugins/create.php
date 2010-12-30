@@ -1,9 +1,9 @@
 <?php
 
-$nav['create'] = array('url' => '/create', 'slug' => 'create', 'name' => 'Create New Plugin', 'loggedInOnly' => 1, 'minRole' => 0, 'weight' => 4, 'extrapre' => '', 'extrapost' => ''); // 1 for only logged in
+$nav['create'] = array('url' => '/create', 'slug' => 'create', 'name' => 'Create New Plugin', 'loggedInOnly' => 1, 'minRole' => User::ROLE_MEMBER, 'weight' => 4, 'extrapre' => '', 'extrapost' => ''); // 1 for only logged in
 if ($slug == 'create')
 {
-	if (User::$role == -1)
+	if (User::$role == User::ROLE_GUEST)
 	{
 		$httpError = 403;
 	}
@@ -12,7 +12,7 @@ if ($slug == 'create')
 		Content::addAdditionalJS('plugincreateform.js');
 		$message = $pname = $pdesc = $preqs = $pmysql = $ismyplugin = $pauthorname = $pauthornameVis = '';
 
-		if (User::$role < 1)
+		if (User::$role < User::ROLE_DEVELOPER)
 		{
 			$message .= Message::notice('As you are not registered as a developer, you won\'t be able to control any plugins you upload here, and they will not be marked as yours.<br />Once you have been moved to the Developers group, you will gain access to edit your plugin.'); // default message
 			$ismyplugin = 'disabled="disabled';
@@ -20,7 +20,7 @@ if ($slug == 'create')
 
 		if (isset($_POST['submit']) && $_POST['submit'] == 'Create!')
 		{
-			if (User::$role < 1)
+			if (User::$role < User::ROLE_DEVELOPER)
 			{
 				$_POST['ismyplugin'] = ''; // force no :D
 			}

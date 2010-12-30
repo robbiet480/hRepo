@@ -18,6 +18,12 @@ class User {
 	 * @var integer The uid from the database from the session.
 	 */
 	public static $uid;
+	
+	const ROLE_ADMIN = 2;
+	const ROLE_DEVELOPER = 1;
+	const ROLE_MEMBER = 0;
+	const ROLE_GUEST = -1;
+	
 	/**
 	 * @var int The role number of the user.
 	 * 
@@ -27,7 +33,9 @@ class User {
 	 * 2 = Administrator
 	 * 
 	 */
-	public static $role = -1;
+	public static $role = self::ROLE_GUEST;
+
+	
 	/**
 	 * @var XenForo_Visitor The visitor object!
 	 */
@@ -49,14 +57,14 @@ class User {
 		// -1 = guest, 0 = member, 1 = dev, 2 = admin
 		if (self::$uid == 0 || $visitor->get('is_banned')) {
 			// guest:
-			self::$role = -1;
+			self::$role = self::ROLE_GUEST;
 			self::$isValid = false;
 		} else {
 			self::$isValid = true;
 			if ($visitor->get('is_admin'))
-				self::$role = 2;
+				self::$role = self::ROLE_ADMIN;
 			else
-				self::$role = 0;
+				self::$role = self::ROLE_MEMBER;
 		}
 		
 		// TODO: implement dev
