@@ -5,7 +5,7 @@ function url($slug, $args = array()) {
 }
 
 function template() {
-	header($_SERVER["SERVER_PROTOCOL"] . " " . Content::$status);
+	header("HTTP/1.1 " . Content::$status);
 
 	foreach (Content::$headers as $k => $v)
 	{
