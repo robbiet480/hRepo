@@ -1,7 +1,7 @@
 <?php
 
 class Sidebar {
-	public static $blocks;
+	public static $blocks = array();
 	
 	public static function add($title, $contents) {
 		self::$blocks[] = array('title' => $title, 'content' => $contents);
