@@ -1,9 +1,7 @@
-<?php 
-$gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
-		<title><?php echo pagetitle(); ?> &lsaquo; Fill the Bukkit</title>
+		<title><?php echo pagetitle(); ?> &lsaquo; hRepo</title>
 
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/fonts.css" />
 		<link rel="stylesheet" type="text/css" href="<?php echo HR_TEMPLATE_PUB_ROOT; ?>css/hrepo.css" />
@@ -34,7 +32,7 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 	<body>
 		<div id="top">
 			<div class="gutter clear">
-				<h1><a href="/">Fill the Bukkit</a></h1>
+				<h1><a href="/">hRepo</a></h1>
 				<?php echo nav(); ?>
 			</div>
 		</div>
@@ -62,7 +60,7 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 			<div class="gutter clear">
 				<p>&copy; <?php echo date('Y'); ?> the hRepo Team.</p>
 				<p>Powered by <a href="http://hostiio.com">Hostiio</a> and <a href="http://aws.amazon.com/s3">Amazon S3</a>.</p>
-				<p>Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo $gitCommit['long']; ?>"><?php echo $gitCommit['short']; ?></a> - by <?php echo $gitCommit['userid']; ?> at <?php echo date('jS M Y, H:i:s', strtotime($gitCommit['commitdate'])); ?></p>
+				<p>Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo trim(shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD')); ?>"><?php echo trim(shell_exec('/usr/bin/git --git-dir=/var/www/hRepo/.git rev-parse --short HEAD')); ?></a></p>
 			</div>
 		</div>
 

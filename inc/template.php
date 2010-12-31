@@ -5,7 +5,7 @@ function url($slug, $args = array()) {
 }
 
 function template() {
-	header("HTTP/1.1 " . Content::$status);
+	header($_SERVER["SERVER_PROTOCOL"] . " " . Content::$status);
 
 	foreach (Content::$headers as $k => $v)
 	{
@@ -44,16 +44,7 @@ function nav() {
 	$totalpost = '';
 	foreach ($nav as $thisSlug => $vals)
 	{
-		if (
-				(!isset($vals['visible']) || $vals['visible'] !== false) &&
-				(
-					(!isset($vals['loggedInOnly'])) ||
-					($vals['loggedInOnly'] == 0) || // non-caring page
-					($vals['loggedInOnly'] == 1 && User::$isValid) || // only for logged in
-					($vals['loggedInOnly'] == -1 && !User::$isValid) // only for not logged in
-				)
-				&& (!isset($vals['minRole']) || (User::$role >= $vals['minRole']))
-		)
+		if (($vals['visible'] !== false) && (($vals['loggedInOnly'] == 0) || ($vals['loggedInOnly'] == 1 && User::$isValid) || ($vals['loggedInOnly'] == -1 && !User::$isValid)))
 		{
 			if (!isset($vals['extrapre']))
 				$vals['extrapre'] = '';

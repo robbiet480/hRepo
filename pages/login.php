@@ -45,7 +45,7 @@ if ($slug == "login")
 			$vars = array('username', 'password', 'confirmPassword', 'email', 'usernameClass', 'passwordClass', 'confirmPasswordClass', 'emailClass');
 			foreach ($vars as $var)
 			{
-				$$var = htmlentities($_SESSION['validatorPassback'][$var]);
+				$$var = $_SESSION['validatorPassback'][$var];
 			}
 		}
 		$regMessage = isset($_SESSION['message']) ? $_SESSION['message'] : Message::error('Something undefined happened!');
@@ -55,7 +55,7 @@ if ($slug == "login")
 	{
 		$username = $password = $confirmPassword = $email = $usernameClass = $passwordClass = $confirmPasswordClass = $emailClass = $unameLogin = '';
 		if (isset($_POST['username'])) {
-			$unameLogin = htmlentities($_POST['username']);
+			$unameLogin = $_POST['username'];
 		}
 		$message = User::loginHandle();
 	}

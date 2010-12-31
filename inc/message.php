@@ -8,7 +8,7 @@ class Message {
 		return "<div class='message message-success'><p>$message</p></div>";
 	}
 	public static function notice ($message) {
-		return "<div class='message message-info'><p>$message</p></div>";
+		return "<div class='message message-notice'><p>$message</p></div>";
 	}
 	public static function warning ($message) {
 		return "<div class='message message-warning'><p>$message</p></div>";

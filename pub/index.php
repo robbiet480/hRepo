@@ -34,9 +34,9 @@ define('HR_RECAPTCHA_PUBKEY', '6Lcy3b8SAAAAADfMXY86VFc8IT7AzeoQPC19G9aL');
 define('HR_RECAPTCHA_PRIVKEY', '6Lcy3b8SAAAAAGHUxvta8txiu7uGniWAffWgTxPj');
 
 define('HR_DB_ENABLE', true);
-define('HR_DSN', 'mysql:host=localhost;port=3306;dbname=bukkit_fill2');
-define('HR_DBUSR', 'bukkit_fill');
-define('HR_DBPASS', 'eKd?X3}U_vzB'); // this can be shared, I guess, since MySQLd only binds to 127.0.0.1
+define('HR_DSN', 'mysql:host=localhost;dbname=hRepo');
+define('HR_DBUSR', 'hrepo');
+define('HR_DBPASS', '93B7A78FDE35AB12CE89292EB144E20630CAA7E1926D9E4A55F622D0AF49BCBF'); // this can be shared, I guess, since MySQLd only binds to 127.0.0.1
 define('HR_DB_PREFIX', '');
 
 error_reporting(E_ALL - E_NOTICE);
@@ -46,27 +46,11 @@ define('HR_DB_DEBUG', true); // this makes magic happen
 if (isset($_SERVER['PATH_INFO'])) {
 	$_GET['page'] = $_SERVER['PATH_INFO']; // if the rewriting is on...
 }
-if (!isset($_GET['page'])) {
-	if (isset($_SERVER['QUERY_STRING'])) {
-		$andPos = strpos($_SERVER['QUERY_STRING'], '&');
-		$_GET['page'] = substr($_SERVER['QUERY_STRING'], 0, $andPos);
-	}
-}
 
-// URI fixing, to avoid google :( ing
-$correctURI = ltrim($_GET['page'], '/');
-if (strlen($correctURI) != 0 && substr($correctURI, -1, 1) != '/') {
-	$correctURI = $correctURI . '/';
-}
-while (strpos($correctURI, '//') !== FALSE) {
-	$correctURI = str_replace('//', '/', $correctURI);
-}
-if ('/' . $correctURI != $_GET['page'] && count($_POST) == 0 && strlen($_GET['page']) != 0) {
-	header('Location: '. HR_PUB_ROOT . $correctURI);
+if (strlen($_GET['page']) != 0 && substr($_GET['page'], -1, 1) != '/' && count($_POST) == 0) {
+	header('Location: '. HR_PUB_ROOT . ltrim($_GET['page'], '/') . '/');
 	exit();
 }
-// end URI fix
-
 $_GET['page'] = rtrim($_GET['page'], '/');
 $parts = explode('/',$_GET['page']);
 if(count($parts) > 1) {
@@ -87,33 +71,12 @@ $nav = array();
 require(HR_INC.'logging.php');
 require(HR_INC.'std.php');
 
-// Load up the XenForo system
-	Log::add('Begin initialising XenForo...');
-	$startTime = microtime(true);
-	//$fileDir = realpath('./../forums/');
-	$fileDir = '/home2/bukkit/public_html/forums/';
-
-	require($fileDir . '/library/XenForo/Autoloader.php');
-	XenForo_Autoloader::getInstance()->setupAutoloader($fileDir . '/library');
-
-	XenForo_Application::initialize($fileDir . '/library', $fileDir);
-	XenForo_Application::set('page_start_time', $startTime);
-
-	// Not required if you are not using any of the preloaded data
-	$dependencies = new XenForo_Dependencies_Public();
-	$dependencies->preLoadData();
-
-	XenForo_Session::startPublicSession();
-	Log::add('XF initialisation complete!');
-// End XenForo
-
 inc('db.php');
 inc('content.php');
 inc('sidebar.php');
 inc('user.php');
 inc('template.php');
 inc('message.php');
-inc('plugin.php');
 
 // Mandatory include-everywhere libraries
 inclib('phpmailer/class.phpmailer.php'); // because then we can set defaults here

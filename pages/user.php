@@ -33,9 +33,8 @@ if ($slug == 'user')
 			$urole = $b['role'];
 			$usalt = $b['userpwsalt'];
 			$uuid = $b['uid'];
-			$uwantsdev = $b['wantsdev'];
 
-			if ($params[1] == 'edit' && (User::$role == 3 || User::$uname == $uname))
+			if ($params[1] == 'edit' && User::$role > 1)
 			{
 				// have they submitted?
 				if (isset($_POST['submit']))
@@ -135,9 +134,6 @@ if ($slug == 'user')
 				{
 					$unamebit = $uname . '\'s';
 					$isclass = $isstat = array('', '', '');
-					if ($params[2] == 'grantDev') {
-						$urole = 1;
-					}
 					$isclass[$urole] = $isstat[$status] = ' selected="selected"';
 					$changeUn = '';
 					$classbit = <<<EOT
@@ -254,13 +250,6 @@ EOT
 						break;
 				}
 				$regdatetext = date('jS \o\f F, Y', $datereg);
-				if (User::$role == 2) {
-					$extraforadmins = "
-<dt>Has Requested Dev Access?</dt>
-<dd>" . ($uwantsdev ? 'YES (<a href="/user/'.$uname.'/edit/grantDev">grant</a>)' : 'NO') . "</dd>";
-				} else {
-					$extraforadmins = '';
-				}
 				// Welcome!
 				Content::setContent(<<<EOT
 <h1>$uname's profile</h1>
@@ -281,7 +270,6 @@ EOT
 	
 <dt>Date Registered</dt>
 <dd>$regdatetext</dd>
-$extraforadmins
 </dl>
 EOT
 				);
