@@ -3,11 +3,11 @@
 class Sidebar {
 	public static $blocks;
 	
-	public function add($title, $contents) {
+	public static function add($title, $contents) {
 		self::$blocks[] = array('title' => $title, 'content' => $contents);
 	}
 	
-	public function clear() {
+	public static function clear() {
 		self::$blocks = array();
 	}
 }

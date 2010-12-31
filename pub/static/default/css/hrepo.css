@@ -4,8 +4,23 @@ body {
 	background:#e5e5e5;
 	font:64.9%/1.85em Helvetica,Arial,sans-serif;
 }
+
 #top {
-	background: url('../../images/main-bar-gradient.png') repeat-x scroll center top #1061B3;
+	background:#361E12;
+	background: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0, rgb(54,30,18)),
+		color-stop(0.55, rgb(75,44,23))
+		);
+	background: -moz-linear-gradient(
+		center bottom,
+		rgb(54,30,18) 0%,
+		rgb(75,44,23) 55%
+		);
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 #top h1 {
@@ -70,7 +85,7 @@ body {
 #wrapper { 
 	width: 960px;
 	margin: 25px auto;
-	border:2px #646464 solid;
+	border:1px #646464 solid;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
