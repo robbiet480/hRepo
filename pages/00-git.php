@@ -6,7 +6,7 @@ if($slug == "git") {
 		chdir(HR_ROOT);
 		Content::setContent("
 			<h1>Updating website from git...</h1>
-			<pre>".`echo Running svn revert && svn revert -R . 2>&1 && echo Running svn update && svn update`."</pre><br />
+			<pre>".`echo Running git reset --hard . && git reset --hard . 2>&1 && echo Running git pull && git pull`."</pre><br />
 			<h3>Now pulling latest commit information from Github...</h3>
 		");
 		inclib('github/lib/phpGitHubApi.php');
