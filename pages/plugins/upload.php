@@ -42,7 +42,7 @@ if ($slug == "upload")
 				<input type="submit" id="bigSubmitButton" disabled="disabled">SUBMIT</button>
 				</form>
 				<script type="text/javascript">
-	uploadURI = '/handleUpload/'+{$params[0]}+'/'+{$params[1]}+'/&{$session['name']}={$session['id']}&loadSessionFromGET=true';
+	uploadURI = '/handleUpload/{$params[0]}/{$params[1]}/&{$session['name']}={$session['id']}&loadSessionFromGET=true';
 				</script>
 EOT
 				);
