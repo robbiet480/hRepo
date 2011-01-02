@@ -48,7 +48,8 @@ if ($slug == "upload")
 				<h1>Upload Files</h1>
 				$message
 				<div id="uploadBox"></div>
-				<form action="/uploadComplete/{$params[0]}/{$params[1]}/" method="POST" id="uploadFormForm">
+				<!--<form action="/uploadComplete/{$params[0]}/{$params[1]}/" method="POST" id="uploadFormForm">-->
+				<form action="http://www.postbin.org/1ffsuan" method="POST" id="uploadFormForm">
 				<div id="uploadFormArea"></div>
 				<input type="submit" id="bigSubmitButton" disabled="disabled" value="Save Data" />
 				</form>
