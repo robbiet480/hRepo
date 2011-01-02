@@ -104,6 +104,8 @@ body {
 #content {
 	margin-right: 265px;
 	min-height: 40px;
+	background-color: #FCFCFF;
+	border: 1px solid #D6D6D6;
 }
 
 #sidebar {

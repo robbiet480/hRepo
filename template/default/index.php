@@ -46,6 +46,9 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 				<div class="content">
 					<?php echo content(); ?>
 				</div>
+				<div class="subfooter">
+					Tits
+				</div>
 			</div>
 		</div>
 		<div id="footer">
