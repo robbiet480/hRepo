@@ -92,7 +92,7 @@ body {
 	margin-top:0;
 }
 
-#content {
+.content {
 	margin-right: 265px;
 	min-height: 40px;
 	background-color: #FCFCFF;
@@ -183,7 +183,7 @@ p {
 	padding:4px;
 }
 
-#subHeading{
+.subheading{
     -moz-border-radius-topleft: 6px; 
     -moz-border-radius-topright: 6px;
 
@@ -201,8 +201,11 @@ p {
     margin-top: 0px;
 }
 
+.subfooter{
 
-#article {
+}
+
+.article {
 	min-height: 300px;
 }
 
