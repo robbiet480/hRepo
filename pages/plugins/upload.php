@@ -67,12 +67,12 @@ if ($slug == "upload")
 							},
 							'onUploadError': function(file, errCode, errMsg) {
 								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-error'><p>Upload failed...</p></div>");
+								if (errCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED) {
+									jQuery('#' + file.id + '_details').remove();
+								}
 							},
 							'onUploadComplete': function(file, queue) {
 								uploadInProgress = (queue.queueLength > 0);
-							},
-							'onUploadCancel': function(file) {
-								jQuery('#' + file.id + '_details').remove();
 							}
 						});
 						jQuery('#uploadFormForm').submit(function() {
