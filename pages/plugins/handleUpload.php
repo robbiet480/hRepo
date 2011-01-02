@@ -37,7 +37,7 @@ if ($slug == "handleUpload")
 		{
 			file_put_contents('/tmp/step3a.txt', 1);
 			Database::insert('plugin_downloads', array('pid' => $pluginID, 'dfname' => $_FILES['Filedata']['name'], 'dfriendlyname' => 'notdoneyet', 'ddesc' => 'notdoneyet'));
-			$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
+			$a = Database::select('plugin_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
 			$pluginFileRow = $a->fetch(PDO::FETCH_ASSOC);
 		}
 		else
