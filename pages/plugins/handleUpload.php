@@ -30,13 +30,13 @@ if ($slug == "handleUpload")
 			exit();
 		}
 		file_put_contents('/tmp/step1.txt', 'Access SELECT: dfname = ' . $_FILES['Filedata']['name']);
-		$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
+		$a = Database::select('plugin_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
 		file_put_contents('/tmp/step2.txt', 1);
 		$lastNum = 0;
 		if ($a->rowCount() == 0)
 		{
 			file_put_contents('/tmp/step3a.txt', 1);
-			Database::insert('plugins_downloads', array('pid' => $pluginID, 'dfname' => $_FILES['Filedata']['name'], 'dfriendlyname' => 'notdoneyet', 'ddesc' => 'notdoneyet'));
+			Database::insert('plugin_downloads', array('pid' => $pluginID, 'dfname' => $_FILES['Filedata']['name'], 'dfriendlyname' => 'notdoneyet', 'ddesc' => 'notdoneyet'));
 			$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
 			$pluginFileRow = $a->fetch(PDO::FETCH_ASSOC);
 		}
