@@ -40,10 +40,10 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 		</div>
 		<div id="wrapper">
 			<div class="article">
-				<div id="subheading">
+				<div class="subheading">
 					Boobies
 				</div>
-				<div id="content">
+				<div class="content">
 					<?php echo content(); ?>
 				</div>
 			</div>
