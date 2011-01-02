@@ -318,7 +318,7 @@ input[type=text], select, button, input[type=password] {
 
 
 textarea {
-	width: 85%;
+	width: 600px;
 	padding:3px;
 	border:1px #aaa solid;
 	color:#333;
