@@ -18,12 +18,12 @@ class User {
 	 * @var integer The uid from the database from the session.
 	 */
 	public static $uid;
-	
+
 	const ROLE_ADMIN = 2;
 	const ROLE_DEVELOPER = 1;
 	const ROLE_MEMBER = 0;
 	const ROLE_GUEST = -1;
-	
+
 	/**
 	 * @var int The role number of the user.
 	 * 
@@ -34,8 +34,6 @@ class User {
 	 * 
 	 */
 	public static $role = self::ROLE_GUEST;
-
-	
 	/**
 	 * @var XenForo_Visitor The visitor object!
 	 */
@@ -46,22 +44,31 @@ class User {
 	}
 
 	public static function bootstrap() {
+		if (isset($_GET['loadSessionFromGET']))
+		{
+			ini_set('session.use_cookies', '0');
+			ini_set('session.use_only_cookies', '0');
+		}
 		session_start();
-		if (!isset($_GET['loadSessionFromGET'])) {
+		if (!isset($_GET['loadSessionFromGET']))
+		{
 			// You can fetch user data using the visitor object
 			$visitor = XenForo_Visitor::getInstance();
-			
+
 			$_SESSION['uname'] = self::$uname = $visitor->get('username');
 			$_SESSION['uid'] = self::$uid = $visitor->getUserId();
 			$_SESSION['visitor'] = self::$visitor = $visitor;
-			
+
 			// ROLE CALCULATION
 			// -1 = guest, 0 = member, 1 = dev, 2 = admin
-			if (self::$uid == 0 || $visitor->get('is_banned')) {
+			if (self::$uid == 0 || $visitor->get('is_banned'))
+			{
 				// guest:
 				self::$role = self::ROLE_GUEST;
 				self::$isValid = false;
-			} else {
+			}
+			else
+			{
 				self::$isValid = true;
 				if ($visitor->get('is_admin'))
 					self::$role = self::ROLE_ADMIN;
@@ -70,7 +77,8 @@ class User {
 			}
 			$_SESSION['role'] = self::$role;
 			$_SESSION['isValid'] = self::$isValid;
-		} else {
+		} else
+		{
 			self::$uname = $_SESSION['uname'];
 			self::$uid = $_SESSION['uid'];
 			self::$visitor = $_SESSION['visitor'];
@@ -78,9 +86,8 @@ class User {
 			self::$isValid = $_SESSION['isValid'];
 			echo 'LOL LOOK THERES BACON AHOY';
 		}
-		
+
 		// TODO: implement dev
-		
 	}
 
 }
