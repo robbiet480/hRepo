@@ -22,7 +22,7 @@ if ($slug == "handleUpload")
 		// get down on it
 		$tempFile = $_FILES['Filedata']['tmp_name'];
 		$fileMd5 = md5_file($tempFile);
-		$newFileName = hash('whirlpool', $pluginUsername . '/' . $pluginName . '/' . $_FILES['Filedata']['name'] . file_get_contents($tempFile));
+		$newFileName = $fileMd5;
 		$fileDir = '/tmp/';
 		if (file_exists($fileDir . $newFileName))
 		{
@@ -51,6 +51,7 @@ if ($slug == "handleUpload")
 		Database::insert('plugin_downloads_version', array('did' => $pluginFileRow['did'], 'vnumber' => $lastNum + 1, 'vhash' => $fileMd5, 'vdate' => date('Y-m-d H:i:s'), 'vchangelog' => 'notdoneyet', 'isons3' => '0'));
 		file_put_contents('/tmp/step5.txt', 1);
 		move_uploaded_file($tempFile, $fileDir . $newFileName);
+		file_put_contents('/tmp/step6.txt', 1);
 		echo '1';
 		exit();
 	}
