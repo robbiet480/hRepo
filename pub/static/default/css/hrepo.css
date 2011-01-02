@@ -234,6 +234,9 @@ p {
 	font-size: 14px;
 }
 
+#pdesc {
+	width: 600px;
+}
 
 #footer {
 	background:#acacac;
@@ -318,12 +321,13 @@ input[type=text], select, button, input[type=password] {
 
 
 textarea {
-	width: 600px;
 	padding:3px;
 	border:1px #aaa solid;
 	color:#333;
 	width:100%;
-	margin:0 0 0 1px; }
+	margin:0 0 0 1px;
+}
+
 
 input[type=text]:hover, select:hover, button:hover, input[type=text]:hover, select:hover, button:hover, input[type=password]:hover {
 	border-color:#777;
