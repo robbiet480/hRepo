@@ -78,7 +78,9 @@ if ($slug == "upload")
 							'onUploadComplete': function(file, queue) {
 								uploadInProgress = (queue.queueLength > 0);
 								if (!uploadInProgress) {
-									$('#bigRedButton').disabled();
+									$('#bigRedButton').removeAttr('disabled');
+								} else {
+									$('#bigRedButton').attr('disabled', 'disabled');
 								}
 							}
 						});
