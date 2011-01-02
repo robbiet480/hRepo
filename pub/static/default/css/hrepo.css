@@ -85,15 +85,6 @@ body {
 #wrapper { 
 	width: 960px;
 	margin: 25px auto;
-	border:1px #646464 solid;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	border-radius: 10px;
-	font-size:1.15em;
-	background: #d5d5d5;
-	-moz-box-shadow: 2px 2px 2px #646464;
-    -webkit-box-shadow: 2px 2px 2px #646464;
-    box-shadow: 2px 2px 2px #646464;
 }
 
 
