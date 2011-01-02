@@ -11,13 +11,13 @@ body {
 		linear,
 		left bottom,
 		left top,
-		color-stop(0, rgb(234,172,1)),
-		color-stop(0.55, rgb(227,135,0))
+		color-stop(0.55, rgb(227,135,0)),
+		color-stop(0, rgb(234,172,1))
 		);
 	background: -moz-linear-gradient(
 		center bottom,
-		rgb(234,172,1) 0%,
-		rgb(227,135,0) 55%
+		rgb(227,135,0) 55%,
+		rgb(234,172,1) 0%
 		);
 	height: 100px;
 }
