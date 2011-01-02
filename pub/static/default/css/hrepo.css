@@ -38,6 +38,7 @@ body {
 #top h1 a {
 	text-decoration:none;
 	color:white;
+	line-height: 100px;
 }
 
 #top h1 a:hover {
