@@ -19,8 +19,6 @@ body {
 		rgb(234,172,1) 0%,
 		rgb(227,135,0) 55%
 		);
-	border-bottom-left-radius: 5px;
-	border-bottom-right-radius: 5px;
 	height: 100px;
 }
 
