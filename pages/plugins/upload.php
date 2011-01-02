@@ -57,7 +57,6 @@ if ($slug == "upload")
 								jQuery('#uploadFormArea').append(
 									makeTheRow
 								);
-								jQuery("#"+file.id+"_currentStatus").slideDown();
 							},
 							'onUploadStart': function(file) {
 								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-info'><p>Upload beginning...</p></div>");
@@ -70,9 +69,7 @@ if ($slug == "upload")
 							'onUploadError': function(file, errCode, errMsg) {
 								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-error'><p>Upload failed...</p></div>");
 								if (errCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED) {
-									jQuery("#"+file.id+"_currentStatus").slideUp(function() {
 										jQuery('#' + file.id + '_details').remove();
-									});
 								}
 							},
 							'onUploadComplete': function(file, queue) {
