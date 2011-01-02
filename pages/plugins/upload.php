@@ -25,6 +25,7 @@ if ($slug == "upload")
 		if ($dbQuery2->rowCount() == 0) {
 			$message = Message::notice('Hi there! It looks like this is the first time you\'ve uploaded files for this plugin. Simply select the files you wish to upload using the file selector below, and then provide details of your uploads in the form which will appear.');
 		}
+		$message .= Message::warning('Remember: if you want to upload a new version of a file, that file must be named EXACTLY the same.<br /><br />Example: I previously uploaded AwesomePlugin.jar - to upload a new version, you must ensure that it is named exactly the same.<br /><br /><b>File names cannot be changed once uploaded.</b>');
 		Content::addAdditionalCSS('uploadify.css');
 		Content::addAdditionalJS('jquery.uploadify.min.js');
 		$session = array(
@@ -44,7 +45,7 @@ if ($slug == "upload")
 					jQuery('#uploadBox').uploadify(
 						{
 							'swf': '/static/images/uploadify/uploadify.swf',
-							'uploader': '/upload/$params[0]/$params[1]/handleUpload/?{$session['name']}={$session['id']}',
+							'uploader': '/handleUpload/$params[0]/$params[1]/?{$session['name']}={$session['id']}',
 							'auto': true,
 							'multi': true,
 							'cancelImage': '/static/images/uploadify/uploadify-cancel.png',

@@ -46,25 +46,36 @@ class User {
 	}
 
 	public static function bootstrap() {
-		// You can fetch user data using the visitor object
-		$visitor = XenForo_Visitor::getInstance();
-		
-		self::$uname = $visitor->get('username');
-		self::$uid = $visitor->getUserId();
-		self::$visitor = $visitor;
-		
-		// ROLE CALCULATION
-		// -1 = guest, 0 = member, 1 = dev, 2 = admin
-		if (self::$uid == 0 || $visitor->get('is_banned')) {
-			// guest:
-			self::$role = self::ROLE_GUEST;
-			self::$isValid = false;
+		session_start();
+		if (!isset($_GET[session_id()])) {
+			// You can fetch user data using the visitor object
+			$visitor = XenForo_Visitor::getInstance();
+			
+			$_SESSION['uname'] = self::$uname = $visitor->get('username');
+			$_SESSION['uid'] = self::$uid = $visitor->getUserId();
+			$_SESSION['visitor'] = self::$visitor = $visitor;
+			
+			// ROLE CALCULATION
+			// -1 = guest, 0 = member, 1 = dev, 2 = admin
+			if (self::$uid == 0 || $visitor->get('is_banned')) {
+				// guest:
+				self::$role = self::ROLE_GUEST;
+				self::$isValid = false;
+			} else {
+				self::$isValid = true;
+				if ($visitor->get('is_admin'))
+					self::$role = self::ROLE_ADMIN;
+				else
+					self::$role = self::ROLE_MEMBER;
+			}
+			$_SESSION['role'] = self::$role;
+			$_SESSION['isValid'] = self::$isValid;
 		} else {
-			self::$isValid = true;
-			if ($visitor->get('is_admin'))
-				self::$role = self::ROLE_ADMIN;
-			else
-				self::$role = self::ROLE_MEMBER;
+			self::$uname = $_SESSION['uname'];
+			self::$uid = $_SESSION['uid'];
+			self::$visitor = $_SESSION['visitor'];
+			self::$role = $_SESSION['role'];
+			self::$isValid = $_SESSION['isValid'];
 		}
 		
 		// TODO: implement dev
