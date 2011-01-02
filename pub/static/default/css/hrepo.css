@@ -147,8 +147,8 @@ body {
 }
 
 #content {
-	float:left;
-	width:68%;
+	margin-right: 265px;
+	min-height: 40px;
 }
 
 #sidebar {
