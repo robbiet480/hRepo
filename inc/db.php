@@ -139,7 +139,9 @@ class Database {
 			{
 				echo '<h1>DB Error:</h1>';
 				print_r(self::getHandle()->errorInfo());
-				echo "<h2>SQL Statement</h2><pre>$sql</pre>";
+				echo "<h2>SQL Statement</h2><pre>$sql</pre><br /><br /><pre>";
+				print_r($prepare);
+				echo "</pre>";
 				die();
 			}
 			else
