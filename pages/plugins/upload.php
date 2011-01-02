@@ -22,8 +22,19 @@ if ($slug == "upload")
 		// Have they uploaded stuff before?
 		$dbQuery2 = Database::select('plugin_downloads', '*', array('pid = ?', $pluginID));
 		$message = '';
-		if ($dbQuery2->rowCount() == 0) {
+		if ($dbQuery2->rowCount() == 0)
+		{
 			$message = Message::notice('Hi there! It looks like this is the first time you\'ve uploaded files for this plugin. Simply select the files you wish to upload using the file selector below, and then provide details of your uploads in the form which will appear.');
+		}
+		else
+		{
+			$listNess = $dbQuery2->fetchAll();
+			$list = '';
+			foreach ($listNess as $fnameThing)
+			{
+				$list .= '<li>' . $fnameThing['dfname'] . '</li>';
+			}
+			$message = Message::notice('The files you currently have on Fill are called:<br /><ul>' . $list . '</ul>');
 		}
 		$message .= Message::warning('Remember: if you want to upload a new version of a file, that file must be named EXACTLY the same.<br /><br />Example: I previously uploaded AwesomePlugin.jar - to upload a new version, you must ensure that it is named exactly the same.<br /><br /><b>File names cannot be changed once uploaded.</b>');
 		Content::addAdditionalCSS('uploadify.css');
@@ -45,6 +56,6 @@ if ($slug == "upload")
 	uploadURI = '/handleUpload/{$params[0]}/{$params[1]}/&{$session['name']}={$session['id']}&loadSessionFromGET=true';
 				</script>
 EOT
-				);
+		);
 	}
 }
