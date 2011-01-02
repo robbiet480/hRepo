@@ -29,7 +29,6 @@ if ($slug == "handleUpload")
 			echo 'File exists';
 			exit();
 		}
-		move_uploaded_file($tempFile, $fileDir . $newFileName);
 		file_put_contents('/home2/bukkit/fill/uploads/step1.txt', 1);
 		$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
 		file_put_contents('/home2/bukkit/fill/uploads/step2.txt', 1);
@@ -51,6 +50,7 @@ if ($slug == "handleUpload")
 		file_put_contents('/home2/bukkit/fill/uploads/step4.txt', 1);
 		Database::insert('plugin_downloads_version', array('did' => $pluginFileRow['did'], 'vnumber' => $lastNum + 1, 'vhash' => $fileMd5, 'vdate' => date('Y-m-d H:i:s'), 'vchangelog' => 'notdoneyet', 'isons3' => '0'));
 		file_put_contents('/home2/bukkit/fill/uploads/step5.txt', 1);
+		move_uploaded_file($tempFile, $fileDir . $newFileName);
 		echo '1';
 		exit();
 	}
