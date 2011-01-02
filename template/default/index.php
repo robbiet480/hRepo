@@ -39,22 +39,12 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 			</div>
 		</div>
 		<div id="wrapper">
-			<div class="gutter clear">
-				<div id="content">
-					<div class="gutter clear">
-						<?php echo content(); ?>
-					</div>
+			<div class="article">
+				<div id="subheading">
+					Boobies
 				</div>
-
-				<div id="sidebar">
-					<div class="gutter clear">
-						<?php
-						foreach (Sidebar::$blocks as $v)
-						{
-							echo "<h3>" . $v['title'] . "</h3><div class='block'>" . $v['content'] . "</div>";
-						}
-						?>
-					</div>
+				<div id="content">
+					<?php echo content(); ?>
 				</div>
 			</div>
 		</div>
