@@ -178,6 +178,7 @@ p {
 .article {
 	min-height: 300px;
 	margin-right: 265px;
+	font-family: Georgia,"Times New Roman",serif;
 }
 
 .subheading{
@@ -197,6 +198,9 @@ p {
     overflow: hidden;
     margin-top: 0px;
 	padding-left: 5px;
+	
+	font-size: 14px;
+	color: #777777;
 }
 .content {
 	min-height: 40px;
@@ -223,6 +227,9 @@ p {
     overflow: hidden;
     margin-top: 0px;
 	padding-left: 5px;
+	
+	color: #777777;
+	font-size: 14px;
 }
 
 
