@@ -39,7 +39,7 @@ if ($slug == "upload")
 				<div id="uploadBox"></div>
 				<form action="/uploadComplete/{$params[0]}/{$params[1]}/" method="POST" id="uploadFormForm">
 				<div id="uploadFormArea"></div>
-				<input type="submit" id="bigSubmitButton" disabled="disabled">SUBMIT</button>
+				<input type="submit" id="bigSubmitButton" disabled="disabled" value="Save Data" />
 				</form>
 				<script type="text/javascript">
 	uploadURI = '/handleUpload/{$params[0]}/{$params[1]}/&{$session['name']}={$session['id']}&loadSessionFromGET=true';
