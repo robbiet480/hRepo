@@ -37,6 +37,7 @@ if ($slug == "upload")
 				<div id="uploadBox"></div>
 				<form action="/uploadComplete/$params[0]/$params[1]" method="POST" id="uploadFormForm">
 				<div id="uploadFormArea"></div>
+				<button type="submit" id="bigSubmitButton" disabled="disabled">SUBMIT</button>
 				</form>
 				<script type="text/javascript">
 				jQuery(document).ready(function() {
@@ -69,13 +70,16 @@ if ($slug == "upload")
 							'onUploadError': function(file, errCode, errMsg) {
 								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-error'><p>Upload failed...</p></div>");
 								if (errCode == SWFUpload.UPLOAD_ERROR.FILE_CANCELLED) {
-									jQuery("#"+file.id+"_currentStatus").slideDown(function() {
+									jQuery("#"+file.id+"_currentStatus").slideUp(function() {
 										jQuery('#' + file.id + '_details').remove();
 									});
 								}
 							},
 							'onUploadComplete': function(file, queue) {
 								uploadInProgress = (queue.queueLength > 0);
+								if (!uploadInProgress) {
+									$('#bigRedButton').disabled();
+								}
 							}
 						});
 						jQuery('#uploadFormForm').submit(function() {
