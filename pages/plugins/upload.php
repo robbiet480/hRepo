@@ -49,7 +49,7 @@ if ($slug == "upload")
 							'cancelImage': '/static/images/uploadify/uploadify-cancel.png',
 							'onSelect': function(file) {
 								makeTheRow = "<div id='"+file.id+"_details'><fieldset><legend>"+file.name+"</legend>";
-								makeTheRow = makeTheRow + "<div id='"+file.id+"_currentStatus'></div><br /><div id='"file.id+"_newUploadForm'>";
+								makeTheRow = makeTheRow + "<div id='"+file.id+"_currentStatus'></div><br /><div id='"+file.id+"_newUploadForm'>";
 								makeTheRow = makeTheRow + "<label for='"+file.id+"_newname'>Filename:</label><input type='text' name='"+file.id+"_newname' id='"+file.id+"_newname' value='"+file.name+"' /></div>";
 								makeTheRow = makeTheRow + "<br /><label for='"+file.id+"_version'>File version:</label><input type='text' name='"+file.id+"_version' id='"+file.id+"_version' /><br />";
 								makeTheRow = makeTheRow + "<label for='"+file.id+"_changelog'>File Description/Changelog:</label><textarea name='"+file.id+"_changelog' id='"+file.id+"_changelog' style='width: 100%; height: 250px;'></textarea></fieldset></div>";
