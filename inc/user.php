@@ -84,7 +84,6 @@ class User {
 			self::$visitor = $_SESSION['visitor'];
 			self::$role = $_SESSION['role'];
 			self::$isValid = $_SESSION['isValid'];
-			echo 'LOL LOOK THERES BACON AHOY';
 		}
 
 		// TODO: implement dev
