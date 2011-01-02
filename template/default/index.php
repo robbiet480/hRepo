@@ -60,7 +60,7 @@ $gitCommit = unserialize(file_get_contents(HR_ROOT . '/gitcommit.txt'));
 		</div>
 		<div id="footer">
 			<div class="gutter clear">
-				<p>&copy; <?php echo date('Y'); ?> the hRepo Team.</p>
+				<p>&copy; <?php echo date('Y'); ?> the Bukkit Team.</p>
 				<p>Powered by <a href="http://hostiio.com">Hostiio</a> and <a href="http://aws.amazon.com/s3">Amazon S3</a>.</p>
 				<p>Git Revision: <a href="http://github.com/robbiet480/hRepo/commit/<?php echo $gitCommit['long']; ?>"><?php echo $gitCommit['short']; ?></a> - by <?php echo $gitCommit['userid']; ?> at <?php echo date('jS M Y, H:i:s', strtotime($gitCommit['commitdate'])); ?></p>
 			</div>
