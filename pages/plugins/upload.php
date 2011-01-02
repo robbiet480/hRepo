@@ -36,7 +36,7 @@ if ($slug == "upload")
 				<h1>Upload Files</h1>
 				$message
 				<div id="uploadBox"></div>
-				<form action="/uploadComplete/$params[0]/$params[1]" method="POST" id="uploadFormForm">
+				<form action="/uploadComplete/$params[0]/$params[1]/" method="POST" id="uploadFormForm">
 				<div id="uploadFormArea"></div>
 				<button type="submit" id="bigSubmitButton" disabled="disabled">SUBMIT</button>
 				</form>
@@ -45,7 +45,7 @@ if ($slug == "upload")
 					jQuery('#uploadBox').uploadify(
 						{
 							'swf': '/static/images/uploadify/uploadify.swf',
-							'uploader': '/handleUpload/$params[0]/$params[1]/?{$session['name']}={$session['id']}',
+							'uploader': '/handleUpload/$params[0]/$params[1]/?{$session['name']}={$session['id']}&loadSessionFromGET=true',
 							'auto': true,
 							'multi': true,
 							'cancelImage': '/static/images/uploadify/uploadify-cancel.png',

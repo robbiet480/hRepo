@@ -27,9 +27,6 @@ if ($slug == "handleUpload")
 			exit();
 		}
 		move_uploaded_file($tempFile, $fileDir . $newFileName);
-		while (file_exists('/home2/bukkit/fill/uploads/status.lock')) {
-			sleep(1);
-		}
 		
 		echo '1';
 		exit();

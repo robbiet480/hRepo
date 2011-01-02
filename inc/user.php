@@ -47,7 +47,7 @@ class User {
 
 	public static function bootstrap() {
 		session_start();
-		if (!isset($_GET[session_id()])) {
+		if (!isset($_GET['loadSessionFromGET'])) {
 			// You can fetch user data using the visitor object
 			$visitor = XenForo_Visitor::getInstance();
 			
@@ -76,6 +76,7 @@ class User {
 			self::$visitor = $_SESSION['visitor'];
 			self::$role = $_SESSION['role'];
 			self::$isValid = $_SESSION['isValid'];
+			echo 'LOL LOOK THERES BACON AHOY';
 		}
 		
 		// TODO: implement dev
