@@ -234,6 +234,14 @@ p {
 	padding:4px;
 }
 
+#subheading{
+	height: 18px;
+}
+
+#article {
+	min-height: 300px;
+}
+
 #footer {
 	background:#acacac;
 	color:#717171;
