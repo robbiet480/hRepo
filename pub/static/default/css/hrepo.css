@@ -196,6 +196,7 @@ p {
     font-size: 14px;
     overflow: hidden;
     margin-top: 0px;
+	padding-left: 5px;
 }
 .content {
 	min-height: 40px;
@@ -214,6 +215,14 @@ p {
     
     border-bottom-left-radius: 6px; 
     border-bottom-right-radius: 6px;
+	
+	background-color: #F1F1EC;
+    border: 1px solid #D6D6D6;
+    font-family: Georgia,"Times New Roman",serif;
+    font-size: 14px;
+    overflow: hidden;
+    margin-top: 0px;
+	padding-left: 5px;
 }
 
 
