@@ -58,15 +58,15 @@ if ($slug == "upload")
 								);
 							},
 							'onUploadStart': function(file) {
-								jQuery('#' + file.id + '_currentStatus').html('<div class='message message-info'><p>Upload beginning...</p></div>');
+								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-info'><p>Upload beginning...</p></div>");
 								uploadInProgress = true;
 							},
 							'onUploadSuccess': function(file, data, response) {
-								jQuery('#' + file.id + '_currentStatus').html('<div class='message message-success'><p>Upload complete!</p></div>');
+								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-success'><p>Upload complete!</p></div>");
 								itemsSubmitted = itemsSubmitted + 1;
 							},
 							'onUploadError': function(file, errCode, errMsg) {
-								jQuery('#' + file.id + '_currentStatus').html('<div class='message message-error'><p>Upload failed...</p></div>');
+								jQuery('#' + file.id + '_currentStatus').html("<div class='message message-error'><p>Upload failed...</p></div>");
 							},
 							'onUploadComplete': function(file, queue) {
 								uploadInProgress = (queue.queueLength > 0);
