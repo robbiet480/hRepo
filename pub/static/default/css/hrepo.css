@@ -6,18 +6,18 @@ body {
 }
 
 #top {
-	background:#361E12;
+	background:#E58E00;
 	background: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0, rgb(54,30,18)),
-		color-stop(0.55, rgb(75,44,23))
+		color-stop(0, rgb(234,172,1)),
+		color-stop(0.55, rgb(227,135,0))
 		);
 	background: -moz-linear-gradient(
 		center bottom,
-		rgb(54,30,18) 0%,
-		rgb(75,44,23) 55%
+		rgb(234,172,1) 0%,
+		rgb(227,135,0) 55%
 		);
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
