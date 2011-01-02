@@ -30,21 +30,27 @@ if ($slug == "handleUpload")
 			exit();
 		}
 		move_uploaded_file($tempFile, $fileDir . $newFileName);
+		file_put_contents('/home2/bukkit/fill/uploads/step1.txt', 1);
 		$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
+		file_put_contents('/home2/bukkit/fill/uploads/step2.txt', 1);
 		$lastNum = 0;
 		if ($a->rowCount() == 0)
 		{
+			file_put_contents('/home2/bukkit/fill/uploads/step3a.txt', 1);
 			Database::insert('plugins_downloads', array('pid' => $pluginID, 'dfname' => $_FILES['Filedata']['name'], 'dfriendlyname' => 'notdoneyet', 'ddesc' => 'notdoneyet'));
 			$a = Database::select('plugins_downloads', '*', array('dfname = ?', $_FILES['Filedata']['name']));
 			$pluginFileRow = $a->fetch(PDO::FETCH_ASSOC);
 		}
 		else
 		{
+			file_put_contents('/home2/bukkit/fill/uploads/step3b.txt', 1);
 			$pluginFileRow = $a->fetch(PDO::FETCH_ASSOC);
 			$b = Database::select('plugins_downloads_version', 'vnumber', array('did = ?', $pluginFileRow['did']));
-			$lastNum = $b['vnumber'];
+			$lastNum = $b->fetchColumn();
 		}
+		file_put_contents('/home2/bukkit/fill/uploads/step4.txt', 1);
 		Database::insert('plugin_downloads_version', array('did' => $pluginFileRow['did'], 'vnumber' => $lastNum + 1, 'vhash' => $fileMd5, 'vdate' => date('Y-m-d H:i:s'), 'vchangelog' => 'notdoneyet', 'isons3' => '0'));
+		file_put_contents('/home2/bukkit/fill/uploads/step5.txt', 1);
 		echo '1';
 		exit();
 	}
