@@ -45,7 +45,7 @@ if ($slug == "upload")
 					jQuery('#uploadBox').uploadify(
 						{
 							'swf': '/static/images/uploadify/uploadify.swf',
-							'uploader': '/handleUpload/$params[0]/$params[1]/?{$session['name']}={$session['id']}&loadSessionFromGET=true',
+							'uploader': '/handleUpload/$params[0]/$params[1]/&{$session['name']}={$session['id']}&loadSessionFromGET=true',
 							'auto': true,
 							'multi': true,
 							'cancelImage': '/static/images/uploadify/uploadify-cancel.png',
